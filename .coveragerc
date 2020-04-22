@@ -1,6 +1,6 @@
 [run]
 source =
-    search_events_app/models.py
+    search_events_app/models/*
     search_events_app/views.py
 
 omit =
