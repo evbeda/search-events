@@ -8,7 +8,7 @@ class TestModels(TestCase):
     def setUp(self):
         self.country = Country("Argentina")
         self.feature = Feature("Embedded Checkout")
-        self.event = Event("Evento1", self.country.name, self.feature.name)
+        self.event = Event("Evento1", self.country.name, self.feature.name, "www.google.com")
 
     def test_feature_model(self):
         self.assertEqual(self.feature.name, "Embedded Checkout")
@@ -20,3 +20,4 @@ class TestModels(TestCase):
         self.assertEqual(self.event.name, "Evento1")
         self.assertEqual(self.event.country, self.country.name)
         self.assertEqual(self.event.feature, self.feature.name)
+        self.assertEqual(self.event.url, "www.google.com")
