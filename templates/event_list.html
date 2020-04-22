@@ -5,38 +5,35 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <table style="width:80%" class='table table-hover table-striped'>
-        <thead class="thead-dark">
-            <tr>
-                <th>Name</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>LOLLAPALOOZA 2020</td>
-                <td>Belgium</td>
-            </tr>
-            <tr>
-                <td>Creamfields</td>
-                <td>Norway</td>
-            </tr>
-            <tr>
-                <td>Fiesta de la Vendimia 2021</td>
-                <td>Argentina</td>
-            </tr>
-            <tr>
-                <td>Tokio 2020 inauguration ceremony</td>
-                <td>Japan</td>
-            </tr>
-            <tr>
-                <td>Beer Fest</td>
-                <td>Germany</td>
-            </tr>
-            <tr>
-                <td>Festival de Viña del Mar</td>
-                <td>Chile</td>
-            </tr>
-            </table>
-        </tbody>
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Format</th>
+                    <th>Organizer</th>
+                    <th>Country</th>
+                    <th>Start date</th>
+                    <th>Language</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in object_list %}
+                    <tr>
+                        <td>
+                            <a href="{{ event.url }}">
+                                {{ event.name }}
+                            </a>
+                        </td>
+                        <td>{{ event.category}}</td>
+                        <td>{{ event.format}}</td>
+                        <td>{{ event.organizer_name }}</td>
+                        <td>{{ event.country}}</td>
+                        <td>{{ event.start_date}}</td>
+                        <td>{{ event.language }}</td>
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
     </div>   
 </div>
