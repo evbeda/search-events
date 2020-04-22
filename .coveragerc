@@ -4,6 +4,7 @@ source =
     search_events_app/views.py
 
 omit =
+    templates/*
     env/*
     */test*
     search_events/*
