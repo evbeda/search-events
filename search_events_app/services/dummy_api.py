@@ -1,14 +1,13 @@
 
 class DummyApi:
-
 	events = [
 		{
-			'name':'Lollapaloza',
+			'name': 'Lollapaloza',
 			'organizer_name': 'Productora 1',
 			'country': 'Argentina',
-			'url':'https://www.eventbrite.com/e/summerton-virtual-whisky-festival-tickets-101800967434?aff=ebdssbonlinesearch',
+			'url': 'https://www.eventbrite.com/e/summerton-virtual-whisky-festival-tickets-101800967434?aff=ebdssbonlinesearch',
 			'start_date': '2020-05-02',
-			'features':['Embedded Checkout', 'Custom Question'],
+			'features': ['Embedded Checkout', 'Custom Question'],
 			'language': 'Spanish',
 			'category': 'Music',
 			'format': 'Festival'
@@ -17,8 +16,8 @@ class DummyApi:
 			'name': 'Football match',
 			'organizer_name': 'UEFA',
 			'country': 'Spain',
-			'url':'https://www.eventbrite.com/e/2020-mwhsports-football-college-camp-tours-tickets-96353506933?aff=ebdssbonlinesearch',
-			'start_date':'2018-03-18',
+			'url': 'https://www.eventbrite.com/e/2020-mwhsports-football-college-camp-tours-tickets-96353506933?aff=ebdssbonlinesearch',
+			'start_date': '2018-03-18',
 			'features': ['Add-ons'],
 			'language': 'English',
 			'category': 'Sports and Fitness',
@@ -28,7 +27,7 @@ class DummyApi:
 			'name': 'Curso manejo de cesped',
 			'organizer_name': 'ACP',
 			'country': 'Argentina',
-			'url':'https://www.eventbrite.com.ar/e/curso-de-cuidado-y-manejo-de-cesped-en-predios-deportivos-registration-84144934765?aff=ebdssbonlinesearch',
+			'url': 'https://www.eventbrite.com.ar/e/curso-de-cuidado-y-manejo-de-cesped-en-predios-deportivos-registration-84144934765?aff=ebdssbonlinesearch',
 			'start_date': '2019-08-03',
 			'features': [],
 			'language': 'Spanish',
