@@ -22,3 +22,8 @@ class TestModels(TestCase):
         self.assertEqual(self.event.name, "Evento1")
         self.assertEqual(self.event.country, self.country)
         self.assertEqual(self.event.feature, self.feature)
+
+    def test_event_with_two_features(self):
+        self.feature2 = Feature("Reserved Seating")
+        self.new_event = Event("Futbol", feature=[self.feature, self.feature2])
+        self.assertEqual(len(self.new_event.feature), 2)
