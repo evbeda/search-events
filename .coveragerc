@@ -8,6 +8,8 @@ omit =
     */test*
     search_events/*
     */migrations/*
+    */dummy_api.py
+
     search_events_app/admin.py
     search_events_app/apps.py
     search_events_app/urls.py
