@@ -10,14 +10,14 @@ ALLOWED_HOSTS = [
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['search-events-evb.herokuapp.com']
+
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'vacations',
-        'USER': 'name',
+        'NAME': '',
+        'USER': '',
         'PASSWORD': '',
         'PORT': '',
     }
@@ -37,5 +37,5 @@ MIDDLEWARE += [  # noqa
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-DEBUG = False
