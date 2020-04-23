@@ -114,6 +114,6 @@ USE_TZ = True
 
 STATIC_URL = '/search_events_app/static/'
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, "static")
+	os.path.join(BASE_DIR, "/search_events_app/static")
 ]
 EL_PAGINATION_PER_PAGE = 5
