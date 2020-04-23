@@ -4,7 +4,7 @@
 {% load el_pagination_tags %}
 
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'search_events/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 <h1>Events</h1>
 
@@ -31,11 +31,11 @@
                                     {{ event.name }}
                                 </a>
                             </td>
-                            <td>{{ event.category}}</td>
-                            <td>{{ event.format}}</td>
+                            <td>{{ event.category }}</td>
+                            <td>{{ event.format }}</td>
                             <td>{{ event.organizer_name }}</td>
-                            <td>{{ event.country}}</td>
-                            <td>{{ event.start_date}}</td>
+                            <td>{{ event.country }}</td>
+                            <td>{{ event.start_date }}</td>
                             <td>{{ event.language }}</td>
                         </tr>
                     {% endfor %}
