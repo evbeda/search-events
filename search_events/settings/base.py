@@ -112,8 +112,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = './search_events_app/static'
+STATIC_URL = './search_events_app/static/'
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, "./search_events_app/static")
+	os.path.join(BASE_DIR, "./search_events_app/static/")
 ]
 EL_PAGINATION_PER_PAGE = 5
