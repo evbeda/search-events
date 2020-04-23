@@ -73,5 +73,5 @@ class TestApiService(TestCase):
     )
     def test_get_events(self, mock_get):
         result = api_service.get_events()
-        self.assertTrue(isinstance(result[0], Event))
+        self.assertIsInstance(result[0], Event)
         self.assertEqual(len(result), 2)
