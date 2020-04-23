@@ -57,7 +57,6 @@ class TestModels(TestCase):
 
     def test_events_more_items(self):
         event_more_items = Event(**self.dict_event)
-
         self.assertEqual(event_more_items.language, 'English')
         self.assertEqual(event_more_items.category, 'Music')
         self.assertEqual(event_more_items.format, 'Festival')
