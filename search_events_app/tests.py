@@ -41,12 +41,11 @@ class TestModels(TestCase):
     def test_event_with_two_features(self):
         self.assertEqual(len(self.new_event.feature), 2)
 
+
 class TestApiService(TestCase):
 
-    @patch.object(
-        DummyApi,
-        'get',
-        return_value=[
+    def setUp(self):
+        self.mock_api_response = [
             {
                 'name': 'Carats world tour',
                 'organizer_name': 'Seung',
@@ -70,8 +69,13 @@ class TestApiService(TestCase):
                 'format': 'Expo',
             },
         ]
-    )
-    def test_get_events(self, mock_get):
-        result = api_service.get_events()
-        self.assertIsInstance(result[0], Event)
-        self.assertEqual(len(result), 2)
+
+    def test_get_events(self):
+        with patch.object(
+                DummyApi,
+                'get',
+                return_value=self.mock_api_response
+        ):
+            result = api_service.get_events()
+            self.assertIsInstance(result[0], Event)
+            self.assertEqual(len(result), 2)
