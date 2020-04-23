@@ -24,6 +24,20 @@ class TestModels(TestCase):
             "www.google.com",
             feature=[self.feature, self.feature2]
             )
+        self.dict_event = {
+                'name': 'Carats world tour',
+                'organizer_name': 'Seung',
+                'country': 'Italy',
+                'url': (
+                    'https://www.eventbrite.com/e/carats-world-tour-tickets'
+                    '-102537931714?aff=ebdssbonlinesearch'
+                    ),
+                'start_date': '2020-07-20',
+                'features': ['EB Studio', 'Facebook'],
+                'language': 'English',
+                'category': 'Music',
+                'format': 'Festival'
+            }
 
     def test_feature_model(self):
         self.assertEqual(self.feature.name, "Embedded Checkout")
@@ -40,6 +54,13 @@ class TestModels(TestCase):
 
     def test_event_with_two_features(self):
         self.assertEqual(len(self.new_event.feature), 2)
+
+    def test_events_more_items(self):
+        event_more_items = Event(**self.dict_event)
+
+        self.assertEqual(event_more_items.language, 'English')
+        self.assertEqual(event_more_items.category, 'Music')
+        self.assertEqual(event_more_items.format, 'Festival')
 
 
 class TestApiService(TestCase):
