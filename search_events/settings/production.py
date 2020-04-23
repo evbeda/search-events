@@ -7,11 +7,15 @@ ALLOWED_HOSTS = [
     'search-events-evb.herokuapp.com',
 ]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 
-
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 DATABASES = {
     'default': {
@@ -39,3 +43,5 @@ MIDDLEWARE += [  # noqa
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
