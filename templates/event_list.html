@@ -1,0 +1,54 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+
+{% load el_pagination_tags %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+<h1>Events</h1>
+
+<div class="container-fluid width-90">
+    <div class="row justify-content-center">
+        <table class='table table-hover table-striped'>
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Format</th>
+                    <th>Organizer</th>
+                    <th>Country</th>
+                    <th>Start date</th>
+                    <th>Language</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% paginate object_list %}
+                    {% for event in object_list %}
+                        <tr>
+                            <td>
+                                <a href="{{ event.url }}" target="_blank">
+                                    {{ event.name }}
+                                </a>
+                            </td>
+                            <td>{{ event.category }}</td>
+                            <td>{{ event.format }}</td>
+                            <td>{{ event.organizer_name }}</td>
+                            <td>{{ event.country }}</td>
+                            <td>{{ event.start_date }}</td>
+                            <td>{{ event.language }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% get_pages %}
+            </tbody>
+        </table>
+    </div> 
+
+    <div class="row">
+        <div class="col">
+            {% include "pagination.html" %}
+        </div>
+
+    </div>  
+
+</div>
