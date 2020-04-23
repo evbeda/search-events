@@ -8,3 +8,5 @@ class Event:
             self.feature = []
         else:
             self.feature = feature
+        for key, value in kwargs.items():
+            setattr(self, key, value)
