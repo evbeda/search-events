@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'search_events_app',
 	'bootstrap4',
+	'el_pagination',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				'django.template.context_processors.request', # For EL-pagination
 			],
 		},
 	},
@@ -114,3 +116,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, "static")
 ]
+
+EL_PAGINATION_PER_PAGE = 5

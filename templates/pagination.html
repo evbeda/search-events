@@ -1,0 +1,27 @@
+{% load el_pagination_tags %}
+
+
+<nav aria-label="Page navigation example" class='float-right'>
+    <ul class="pagination align-self-end">
+        <li class="page-item">
+            <a class="page-link" href="{{ pages.first.path }}">First</a>
+        </li>
+        {% for page in pages %}
+            {% if page.number == pages.current.number %}
+                <li class="page-item active">
+                    <a class="page-link" href="{{ page.path }}">{{ page.number }}</a>
+                </li>
+            {% else %} 
+                {% if page.number >= pages.current.number|add:"-2" and page.number <= pages.current.number|add:"2" %}                
+                    <li class="page-item">
+                        <a class="page-link" href="{{ page.path }}">{{ page.number }}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+        <li class="page-item">
+            <a class="page-link" href="{{ pages.last.path }}">Last</a>
+        </li>
+    </ul>
+</nav>
