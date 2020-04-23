@@ -4,7 +4,7 @@ import dj_database_url
 
 
 ALLOWED_HOSTS = [
-    'search-events-evb.herokuapp.com',
+    '*',
 ]
 
 
