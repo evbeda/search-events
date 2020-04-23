@@ -32,10 +32,6 @@ DATABASES['default'].update(DB_FROM_ENV)
 
 # Application definition
 
-INSTALLED_APPS += [  # noqa
-    'whitenoise.runserver_nostatic'
-]
-
 MIDDLEWARE += [  # noqa
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
