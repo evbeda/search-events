@@ -11,7 +11,8 @@ from search_events_app.models.feature import Feature
 
 class TestModels(TestCase):
     def setUp(self):
-        self.country = Country("Argentina")
+        self.country = Country.objects.create(name="Argentina", alpha_2_code="AR",
+        alpha_3_code="ARG", flag="https://restcountries.eu/data/arg.svg")
         self.feature = Feature("Embedded Checkout")
         self.feature2 = Feature("Reserved Seating")
         self.event = Event(
@@ -44,6 +45,12 @@ class TestModels(TestCase):
 
     def test_country_model(self):
         self.assertEqual(self.country.name, "Argentina")
+        self.assertEqual(self.country.alpha_2_code, "AR")
+        self.assertEqual(self.country.alpha_3_code, "ARG")
+        self.assertEqual(self.country.flag, "https://restcountries.eu/data/arg.svg")
+
+    def test_country_model_str(self):
+        self.assertEqual(self.country.__str__(), "Argentina")
 
     def test_event_model(self):
         self.assertEqual(self.event2.country, None)
