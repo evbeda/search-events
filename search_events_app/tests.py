@@ -49,6 +49,9 @@ class TestModels(TestCase):
         self.assertEqual(self.country.alpha_3_code, "ARG")
         self.assertEqual(self.country.flag, "https://restcountries.eu/data/arg.svg")
 
+    def test_country_model_str(self):
+        self.assertEqual(self.country.__str__(), "Argentina")
+
     def test_event_model(self):
         self.assertEqual(self.event2.country, None)
         self.assertEqual(self.event.name, "Evento1")
