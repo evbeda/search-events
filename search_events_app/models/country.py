@@ -8,6 +8,10 @@ class Country(models.Model):
     alpha_3_code = models.CharField(max_length=3)
     flag = models.URLField()
 
+    def __init__(self, name=None, alpha2Code=None, alpha3Code=None, flag=None, **kwargs):
+        if name and alpha2Code and alpha3Code and flag:
+            super().__init__(name=name, alpha_2_code=alpha2Code, alpha_3_code=alpha3Code, flag=flag)
+
     def __str__(self):
         return f"{self.name}"
 
