@@ -12,8 +12,8 @@ from search_events_app.models.feature import Feature
 class TestCountry(TestCase):
 
     def setUp(self):
-        self.country = Country.objects.create(name="Argentina", alpha_2_code="AR",
-        alpha_3_code="ARG", flag="https://restcountries.eu/data/arg.svg")
+        self.country = Country.objects.create(name="Argentina", alpha2Code="AR",
+        alpha3Code="ARG", flag="https://restcountries.eu/data/arg.svg")
 
     def test_country_basic_info(self):
         self.assertEqual(self.country.name, "Argentina")
@@ -28,8 +28,8 @@ class TestCountry(TestCase):
 class TestEvent(TestCase):
 
     def setUp(self):
-        self.country = Country.objects.create(name="Argentina", alpha_2_code="AR",
-        alpha_3_code="ARG", flag="https://restcountries.eu/data/arg.svg")
+        self.country = Country.objects.create(name="Argentina", alpha2Code="AR",
+        alpha3Code="ARG", flag="https://restcountries.eu/data/arg.svg")
         self.event2 = Event("Name", "www.google.com")
         self.feature = Feature("Embedded Checkout")
         self.event = Event(
@@ -113,9 +113,9 @@ class TestApiService(TestCase):
 
     def test_get_events(self):
         with patch.object(
-                DummyApi,
-                'get',
-                return_value=self.mock_api_response
+            DummyApi,
+            'get',
+            return_value=self.mock_api_response
         ):
             result = api_service.get_events()
             self.assertIsInstance(result[0], Event)
