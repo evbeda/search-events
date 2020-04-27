@@ -1,14 +1,20 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
-
 {% load el_pagination_tags %}
 
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<script type="text/javascript" src="{% static 'js/filter_country.js' %}"></script>
 
 <h1>Events</h1>
 
 <div class="container-fluid width-90">
+    <form autocomplete="off" action="">
+        <div class="autocomplete" style="width:300px;">
+            <input id="myInput" type="text" onkeyup="myFunction({{countries_names}})" name="myCountry" placeholder="Country">
+        </div>
+        <input type="submit">
+    </form>
     <div class="row justify-content-center">
         <table class='table table-hover table-striped'>
             <thead class="thead-dark">
