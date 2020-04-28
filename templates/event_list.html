@@ -10,11 +10,11 @@
 <h1>Events</h1>
 
 <div class="container-fluid width-90">
-    <form autocomplete="off" action="" id="country-form">
+    <form autocomplete="off" id="country-form">
         <div class="autocomplete" style="width:300px;">
             <input id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country">
         </div>
-        <input type="submit">
+        <button class="btn btn-primary" onclick="sendData('country', {{countries}});return false;">Submit</button>
     </form>
     <div class="row justify-content-center">
         <table class='table table-hover table-striped'>
