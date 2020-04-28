@@ -1,4 +1,4 @@
-const filterCountry = (function() {
+const filterCriteria = (function() {
 	var arr, element;
 	var currentFocus = -1;
 
