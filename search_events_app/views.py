@@ -11,8 +11,8 @@ class EventListView(ListView):
 
     def get_queryset(self):
         events = get_events()
-        event = filter_events(self.request, events)
-        return event
+        events = filter_events(self.request, events)
+        return events
 
     def get_context_data(self, **kwargs):
         countries = Country.objects.all()
