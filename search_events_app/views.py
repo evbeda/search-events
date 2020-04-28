@@ -17,8 +17,10 @@ class EventListView(ListView):
     def get_context_data(self, **kwargs):
         countries = Country.objects.all()
         context = super().get_context_data(**kwargs)
-        context['countries'] = countries
-        context['countries_names'] = [
-            {'id': country.id, 'name': country.name} for country in countries
+        context['countries'] = [
+            {
+                'alpha2Code': country.alpha_2_code,
+                'name': country.name
+            } for country in countries
         ]
         return context
