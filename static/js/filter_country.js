@@ -1,5 +1,8 @@
+$('form').submit(function(e){ e.preventDefault(); });
+
+var arr, element;
+
 const filterCriteria = (function() {
-	var arr, element;
 	var currentFocus = -1;
 
 	$(document).ready(function() {
@@ -116,3 +119,11 @@ const filterCriteria = (function() {
 
 	return filterDOM
 })()
+
+function sendData(domId, array){
+	elem = document.getElementById(domId)
+	data = array.filter(e => e.name == elem.value)
+	if(!data.length) return false;
+	elem.value = data[0].alpha2Code
+	document.getElementById("country-form").submit()
+}
