@@ -1,19 +1,16 @@
-from unittest.mock import (
-    patch,
-    MagicMock,
-)
-
 from django.test import TestCase
 
-from search_events_app.models.event import Event
-from search_events_app.services.api_service import ApiService
-from search_events_app.services.dummy_api import DummyApi
+from search_events_app.services.api_response_processor import (
+    process_events,
+    get_country,
+    get_tag,
+)
 
 
-class TestApiService(TestCase):
+class TestApiResponseProcessor(TestCase):
 
-    def setUp(self):
-        self.mock_api_response = {
+    def test_process_events(self):
+        mock_api_response = {
             'events': {
                 'results': [
                     {
@@ -68,13 +65,77 @@ class TestApiService(TestCase):
             }
         }
 
-    @patch(
-        'search_events_app.services.api_service.requests.post'
-    )
-    def test_get_events(self, mock_post):
-        response = MagicMock()
-        response.json = MagicMock(return_value=self.mock_api_response)
-        mock_post.return_value = response
-        result = ApiService().get_events()
-        self.assertIsInstance(result[0], Event)
+        result = process_events(mock_api_response)
+        expected_result = {
+            "name": 'Carats world tour',
+            "url": 'https://www.eventbrite.com/e/carats-world-tour-tickets-102537931714?aff=ebdssbonlinesearch',
+            "language": 'en-us',
+            "start_date": '2020-07-20',
+            "category": "Music",
+            "format_": "Festival",
+            "organizer": "MusicABC_2",
+            "country": 'US',
+        }
+        self.assertIsInstance(result[0], dict)
         self.assertEqual(len(result), 2)
+        self.assertEqual(result[0], expected_result)
+
+    def test_get_tag(self):
+        item = {
+            "tags": [
+                {
+                    "prefix": "EventbriteCategory",
+                    "display_name": "Music"
+                },
+                {
+                    "prefix": "EventbriteFormat",
+                    "display_name": "Festival"
+                },
+            ]
+        }
+
+        category = get_tag(item, "EventbriteCategory")
+        format_ = get_tag(item, "EventbriteFormat")
+
+        self.assertEqual(category, "Music")
+        self.assertEqual(format_, "Festival")
+
+    def test_get_tag_without_category(self):
+        item = {
+            "tags": [
+                {
+                    "prefix": "EventbriteFormat",
+                    "display_name": "Festival"
+                },
+            ]
+        }
+
+        category = get_tag(item, "EventbriteCategory")
+
+        self.assertIsNone(category)
+
+    def test_get_country(self):
+        item = {
+            "primary_venue": {
+                "address": {
+                    "country": "GB"
+                },
+            }
+        }
+
+        country = get_country(item)
+
+        self.assertEqual(country, "GB")
+
+    def test_get_none_country(self):
+        item = {
+            "primary_venue": {
+                "address": {
+                    "city": "Amsterdam"
+                },
+            }
+        }
+
+        country = get_country(item)
+
+        self.assertIsNone(country)
