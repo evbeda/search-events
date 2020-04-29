@@ -9,7 +9,7 @@ class Event:
             start_date=None,
             language=None,
             category=None,
-            format=None,
+            format_=None,
             organizer=None,
             **kwargs
     ):
@@ -19,10 +19,9 @@ class Event:
         self.start_date = start_date
         self.language = language
         self.category = category
-        self.format = format
+        self.format = format_
         self.organizer = organizer
         if not feature:
             self.feature = []
         else:
             self.feature = feature
-

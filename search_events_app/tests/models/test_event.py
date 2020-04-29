@@ -49,7 +49,7 @@ class TestEvent(TestCase):
             'features': ['EB Studio', 'Facebook'],
             'language': 'English',
             'category': 'Music',
-            'format': 'Festival'
+            'format_': 'Festival'
         }
         event = Event(**dict_event)
         self.assertEqual(event.language, 'English')
