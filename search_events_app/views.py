@@ -3,15 +3,15 @@ from django.views.generic.list import ListView
 
 from search_events_app.services.api_service import ApiService
 from search_events_app.models.country import Country
-from search_events_app.services.filter_service import filter_events
+from search_events_app.services.filter_manager import FilterManager
 
 
 class EventListView(ListView):
     template_name = 'event_list.html'
 
     def get_queryset(self):
-        events = ApiService().get_events()
-        events = filter_events(self.request, events)
+        FilterManager.apply_filter(self.request)
+        events = ApiService().get_events(country=FilterManager.latest_filter.get('country'))
         return events
 
     def get_context_data(self, **kwargs):
