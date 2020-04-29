@@ -3,10 +3,7 @@ from unittest.mock import MagicMock
 from django.test import TestCase
 
 from search_events_app.models.event import Event
-from search_events_app.services.filter_service import (
-    apply_country_filter,
-    filter_events
-)
+from search_events_app.services.filter_manager import FilterManager
 
 
 class TestFilterService(TestCase):
@@ -25,8 +22,11 @@ class TestFilterService(TestCase):
         ]
 
     def test_filter_events(self):
+        expected = {'country': 'ar'}
         mock_request = MagicMock()
         mock_request.GET = MagicMock()
-        mock_request.GET.get = MagicMock(return_value='Argentina')
-        result = filter_events(mock_request, self.events)
-        self.assertEqual(result, [self.event1, self.event4])
+        mock_request.GET.get = MagicMock(return_value='AR')
+
+        FilterManager.apply_filter(mock_request)
+
+        self.assertEqual(FilterManager.latest_filter, expected)

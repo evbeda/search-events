@@ -1,6 +1,6 @@
 def process_events(response):
     data = response["events"]["results"]
-    
+ 
     events = []
     for item in data:
         event_dict = {
@@ -23,6 +23,7 @@ def get_tag(item, criteria):
     for tag in tags:
         if tag["prefix"] == criteria:
             return tag["display_name"]
+
 
 def get_country(item):
     venue = item.get("primary_venue")
