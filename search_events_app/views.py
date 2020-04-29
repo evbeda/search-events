@@ -11,7 +11,9 @@ class EventListView(ListView):
 
     def get_queryset(self):
         FilterManager.apply_filter(self.request)
-        events = ApiService().get_events(country=FilterManager.latest_filter.get('country'))
+        events = ApiService().get_events( 
+            country=FilterManager.latest_filter.get('country')
+        )
         return events
 
     def get_context_data(self, **kwargs):
