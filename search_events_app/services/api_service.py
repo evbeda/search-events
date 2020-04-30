@@ -12,6 +12,7 @@ class ApiService:
 
     @classmethod
     def get_events(cls, country=None):
+		
         if not cls.events:
             body_dict = cls.format_body(country)
             response = requests.post(
@@ -30,6 +31,7 @@ class ApiService:
         base_dict = {
             "event_search": {
                 "sort": "default",
+				"dates": "current_future",
                 "page_size": 20,
             }
         }
