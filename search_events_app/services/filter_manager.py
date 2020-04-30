@@ -18,4 +18,4 @@ class FilterManager:
 
         if new_filter != cls.latest_filter.get(field):
             ApiService.clear_events()
-            cls.latest_filter[field] = new_filter.lower()
+            cls.latest_filter[field] = new_filter
