@@ -37,6 +37,7 @@ class ApiService:
         }
         if country:
             base_dict['event_search']['countries'] = [country.lower()]
+            base_dict['event_search']["online_events_excluded"] = True
         return base_dict
 
     @classmethod
