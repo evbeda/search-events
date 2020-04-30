@@ -1,6 +1,9 @@
+from search_events_app.models.country import Country
+
+
 def process_events(response):
     data = response["events"]["results"]
- 
+
     events = []
     for item in data:
         event_dict = {
@@ -30,4 +33,7 @@ def get_country(item):
     if venue:
         address = venue.get("address")
         if address:
-            return address.get("country")
+            alpha2code = address.get("country")
+            if alpha2code:
+                country = Country.objects.get(alpha_2_code=alpha2code)
+                return country.name

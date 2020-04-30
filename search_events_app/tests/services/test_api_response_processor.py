@@ -5,9 +5,23 @@ from search_events_app.services.api_response_processor import (
     get_country,
     get_tag,
 )
+from search_events_app.models.country import Country
 
 
 class TestApiResponseProcessor(TestCase):
+    def setUp(self):
+        country1 = Country.objects.create(
+            name='England',
+            alpha2Code='GB',
+            alpha3Code='GBT',
+            flag='https://www.google.com.ar'
+        )
+        country2 = Country.objects.create(
+            name='United States',
+            alpha2Code='US',
+            alpha3Code='USA',
+            flag='https://www.google.com.ar'
+        )
 
     def test_process_events(self):
         mock_api_response = {
@@ -74,8 +88,9 @@ class TestApiResponseProcessor(TestCase):
             "category": "Music",
             "format_": "Festival",
             "organizer": "MusicABC_2",
-            "country": 'US',
+            "country": 'United States',
         }
+
         self.assertIsInstance(result[0], dict)
         self.assertEqual(len(result), 2)
         self.assertEqual(result[0], expected_result)
@@ -125,7 +140,7 @@ class TestApiResponseProcessor(TestCase):
 
         country = get_country(item)
 
-        self.assertEqual(country, "GB")
+        self.assertEqual(country, "England")
 
     def test_get_none_country(self):
         item = {
