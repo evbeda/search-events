@@ -43,3 +43,15 @@ class TestFilters(TestCase):
         self.country_filter.apply_filter(self.mock_request)
 
         self.assertFalse(self.country_filter.has_changed)
+
+    def test_country_filter_info(self):
+        self.mock_request.GET.get = MagicMock(return_value='AR')
+
+        self.country_filter.apply_filter(self.mock_request)
+
+        self.assertEqual(self.country_filter.get_key(), "country")
+        self.assertEqual(self.country_filter.get_value(), "Argentina")
+        self.assertEqual(self.country_filter.get_type(), "search")
+        self.assertEqual(self.country_filter.get_request_value(), {
+            'place_within': "1234"
+        })
