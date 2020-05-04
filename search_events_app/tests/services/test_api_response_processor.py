@@ -11,16 +11,14 @@ from search_events_app.models.country import Country
 class TestApiResponseProcessor(TestCase):
     def setUp(self):
         country1 = Country.objects.create(
-            name='England',
-            alpha2Code='GB',
-            alpha3Code='GBT',
-            flag='https://www.google.com.ar'
+            label='England',
+            code='GB',
+            eventbrite_id='1234'
         )
         country2 = Country.objects.create(
-            name='United States',
-            alpha2Code='US',
-            alpha3Code='USA',
-            flag='https://www.google.com.ar'
+            label='United States',
+            code='US',
+            eventbrite_id='5678'
         )
 
     def test_process_events(self):
@@ -154,3 +152,4 @@ class TestApiResponseProcessor(TestCase):
         country = get_country(item)
 
         self.assertIsNone(country)
+        

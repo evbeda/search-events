@@ -5,24 +5,21 @@ from django.db import models
 class Country(models.Model):
     name = models.CharField(max_length=100)
     alpha_2_code = models.CharField(max_length=2)
-    alpha_3_code = models.CharField(max_length=3)
-    flag = models.URLField()
+    eventbrite_id = models.CharField(max_length=30)
 
     def __init__(
         self,
         id=None,
-        name=None,
-        alpha2Code=None,
-        alpha3Code=None,
-        flag=None,
+        label=None,
+        code=None,
+        eventbrite_id=None,
         **kwargs
     ):
         super().__init__(
             id=id,
-            name=name,
-            alpha_2_code=alpha2Code,
-            alpha_3_code=alpha3Code,
-            flag=flag
+            name=label,
+            alpha_2_code=code,
+            eventbrite_id=eventbrite_id
         )
 
     def __str__(self):

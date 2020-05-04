@@ -14,10 +14,8 @@ class TestEvent(TestCase):
         event = Event("Name", "www.google.com")
         self.assertEqual(event.country, None)
 
-    
     def test_event_basic_info(self):
-        country = Country.objects.create(name="Argentina", alpha2Code="AR",
-        alpha3Code="ARG", flag="https://restcountries.eu/data/arg.svg")
+        country = Country.objects.create(label="Argentina", code="AR", eventbrite_id="1234")
         event = Event(
             "Evento1", "www.google" +
             ".com", country, self.feature

@@ -1,20 +1,14 @@
-from search_events_app.services.api_service import ApiService
+from search_events_app.services.filters.country_filter import CountryFilter
 
 
 class FilterManager:
-    latest_filter = {'country': None}
+    latest_filters = [CountryFilter()]
 
     @classmethod
-    def apply_filter(cls, request):
-        FilterManager.apply_field_filter(request, 'country')
+    def apply_filters(cls, request):
+        for latest_filter in cls.latest_filters:
+            latest_filter.apply_filter(request)
 
     @classmethod
-    def apply_field_filter(cls, request, field):
-        new_filter = request.GET.get(field)
-        # import pdb; pdb.set_trace()
-
-        if new_filter:
-            new_filter = new_filter.lower()
-
-        if new_filter != cls.latest_filter.get(field):
-            cls.latest_filter[field] = new_filter
+    def filter_has_changed(cls):
+        return len([latest_filter for latest_filter in cls.latest_filters if latest_filter.has_changed]) > 0

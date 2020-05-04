@@ -19,8 +19,8 @@ class TestEventListView(TestCase):
 	def test_get_context_data(self, mock_objects):
 		self.client = Client()
 		countries = [
-			Country(name="Argentina", alpha2Code="AR", alpha3Code="ARG"),
-			Country(name="Spain", alpha2Code="ES", alpha3Code="ESP")
+			Country(label="Argentina", code="AR", eventbrite_id="1234"),
+			Country(label="Spain", code="ES", eventbrite_id="4567")
 		]
 		mock_objects.all = MagicMock(return_value=countries)
 		expected_result = [
