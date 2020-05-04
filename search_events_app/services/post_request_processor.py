@@ -5,5 +5,11 @@ def post_process_events(events, dto_filter):
 
 def validate_filters(event, dto_filter):
     return all([
-            event.country == dto_filter.country
+            validate_country(event, dto_filter),
         ])
+
+
+def validate_country(event, dto_filter):
+    if not dto_filter.country:
+        return True
+    return event.country == dto_filter.country

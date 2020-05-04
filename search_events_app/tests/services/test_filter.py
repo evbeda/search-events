@@ -53,5 +53,5 @@ class TestFilters(TestCase):
         self.assertEqual(self.country_filter.get_value(), "Argentina")
         self.assertEqual(self.country_filter.get_type(), "search")
         self.assertEqual(self.country_filter.get_request_value(), {
-            'place_within': "1234"
+            'places_within': ["1234"]
         })

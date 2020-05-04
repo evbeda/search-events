@@ -1,8 +1,6 @@
 import requests
-import json
 
 from search_events_app.models.event import Event
-from search_events_app.services.dummy_api import DummyApi
 from .api_response_processor import process_events
 
 
@@ -32,8 +30,6 @@ class ApiService:
             }
         }
         for dto_filter in dto_filters:
-            base_dict['event_search'].update(dto_filter.value)
-
+            if dto_filter.value:
+                base_dict['event_search'].update(dto_filter.value)
         return base_dict
-
-

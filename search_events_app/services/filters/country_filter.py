@@ -8,6 +8,7 @@ class CountryFilter(Filter):
 
     def apply_filter(self, request):
         alpha_2_code = request.GET.get('country') if request.GET.get('country') else None
+        new_filter = None
         if alpha_2_code:
             try:
                 new_filter = Country.objects.get(alpha_2_code=alpha_2_code)
@@ -30,5 +31,5 @@ class CountryFilter(Filter):
     def get_request_value(self):
         if self.value:
             return {
-                'place_within': self.value.eventbrite_id
+                'places_within': [self.value.eventbrite_id]
             }

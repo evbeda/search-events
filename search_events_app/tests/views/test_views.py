@@ -7,10 +7,18 @@ from django.test import Client
 from django.test import TestCase
 
 from search_events_app.models.country import Country
+from search_events_app.models.event import Event
+from search_events_app.services.api_service import ApiService
+from search_events_app.services.filter_manager import FilterManager
+from search_events_app.services.state_manager import StateManager
 from search_events_app.views import EventListView
 
 
 class TestEventListView(TestCase):
+
+	def setUp(self):
+		self.events = [Event(name="Evento1", url="www.google.com")]
+
 
 	@patch.object(
 		Country,
@@ -41,3 +49,35 @@ class TestEventListView(TestCase):
 
 		self.assertEqual(result["countries"], expected_result)
 
+	@patch.object(
+		FilterManager,
+		"apply_filters"
+	)
+	@patch.object(
+		FilterManager,
+		"filter_has_changed",
+		return_value=False
+	)
+	def test_get_queryset_with_cached_events_and_filter_without_changes(self, mock_has_changed, mock_apply_filters):
+		StateManager.set_events(self.events)
+		view = EventListView()
+		view.request = MagicMock()
+		result = view.get_queryset()
+		self.assertEqual(result, self.events)
+
+
+	@patch.object(
+		FilterManager,
+		"apply_filters"
+	)
+	@patch.object(
+		FilterManager,
+		"filter_has_changed",
+		return_value=True
+	)
+	def test_get_queryset_without_cached_events_and_filter_with_changes(self, mock_has_changed, mock_apply_filters):
+		with patch.object(ApiService, 'get_events', return_value= self.events):
+			view = EventListView()
+			view.request = MagicMock()
+			result = view.get_queryset()
+			self.assertEqual(result, self.events)
