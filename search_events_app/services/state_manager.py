@@ -6,5 +6,9 @@ class StateManager:
         cls.events = events
 
     @classmethod
+    def reset_events(cls):
+        cls.events = None
+
+    @classmethod
     def get_last_searched_events(cls):
         return cls.events

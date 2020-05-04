@@ -19,6 +19,11 @@ class TestStateManager(TestCase):
         result = StateManager.events
         self.assertEqual(result, self.events)
 
+    def test_reset_events(self):
+        StateManager.reset_events()
+        result = StateManager.events
+        self.assertIsNone(result)
+
     def test_get_last_searched_events(self):
         StateManager.events = self.events
         result = StateManager.get_last_searched_events()
