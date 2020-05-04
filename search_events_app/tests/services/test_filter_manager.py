@@ -6,7 +6,7 @@ from search_events_app.models.event import Event
 from search_events_app.services.filter_manager import FilterManager
 
 
-class TestFilterService(TestCase):
+class TestFilterManager(TestCase):
     def setUp(self):
         self.event1 = Event('Event1', 'wwww.google.com', 'Argentina')
         self.event2 = Event('Event2', 'wwww.google.com', 'United States')
