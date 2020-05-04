@@ -68,26 +68,3 @@ class TestApiService(TestCase):
                 ]
             }
         }
-
-    @patch(
-        'search_events_app.services.api_service.requests.post'
-    )
-    def test_get_events(self, mock_post):
-        country1 = Country.objects.create(
-            name='England',
-            alpha2Code='GB',
-            alpha3Code='GBT',
-            flag='https://www.google.com.ar'
-        )
-        country2 = Country.objects.create(
-            name='United States',
-            alpha2Code='US',
-            alpha3Code='USA',
-            flag='https://www.google.com.ar'
-        )
-        response = MagicMock()
-        response.json = MagicMock(return_value=self.mock_api_response)
-        mock_post.return_value = response
-        result = ApiService().get_events()
-        self.assertIsInstance(result[0], Event)
-        self.assertEqual(len(result), 2)
