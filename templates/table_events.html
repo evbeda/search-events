@@ -1,0 +1,50 @@
+{% load el_pagination_tags %}
+
+<div class="row justify-content-center">
+    <table class='table table-hover table-striped'>
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Format</th>
+                <th>Organizer</th>
+                <th>Country</th>
+                <th>Start date</th>
+                <th>Language</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% paginate object_list %}
+                {% for event in object_list %}
+                    <tr>
+                        <td>
+                            <a href="{{ event.url }}" target="_blank">
+                                {{ event.name }}
+                            </a>
+                        </td>
+                        <td>{{ event.category }}</td>
+                        <td>{{ event.format }}</td>
+                        <td>{{ event.organizer }}</td>
+                        <td>{{ event.country }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.language }}</td>
+                    </tr>
+                {% endfor %}
+                {% get_pages %}
+        </tbody>
+    </table>
+
+    {% if not object_list %}
+        <p>No events were found.</p>
+    {% endif %}
+        
+</div> 
+
+{% if object_list %}
+    <div class="row">
+        <div class="col">
+            {% include "pagination.html" %}
+        </div>
+    </div>  
+{% endif %}
