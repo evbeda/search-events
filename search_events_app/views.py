@@ -24,3 +24,33 @@ class EventListView(ListView):
             } for country in countries
         ]
         return context
+
+    def get_dto_filter_by_filters(self, filters):
+        dict_dto = {}
+        for filter_ in filters:
+            dict_dto[filter_.get_key()] = filter_.get_value()
+
+        return DTOFilter(**dict_dto)
+
+    def get_list_dto_api_service_filter_by_filters(self, filters):
+        list_dto = []
+        dict_dto = {}
+        for filter_ in filters:
+            dict_dto['type'] = filter_.get_type()
+            dict_dto['value'] = filter_.get_request_value()
+            list_dto.append(DTOApiServiceFilter(**dict_dto))
+
+        return list_dto
+
+
+class DTOFilter:
+    
+    def __init__(self, **kwargs):
+        self.country = kwargs.get('country')
+
+
+class DTOApiServiceFilter:
+    
+    def __init__(self, **kwargs):
+        self.type = kwargs.get('type')
+        self.value = kwargs.get('value')
