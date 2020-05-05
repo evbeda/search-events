@@ -1,0 +1,17 @@
+<form autocomplete="off" id="country-form">
+        <div class="row">
+            <div class="autocomplete" style="width:300px;">
+                <input id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country">
+            </div>
+            <div class="input-group col col-sm-3" >
+                <select name="online" class="custom-select h-100" id="inputGroupSelect01">
+                    <option value="both">Online and offline events</option>
+                    <option value="on">Only online</option>
+                    <option value="off">Only offline</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <button class="btn btn-primary" onclick="sendData('country', {{countries}});return false;">Submit</button>
+        </div>
+</form>
