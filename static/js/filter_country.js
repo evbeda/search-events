@@ -6,6 +6,8 @@ const filterCriteria = (function() {
 	var currentFocus = -1;
 
 	$(document).ready(function() {
+		document.getElementById('country').value = querySt('country');
+		document.getElementById('online').value = querySt('online');
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
 				event.preventDefault();
@@ -121,7 +123,7 @@ const filterCriteria = (function() {
 
 function sendData(domId, array){
 	elem = document.getElementById(domId)
-	data = array.filter(e => e.name == elem.value)
+	data = array.filter(e => e.name == elem.value || e.alpha2Code == elem.value)
 	if(!data.length && elem.value != "") return false;
 	elem.value = data && data[0] ? data[0].alpha2Code : ""
 	document.getElementById("country-form").submit()
@@ -134,4 +136,17 @@ function toggleDisable(domId, value) {
 	if(value == 'on') {
 		elem.value = ''
 	}
+}
+
+function querySt(ji) {
+
+    hu = window.location.search.substring(1);
+    gy = hu.split("&");
+
+    for (i=0;i<gy.length;i++) {
+        ft = gy[i].split("=");
+        if (ft[0] == ji) {
+            return ft[1];
+        }
+    }
 }

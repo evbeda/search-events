@@ -1,7 +1,7 @@
 <form autocomplete="off" id="country-form">
         <div class="row">
             <div id="divCountry" class="autocomplete" style="width:300px;">
-                <input class="form-control" id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country">
+                <input class="form-control" id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country" value="querySt('country');">
             </div>
             <div class="input-group col col-sm-3" >
                 <select onchange="toggleDisable('country', this.value);" id="online" name="online" class="custom-select h-100" id="inputGroupSelect01">
