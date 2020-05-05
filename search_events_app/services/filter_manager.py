@@ -1,8 +1,9 @@
 from search_events_app.services.filters.country_filter import CountryFilter
+from search_events_app.services.filters.online_filter import OnlineFilter
 
 
 class FilterManager:
-    latest_filters = [CountryFilter()]
+    latest_filters = [CountryFilter(), OnlineFilter()]
 
     @classmethod
     def apply_filters(cls, request):
