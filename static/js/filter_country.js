@@ -18,7 +18,6 @@ const filterCriteria = (function() {
 		var itemsList, item, val = this.value;
 		/*close any already open lists of autocompleted values*/
 		closeAllLists();
-		if(val.length < 3) return;
 		if (!val) { return false; }
 		/*create a DIV element that will contain the items (values):*/
 		itemsList = document.createElement("DIV");
@@ -29,7 +28,7 @@ const filterCriteria = (function() {
 
 		for (i = 0; i < arr.length; i++) {
 			/*check if the item starts with the same letters as the text field value:*/
-			if (arr[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+			if ((arr[i].alpha2Code.toUpperCase() == val.toUpperCase() && val.length == 2) || (arr[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase() && val.length >= 3)) {
 				/*create a DIV element for each matching element:*/
 				item = document.createElement("DIV");
 				/*make the matching letters bold:*/
