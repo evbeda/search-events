@@ -6,8 +6,17 @@ const filterCriteria = (function() {
 	var currentFocus = -1;
 
 	$(document).ready(function() {
-		document.getElementById('country').value = querySt('country');
-		document.getElementById('online').value = querySt('online');
+		if(querySt("country")){
+			document.getElementById('country').value = querySt('country');
+			console.log("asdasd")
+		}
+		if(querySt("online")){
+			var online_dom =document.getElementById('online')
+			online_dom.value = querySt('online');
+			if (online_dom.value == "on"){
+				toggleDisable("country",online_dom.value)
+			}
+		}
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
 				event.preventDefault();
@@ -123,9 +132,9 @@ const filterCriteria = (function() {
 
 function sendData(domId, array){
 	elem = document.getElementById(domId)
-	data = array.filter(e => e.name == elem.value || e.alpha2Code == elem.value)
+	data = array.filter(e => e.name == elem.value)
 	if(!data.length && elem.value != "") return false;
-	elem.value = data && data[0] ? data[0].alpha2Code : ""
+	elem.value = data && data[0] ? data[0].name : ""
 	document.getElementById("country-form").submit()
 }
 
@@ -146,7 +155,7 @@ function querySt(ji) {
     for (i=0;i<gy.length;i++) {
         ft = gy[i].split("=");
         if (ft[0] == ji) {
-            return ft[1];
+            return ft[1].replace("+"," ");
         }
     }
 }

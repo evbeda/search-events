@@ -15,7 +15,7 @@ class TestFilters(TestCase):
         self.mock_request.GET = MagicMock()
 
     def test_apply_country_filter(self):
-        self.mock_request.GET.get = MagicMock(return_value='AR')
+        self.mock_request.GET.get = MagicMock(return_value='Argentina')
 
         self.country_filter.apply_filter(self.mock_request)
 
@@ -38,14 +38,14 @@ class TestFilters(TestCase):
 
     def test_apply_country_filter_same_value(self):
         self.country_filter.value = self.country
-        self.mock_request.GET.get = MagicMock(return_value='AR')
+        self.mock_request.GET.get = MagicMock(return_value='Argentina')
 
         self.country_filter.apply_filter(self.mock_request)
 
         self.assertFalse(self.country_filter.has_changed)
 
     def test_country_filter_info(self):
-        self.mock_request.GET.get = MagicMock(return_value='AR')
+        self.mock_request.GET.get = MagicMock(return_value='Argentina')
 
         self.country_filter.apply_filter(self.mock_request)
 
