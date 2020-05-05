@@ -51,3 +51,9 @@ input[type=submit] {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+input[type="text"]:disabled {
+  background: #dddddd;
+  border-color: red;
+  cursor: not-allowed;
+}

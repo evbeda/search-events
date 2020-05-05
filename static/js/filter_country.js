@@ -126,3 +126,12 @@ function sendData(domId, array){
 	elem.value = data && data[0] ? data[0].alpha2Code : ""
 	document.getElementById("country-form").submit()
 }
+
+function toggleDisable(domId, value) {
+	elem = document.getElementById(domId)
+	$( elem ).prop( "disabled", value == 'on' );
+	// elem.style.display = value == 'on' ? 'none' : 'block'
+	if(value == 'on') {
+		elem.value = ''
+	}
+}
