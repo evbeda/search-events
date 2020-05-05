@@ -8,7 +8,6 @@ const filterCriteria = (function() {
 	$(document).ready(function() {
 		if(querySt("country")){
 			document.getElementById('country').value = querySt('country');
-			console.log("asdasd")
 		}
 		if(querySt("online")){
 			var online_dom =document.getElementById('online')
@@ -16,6 +15,9 @@ const filterCriteria = (function() {
 			if (online_dom.value == "on"){
 				toggleDisable("country",online_dom.value)
 			}
+		}
+		if(querySt("language")){
+			document.getElementById('country').value = querySt('language');
 		}
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
