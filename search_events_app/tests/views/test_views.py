@@ -18,7 +18,7 @@ class TestEventListView(TestCase):
 
 	def setUp(self):
 		self.events = [Event(name="Evento1", url="www.google.com")]
-
+		StateManager.reset_events()
 
 	@patch.object(
 		Country,
@@ -65,7 +65,6 @@ class TestEventListView(TestCase):
 		result = view.get_queryset()
 		self.assertEqual(result, self.events)
 
-
 	@patch.object(
 		FilterManager,
 		"apply_filters"
@@ -77,6 +76,39 @@ class TestEventListView(TestCase):
 	)
 	def test_get_queryset_without_cached_events_and_filter_with_changes(self, mock_has_changed, mock_apply_filters):
 		with patch.object(ApiService, 'get_events', return_value= self.events):
+			view = EventListView()
+			view.request = MagicMock()
+			result = view.get_queryset()
+			self.assertEqual(result, self.events)
+
+	@patch.object(
+		FilterManager,
+		"apply_filters"
+	)
+	@patch.object(
+		FilterManager,
+		"filter_has_changed",
+		return_value=True
+	)
+	def test_get_queryset_with_cached_events_and_filter_with_changes(self, mock_has_changed, mock_apply_filters):
+		StateManager.set_events(self.events)
+		with patch.object(ApiService, 'get_events', return_value= self.events):
+			view = EventListView()
+			view.request = MagicMock()
+			result = view.get_queryset()
+			self.assertEqual(result, self.events)
+
+	@patch.object(
+		FilterManager,
+		"apply_filters"
+	)
+	@patch.object(
+		FilterManager,
+		"filter_has_changed",
+		return_value=False
+	)
+	def test_get_queryset_without_cached_events_and_filter_without_changes(self, mock_has_changed, mock_apply_filters):
+		with patch.object(ApiService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
 			result = view.get_queryset()
