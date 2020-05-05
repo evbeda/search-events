@@ -7,11 +7,11 @@ from search_events_app.models.country import Country
 class CountryFilter(Filter):
 
     def apply_filter(self, request):
-        alpha_2_code = request.GET.get('country') if request.GET.get('country') else None
+        country_name = request.GET.get('country') if request.GET.get('country') else None
         new_filter = None
-        if alpha_2_code:
+        if country_name:
             try:
-                new_filter = Country.objects.get(alpha_2_code=alpha_2_code)
+                new_filter = Country.objects.get(name=country_name)
             except ObjectDoesNotExist:
                 new_filter = None
         self.has_changed = new_filter != self.value
