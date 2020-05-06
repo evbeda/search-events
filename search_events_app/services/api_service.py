@@ -11,7 +11,7 @@ class ApiService:
     def get_events(cls, dto_filters_array):
         search_filters = [dto_filter for dto_filter in dto_filters_array if dto_filter.type == 'search']
         body_dict = cls.format_body(search_filters)
-        token = '&token='+get_env_variable('token_api')
+        token = '&token='+get_env_variable('TOKEN_API')
         url_api = 'https://www.evbqaapi.com/v3/destination/search/?'
         url_api_expand = 'expand.destination_event=primary_organizer%2Cprimary_venue'
         response = requests.post(
