@@ -9,7 +9,6 @@ from search_events_app.services.filters.language_filter import LanguageFilter
 class TestLanguageFilter(TestCase):
 
     def setUp(self):
-        self.language = Language.objects.create(name='German', code='de')
         self.language_filter = LanguageFilter()
         self.mock_request = MagicMock()
         self.mock_request.GET = MagicMock()
@@ -37,7 +36,8 @@ class TestLanguageFilter(TestCase):
         self.assertIsNone(self.language_filter.value)
 
     def test_apply_language_filter_same_value(self):
-        self.language_filter.value = self.language
+        language = Language.objects.get(code='de')
+        self.language_filter.value = language
         self.mock_request.GET.get = MagicMock(return_value='de')
 
         self.language_filter.apply_filter(self.mock_request)
