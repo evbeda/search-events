@@ -9,11 +9,11 @@ class ApiService:
 
     @classmethod
     def get_events(cls, dto_filters_array):
-        search_filters = [dto_filter for dto_filter in dto_filters_array if dto_filter.type == "search"]
+        search_filters = [dto_filter for dto_filter in dto_filters_array if dto_filter.type == 'search']
         body_dict = cls.format_body(search_filters)
-        token = "&token="+get_env_variable('token_api')
-        url_api = "https://www.evbqaapi.com/v3/destination/search/?"
-        url_api_expand = "expand.destination_event=primary_organizer%2Cprimary_venue"
+        token = '&token='+get_env_variable('token_api')
+        url_api = 'https://www.evbqaapi.com/v3/destination/search/?'
+        url_api_expand = 'expand.destination_event=primary_organizer%2Cprimary_venue'
         response = requests.post(
             url_api+url_api_expand+token,
             json=body_dict
@@ -24,10 +24,10 @@ class ApiService:
     @classmethod
     def format_body(cls, dto_filters):
         base_dict = {
-            "event_search": {
-                "sort": "default",
-                "dates": "current_future",
-                "page_size": 20,
+            'event_search': {
+                'sort': 'default',
+                'dates': 'current_future',
+                'page_size': 20,
             }
         }
         for dto_filter in dto_filters:

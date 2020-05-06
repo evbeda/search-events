@@ -8,28 +8,28 @@ from search_events_app.models.feature import Feature
 class TestEvent(TestCase):
 
     def setUp(self):
-        self.feature = Feature("Embedded Checkout")
+        self.feature = Feature('Embedded Checkout')
 
     def test_event_without_country(self):
-        event = Event("Name", "www.google.com")
+        event = Event('Name', 'www.google.com')
         self.assertEqual(event.country, None)
 
     def test_event_basic_info(self):
-        country = Country.objects.create(label="Argentina", code="AR", eventbrite_id="1234")
+        country = Country.objects.create(label='Argentina', code='AR', eventbrite_id='1234')
         event = Event(
-            "Evento1", "www.google" +
-            ".com", country, self.feature
+            'Evento1', 'www.google' +
+            '.com', country, self.feature
         )
-        self.assertEqual(event.name, "Evento1")
+        self.assertEqual(event.name, 'Evento1')
         self.assertEqual(event.country, country)
         self.assertEqual(event.feature, self.feature)
-        self.assertEqual(event.url, "www.google.com")
+        self.assertEqual(event.url, 'www.google.com')
 
     def test_event_with_two_features(self):
-        feature = Feature("Reserved Seating")        
+        feature = Feature('Reserved Seating')        
         event = Event(
-            "Futbol",
-            "www.google.com",
+            'Futbol',
+            'www.google.com',
             feature=[self.feature, feature]
         )
         self.assertEqual(len(event.feature), 2)

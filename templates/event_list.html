@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -7,9 +7,9 @@
     <h1>Events</h1>
 
     <div class="container-fluid width-90">
-        {% include 'filters.html' %}
+        {% include "filters.html" %}
         
-        {% include 'table_events.html' %}
+        {% include "table_events.html" %}
     </div>
 
 {% endblock %}

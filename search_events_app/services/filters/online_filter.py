@@ -28,7 +28,7 @@ class OnlineFilter(Filter):
             return self.value
 
     def get_type(self):
-        return "search"
+        return 'search'
 
     def get_key(self):
-        return "online"
+        return 'online'

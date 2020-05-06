@@ -15,14 +15,14 @@ from search_events_app.dto.dto_api_service_filter import DTOApiServiceFilter
 class TestApiService(TestCase):
 
     def setUp(self):
-        self.mock_dto_filter = [DTOApiServiceFilter(type="search", value={'places_within': "1234"})]
+        self.mock_dto_filter = [DTOApiServiceFilter(type='search', value={'places_within': '1234'})]
         self.mock_api_response = {
             'events': {
                 'results': [
                     {
                         'name': 'Carats world tour',
                         'primary_organizer': {
-                            "name": "MusicABC_2"
+                            'name': 'MusicABC_2'
                         },
                         'primary_venue': {
                             'address': {
@@ -34,19 +34,19 @@ class TestApiService(TestCase):
                         'language': 'en-us',
                         'tags': [
                             {
-                                "prefix": "EventbriteCategory",
-                                "display_name": "Music"
+                                'prefix': 'EventbriteCategory',
+                                'display_name': 'Music'
                             },
                             {
-                                "prefix": "EventbriteFormat",
-                                "display_name": "Festival"
+                                'prefix': 'EventbriteFormat',
+                                'display_name': 'Festival'
                             },
                         ]
                     },
                     {
                         'name': 'Virtual stitch & bitch',
                         'primary_organizer': {
-                            "name": "MusicABC"
+                            'name': 'MusicABC'
                         },
                         'primary_venue': {
                             'address': {
@@ -58,12 +58,12 @@ class TestApiService(TestCase):
                         'language': 'en-gb',
                         'tags': [
                             {
-                                "prefix": "EventbriteCategory",
-                                "display_name": "Fashion"
+                                'prefix': 'EventbriteCategory',
+                                'display_name': 'Fashion'
                             },
                             {
-                                "prefix": "EventbriteFormat",
-                                "display_name": "Expo"
+                                'prefix': 'EventbriteFormat',
+                                'display_name': 'Expo'
                             },
                         ]
                     },
@@ -72,24 +72,24 @@ class TestApiService(TestCase):
         }
         self.mock_response_processed = [
             {
-                "name": "Event1",
-                "url": "www.google",
-                "language": "Spanish",
-                "start_date": "2020-05-12",
-                "category": "category A",
-                "format_": "format A",
-                "organizer": "Organizer 1",
-                "country": "Argentina"
+                'name': 'Event1',
+                'url': 'www.google',
+                'language': 'Spanish',
+                'start_date': '2020-05-12',
+                'category': 'category A',
+                'format_': 'format A',
+                'organizer': 'Organizer 1',
+                'country': 'Argentina'
             },
             {
-                "name": "Event2",
-                "url": "www.google",
-                "language": "Spanish",
-                "start_date": "2020-05-12",
-                "category": "category A",
-                "format_": "format A",
-                "organizer": "Organizer 1",
-                "country": "Argentina",
+                'name': 'Event2',
+                'url': 'www.google',
+                'language': 'Spanish',
+                'start_date': '2020-05-12',
+                'category': 'category A',
+                'format_': 'format A',
+                'organizer': 'Organizer 1',
+                'country': 'Argentina',
             }
         ]
 
@@ -117,7 +117,7 @@ class TestApiService(TestCase):
 
     def test_format_body(self):
         expected = {
-            "event_search": {
+            'event_search': {
                 'sort': 'default',
                 'dates': 'current_future',
                 'page_size': 20,

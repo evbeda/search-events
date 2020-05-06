@@ -56,9 +56,9 @@ class TestFilters(TestCase):
 
         self.online_filter.apply_filter(self.mock_request)
 
-        self.assertEqual(self.online_filter.get_key(), "online")
+        self.assertEqual(self.online_filter.get_key(), 'online')
         self.assertEqual(self.online_filter.get_value(), OnlineParameters.ONLINE)
-        self.assertEqual(self.online_filter.get_type(), "search")
+        self.assertEqual(self.online_filter.get_type(), 'search')
         self.assertEqual(self.online_filter.get_request_value(), {
             OnlineParameters.ONLINE.get('key'): True
         })

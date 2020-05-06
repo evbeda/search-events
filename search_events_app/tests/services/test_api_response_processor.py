@@ -16,7 +16,7 @@ class TestApiResponseProcessor(TestCase):
                     {
                         'name': 'Carats world tour',
                         'primary_organizer': {
-                            "name": "MusicABC_2"
+                            'name': 'MusicABC_2'
                         },
                         'primary_venue': {
                             'address': {
@@ -28,19 +28,19 @@ class TestApiResponseProcessor(TestCase):
                         'language': 'en-us',
                         'tags': [
                             {
-                                "prefix": "EventbriteCategory",
-                                "display_name": "Music"
+                                'prefix': 'EventbriteCategory',
+                                'display_name': 'Music'
                             },
                             {
-                                "prefix": "EventbriteFormat",
-                                "display_name": "Festival"
+                                'prefix': 'EventbriteFormat',
+                                'display_name': 'Festival'
                             },
                         ]
                     },
                     {
                         'name': 'Virtual stitch & bitch',
                         'primary_organizer': {
-                            "name": "MusicABC"
+                            'name': 'MusicABC'
                         },
                         'primary_venue': {
                             'address': {
@@ -52,12 +52,12 @@ class TestApiResponseProcessor(TestCase):
                         'language': 'en-gb',
                         'tags': [
                             {
-                                "prefix": "EventbriteCategory",
-                                "display_name": "Fashion"
+                                'prefix': 'EventbriteCategory',
+                                'display_name': 'Fashion'
                             },
                             {
-                                "prefix": "EventbriteFormat",
-                                "display_name": "Expo"
+                                'prefix': 'EventbriteFormat',
+                                'display_name': 'Expo'
                             },
                         ]
                     },
@@ -67,14 +67,14 @@ class TestApiResponseProcessor(TestCase):
 
         result = process_events(mock_api_response)
         expected_result = {
-            "name": 'Carats world tour',
-            "url": 'https://www.eventbrite.com/e/carats-world-tour-tickets-102537931714?aff=ebdssbonlinesearch',
-            "language": 'en-us',
-            "start_date": '2020-07-20',
-            "category": "Music",
-            "format_": "Festival",
-            "organizer": "MusicABC_2",
-            "country": 'United States',
+            'name': 'Carats world tour',
+            'url': 'https://www.eventbrite.com/e/carats-world-tour-tickets-102537931714?aff=ebdssbonlinesearch',
+            'language': 'en-us',
+            'start_date': '2020-07-20',
+            'category': 'Music',
+            'format_': 'Festival',
+            'organizer': 'MusicABC_2',
+            'country': 'United States',
         }
 
         self.assertIsInstance(result[0], dict)
@@ -83,56 +83,56 @@ class TestApiResponseProcessor(TestCase):
 
     def test_get_tag(self):
         item = {
-            "tags": [
+            'tags': [
                 {
-                    "prefix": "EventbriteCategory",
-                    "display_name": "Music"
+                    'prefix': 'EventbriteCategory',
+                    'display_name': 'Music'
                 },
                 {
-                    "prefix": "EventbriteFormat",
-                    "display_name": "Festival"
+                    'prefix': 'EventbriteFormat',
+                    'display_name': 'Festival'
                 },
             ]
         }
 
-        category = get_tag(item, "EventbriteCategory")
-        format_ = get_tag(item, "EventbriteFormat")
+        category = get_tag(item, 'EventbriteCategory')
+        format_ = get_tag(item, 'EventbriteFormat')
 
-        self.assertEqual(category, "Music")
-        self.assertEqual(format_, "Festival")
+        self.assertEqual(category, 'Music')
+        self.assertEqual(format_, 'Festival')
 
     def test_get_tag_without_category(self):
         item = {
-            "tags": [
+            'tags': [
                 {
-                    "prefix": "EventbriteFormat",
-                    "display_name": "Festival"
+                    'prefix': 'EventbriteFormat',
+                    'display_name': 'Festival'
                 },
             ]
         }
 
-        category = get_tag(item, "EventbriteCategory")
+        category = get_tag(item, 'EventbriteCategory')
 
         self.assertIsNone(category)
 
     def test_get_country(self):
         item = {
-            "primary_venue": {
-                "address": {
-                    "country": "GB"
+            'primary_venue': {
+                'address': {
+                    'country': 'GB'
                 },
             }
         }
 
         country = get_country(item)
 
-        self.assertEqual(country, "United Kingdom")
+        self.assertEqual(country, 'United Kingdom')
 
     def test_get_none_country(self):
         item = {
-            "primary_venue": {
-                "address": {
-                    "city": "Amsterdam"
+            'primary_venue': {
+                'address': {
+                    'city': 'Amsterdam'
                 },
             }
         }

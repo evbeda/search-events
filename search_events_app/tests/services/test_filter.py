@@ -18,7 +18,7 @@ class TestFilters(TestCase):
 
         self.country_filter.apply_filter(self.mock_request)
 
-        self.assertEqual(self.country_filter.value.name, "Argentina")
+        self.assertEqual(self.country_filter.value.name, 'Argentina')
         self.assertTrue(self.country_filter.has_changed)
 
     def test_not_apply_country_filter(self):
@@ -49,9 +49,9 @@ class TestFilters(TestCase):
 
         self.country_filter.apply_filter(self.mock_request)
 
-        self.assertEqual(self.country_filter.get_key(), "country")
-        self.assertEqual(self.country_filter.get_value(), "Argentina")
-        self.assertEqual(self.country_filter.get_type(), "search")
+        self.assertEqual(self.country_filter.get_key(), 'country')
+        self.assertEqual(self.country_filter.get_value(), 'Argentina')
+        self.assertEqual(self.country_filter.get_type(), 'search')
         self.assertEqual(self.country_filter.get_request_value(), {
-            'places_within': ["85632505"]
+            'places_within': ['85632505']
         })

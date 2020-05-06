@@ -8,16 +8,16 @@ from search_events_app.dto.dto_filter import DTOFilter
 class TestPostRequestProcessor(TestCase):
     def setUp(self):
         self.dto_filter = DTOFilter()
-        self.dto_filter.country = "Argentina"
+        self.dto_filter.country = 'Argentina'
 
     def test_validate_filters_true(self):
-        event = Event("Event1", "https://google.com", country="Argentina")
+        event = Event('Event1', 'https://google.com', country='Argentina')
         result = validate_filters(event, self.dto_filter)
 
         self.assertTrue(result)
 
     def test_validate_filters_false(self):
-        event = Event("Event1", "https://google.com", country="Brazil")
+        event = Event('Event1', 'https://google.com', country='Brazil')
         
         result = validate_filters(event, self.dto_filter)
 
