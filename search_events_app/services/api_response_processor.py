@@ -3,7 +3,6 @@ from search_events_app.models.country import Country
 
 def process_events(response):
     data = response["events"]["results"]
-
     events = []
     for item in data:
         event_dict = {
