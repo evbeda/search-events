@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from search_events_app.services import post_request_processor
 from search_events_app.services.api_service import ApiService
 from search_events_app.models.country import Country
+from search_events_app.models.language import Language
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager
 
@@ -24,12 +25,20 @@ class EventListView(ListView):
 
     def get_context_data(self, **kwargs):
         countries = Country.objects.all()
+        languages = Language.objects.all()
         context = super().get_context_data(**kwargs)
         context['countries'] = [
             {
                 'alpha2Code': country.alpha_2_code,
                 'name': country.name
             } for country in countries
+        ]
+
+        context['languages'] = [
+            {
+                'code': language.code,
+                'name': language.name
+            } for language in languages
         ]
         return context
 
