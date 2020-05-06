@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunSQL(
             ''.join([
-                f"INSERT INTO main.search_events_app_country (name, alpha_2_code, eventbrite_id) VALUES ( '{c[1]}', '{c[2]}', '{c[3]}');"
+                f'INSERT INTO main.search_events_app_country (name, alpha_2_code, eventbrite_id) VALUES ( "{c[1]}", "{c[2]}", "{c[3]}");'
                 for c in countries
             ])
         )

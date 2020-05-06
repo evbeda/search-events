@@ -18,7 +18,7 @@ class TestLanguageFilter(TestCase):
 
         self.language_filter.apply_filter(self.mock_request)
 
-        self.assertEqual(self.language_filter.value.name, "German")
+        self.assertEqual(self.language_filter.value.name, 'German')
         self.assertTrue(self.language_filter.has_changed)
 
     def test_not_apply_language_filter(self):
@@ -49,9 +49,9 @@ class TestLanguageFilter(TestCase):
 
         self.language_filter.apply_filter(self.mock_request)
 
-        self.assertEqual(self.language_filter.get_key(), "language")
-        self.assertEqual(self.language_filter.get_value(), "German")
-        self.assertEqual(self.language_filter.get_type(), "search")
+        self.assertEqual(self.language_filter.get_key(), 'language')
+        self.assertEqual(self.language_filter.get_value(), 'German')
+        self.assertEqual(self.language_filter.get_type(), 'search')
         self.assertEqual(self.language_filter.get_request_value(), {
-            'languages': ["de"]
+            'languages': ['de']
         })

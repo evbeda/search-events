@@ -18,74 +18,74 @@ from search_events_app.views import EventListView
 class TestEventListView(TestCase):
 
 	def setUp(self):
-		self.events = [Event(name="Evento1", url="www.google.com")]
+		self.events = [Event(name='Evento1', url='www.google.com')]
 		StateManager.reset_events()
 
 	@patch.object(
 		Country,
-		"objects"
+		'objects'
 	)
 	def test_get_context_data_countries(self, mock_objects):
 		self.client = Client()
 		countries = [
-			Country(label="Argentina", code="AR", eventbrite_id="1234"),
-			Country(label="Spain", code="ES", eventbrite_id="4567")
+			Country(label='Argentina', code='AR', eventbrite_id='1234'),
+			Country(label='Spain', code='ES', eventbrite_id='4567')
 		]
 		mock_objects.all = MagicMock(return_value=countries)
 		expected_result = [
 			{
-				'alpha2Code': "AR",
-				'name': "Argentina"
+				'alpha2Code': 'AR',
+				'name': 'Argentina'
 			},
 			{
-				'alpha2Code': "ES",
-				'name': "Spain"
+				'alpha2Code': 'ES',
+				'name': 'Spain'
 			}
 		]
 		kwargs = {
-			"object_list": []
+			'object_list': []
 		}
 
 		result = EventListView().get_context_data(**kwargs)
 
-		self.assertEqual(result["countries"], expected_result)
+		self.assertEqual(result['countries'], expected_result)
 
 	@patch.object(
 		Language,
-		"objects"
+		'objects'
 	)
 	def test_get_context_data_languages(self, mock_objects):
 		self.client = Client()
 		languages = [
-			Language(name="German", code="de"),
-			Language(name="Spanish", code="es")
+			Language(name='German', code='de'),
+			Language(name='Spanish', code='es')
 		]
 		mock_objects.all = MagicMock(return_value=languages)
 		expected_result = [
 			{
-				'code': "de",
-				'name': "German"
+				'code': 'de',
+				'name': 'German'
 			},
 			{
-				'code': "es",
-				'name': "Spanish"
+				'code': 'es',
+				'name': 'Spanish'
 			}
 		]
 		kwargs = {
-			"object_list": []
+			'object_list': []
 		}
 
 		result = EventListView().get_context_data(**kwargs)
 
-		self.assertEqual(result["languages"], expected_result)
+		self.assertEqual(result['languages'], expected_result)
 
 	@patch.object(
 		FilterManager,
-		"apply_filters"
+		'apply_filters'
 	)
 	@patch.object(
 		FilterManager,
-		"filter_has_changed",
+		'filter_has_changed',
 		return_value=False
 	)
 	def test_get_queryset_with_cached_events_and_filter_without_changes(self, mock_has_changed, mock_apply_filters):
@@ -97,11 +97,11 @@ class TestEventListView(TestCase):
 
 	@patch.object(
 		FilterManager,
-		"apply_filters"
+		'apply_filters'
 	)
 	@patch.object(
 		FilterManager,
-		"filter_has_changed",
+		'filter_has_changed',
 		return_value=True
 	)
 	@patch(
@@ -118,11 +118,11 @@ class TestEventListView(TestCase):
 
 	@patch.object(
 		FilterManager,
-		"apply_filters"
+		'apply_filters'
 	)
 	@patch.object(
 		FilterManager,
-		"filter_has_changed",
+		'filter_has_changed',
 		return_value=True
 	)
 	@patch(
@@ -139,11 +139,11 @@ class TestEventListView(TestCase):
 
 	@patch.object(
 		FilterManager,
-		"apply_filters"
+		'apply_filters'
 	)
 	@patch.object(
 		FilterManager,
-		"filter_has_changed",
+		'filter_has_changed',
 		return_value=False
 	)
 	@patch(

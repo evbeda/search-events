@@ -42,9 +42,9 @@ class TestFilterManager(TestCase):
 
     def test_get_dto_filter_by_filters(self):
         country_filter = CountryFilter()
-        country_filter.value = Country(label="Spain", code="ES")
+        country_filter.value = Country(label='Spain', code='ES')
         language_filter = LanguageFilter()
-        language_filter.value = Language.objects.create(name="Spanish", code="es")
+        language_filter.value = Language.objects.create(name='Spanish', code='es')
         FilterManager.latest_filters = [country_filter, OnlineFilter(), language_filter]
 
         result = FilterManager.get_dto_filter_by_filters()
@@ -59,9 +59,9 @@ class TestFilterManager(TestCase):
         ]
         
         country_filter = CountryFilter()
-        country_filter.value = Country(label="Argentina", code="AR", eventbrite_id="85632505")
+        country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='85632505')
         language_filter = LanguageFilter()
-        language_filter.value = Language.objects.create(name="Spanish", code="es")
+        language_filter.value = Language.objects.create(name='Spanish', code='es')
         FilterManager.latest_filters = [country_filter, OnlineFilter(), language_filter]
 
         result = [

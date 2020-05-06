@@ -19,14 +19,14 @@ class LanguageFilter(Filter):
             self.value = new_filter
 
     def get_key(self):
-        return "language"
+        return 'language'
 
     def get_value(self):
         if self.value:
             return self.value.name
 
     def get_type(self):
-        return "search"
+        return 'search'
 
     def get_request_value(self):
         if self.value:
