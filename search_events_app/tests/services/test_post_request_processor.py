@@ -1,9 +1,9 @@
 from django.test import TestCase
 
 from search_events_app.models.event import Event
+from search_events_app.services.post_request_processor import validate_filters
 from search_events_app.views import DTOFilter
 
-from search_events_app.services.post_request_processor import validate_filters
 
 class TestPostRequestProcessor(TestCase):
     def setUp(self):

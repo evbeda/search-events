@@ -1,14 +1,14 @@
 from unittest.mock import (
 	MagicMock,
-	patch
+	patch,
 )
-from django.test import Client
 
+from django.test import Client
 from django.test import TestCase
 
 from search_events_app.models.country import Country
-from search_events_app.models.language import Language
 from search_events_app.models.event import Event
+from search_events_app.models.language import Language
 from search_events_app.services.api_service import ApiService
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager

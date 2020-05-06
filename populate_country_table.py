@@ -1,7 +1,8 @@
 
-import os
 import django
 import requests
+import os
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'search_events.settings.dev')
 django.setup()
 

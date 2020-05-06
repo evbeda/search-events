@@ -2,8 +2,8 @@ from unittest.mock import MagicMock
 
 from django.test import TestCase
 
-from search_events_app.services.filters.country_filter import CountryFilter
 from search_events_app.models.country import Country
+from search_events_app.services.filters.country_filter import CountryFilter
 
 
 class TestFilters(TestCase):
