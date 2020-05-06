@@ -7,13 +7,13 @@ from search_events_app.services.filters.filter import Filter
 class CountryFilter(Filter):
 
     def apply_filter(self, request):
-        country_name = request.GET.get('country') if request.GET.get('country') else None
+        country_name = request.GET.get('country')
         new_filter = None
         if country_name:
             try:
                 new_filter = Country.objects.get(name=country_name)
             except ObjectDoesNotExist:
-                new_filter = None
+                pass
         self.has_changed = new_filter != self.value
         if self.has_changed:
             self.value = new_filter
