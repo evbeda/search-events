@@ -142,11 +142,11 @@ function sendData(domId, array){
 
 function toggleDisable(domId, value) {
 	elem = document.getElementById(domId)
-	$( elem ).prop( "disabled", value == 'on' );
-	// elem.style.display = value == 'on' ? 'none' : 'block'
+	// $( elem ).prop( "disabled", value == 'on' );
 	if(value == 'on') {
 		elem.value = ''
 	}
+	elem.style.display = value == 'on' ? 'none' : 'block'
 }
 
 function querySt(ji) {
