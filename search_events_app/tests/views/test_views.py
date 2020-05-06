@@ -1,13 +1,14 @@
 from unittest.mock import (
 	MagicMock,
-	patch
+	patch,
 )
-from django.test import Client
 
+from django.test import Client
 from django.test import TestCase
 
 from search_events_app.models.country import Country
 from search_events_app.models.event import Event
+from search_events_app.models.language import Language
 from search_events_app.services.api_service import ApiService
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager
@@ -24,7 +25,7 @@ class TestEventListView(TestCase):
 		Country,
 		"objects"
 	)
-	def test_get_context_data(self, mock_objects):
+	def test_get_context_data_countries(self, mock_objects):
 		self.client = Client()
 		countries = [
 			Country(label="Argentina", code="AR", eventbrite_id="1234"),
@@ -48,6 +49,35 @@ class TestEventListView(TestCase):
 		result = EventListView().get_context_data(**kwargs)
 
 		self.assertEqual(result["countries"], expected_result)
+
+	@patch.object(
+		Language,
+		"objects"
+	)
+	def test_get_context_data_languages(self, mock_objects):
+		self.client = Client()
+		languages = [
+			Language(name="German", code="de"),
+			Language(name="Spanish", code="es")
+		]
+		mock_objects.all = MagicMock(return_value=languages)
+		expected_result = [
+			{
+				'code': "de",
+				'name': "German"
+			},
+			{
+				'code': "es",
+				'name': "Spanish"
+			}
+		]
+		kwargs = {
+			"object_list": []
+		}
+
+		result = EventListView().get_context_data(**kwargs)
+
+		self.assertEqual(result["languages"], expected_result)
 
 	@patch.object(
 		FilterManager,

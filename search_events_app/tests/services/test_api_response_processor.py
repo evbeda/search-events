@@ -1,11 +1,11 @@
 from django.test import TestCase
 
+from search_events_app.models.country import Country
 from search_events_app.services.api_response_processor import (
-    process_events,
     get_country,
     get_tag,
+    process_events,
 )
-from search_events_app.models.country import Country
 
 
 class TestApiResponseProcessor(TestCase):
