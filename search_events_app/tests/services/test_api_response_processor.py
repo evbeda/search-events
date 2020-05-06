@@ -9,18 +9,6 @@ from search_events_app.services.api_response_processor import (
 
 
 class TestApiResponseProcessor(TestCase):
-    def setUp(self):
-        country1 = Country.objects.create(
-            label='England',
-            code='GB',
-            eventbrite_id='1234'
-        )
-        country2 = Country.objects.create(
-            label='United States',
-            code='US',
-            eventbrite_id='5678'
-        )
-
     def test_process_events(self):
         mock_api_response = {
             'events': {
@@ -138,7 +126,7 @@ class TestApiResponseProcessor(TestCase):
 
         country = get_country(item)
 
-        self.assertEqual(country, "England")
+        self.assertEqual(country, "United Kingdom")
 
     def test_get_none_country(self):
         item = {
@@ -152,4 +140,4 @@ class TestApiResponseProcessor(TestCase):
         country = get_country(item)
 
         self.assertIsNone(country)
-        
+     

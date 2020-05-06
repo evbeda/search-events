@@ -9,7 +9,6 @@ from search_events_app.services.filters.country_filter import CountryFilter
 class TestFilters(TestCase):
 
     def setUp(self):
-        self.country = Country.objects.create(label='Argentina', code='AR', eventbrite_id="1234")
         self.country_filter = CountryFilter()
         self.mock_request = MagicMock()
         self.mock_request.GET = MagicMock()
@@ -37,7 +36,8 @@ class TestFilters(TestCase):
         self.assertIsNone(self.country_filter.value)
 
     def test_apply_country_filter_same_value(self):
-        self.country_filter.value = self.country
+        country = Country.objects.get(name='Argentina')
+        self.country_filter.value = country
         self.mock_request.GET.get = MagicMock(return_value='Argentina')
 
         self.country_filter.apply_filter(self.mock_request)
@@ -53,5 +53,5 @@ class TestFilters(TestCase):
         self.assertEqual(self.country_filter.get_value(), "Argentina")
         self.assertEqual(self.country_filter.get_type(), "search")
         self.assertEqual(self.country_filter.get_request_value(), {
-            'places_within': ["1234"]
+            'places_within': ["85632505"]
         })
