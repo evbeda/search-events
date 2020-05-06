@@ -30,7 +30,6 @@ class ApiService:
                 "page_size": 20,
             }
         }
-
         for dto_filter in dto_filters:
             if dto_filter.value:
                 base_dict['event_search'].update(dto_filter.value)
