@@ -9,11 +9,13 @@ from search_events_app.models.country import Country
 from search_events_app.models.event import Event
 from search_events_app.services.api_service import ApiService
 from search_events_app.services.dummy_api import DummyApi
+from search_events_app.views import DTOApiServiceFilter
 
 
 class TestApiService(TestCase):
 
     def setUp(self):
+        self.mock_dto_filter = [DTOApiServiceFilter(type="search", value={'places_within': "1234"})]
         self.mock_api_response = {
             'events': {
                 'results': [
@@ -68,3 +70,61 @@ class TestApiService(TestCase):
                 ]
             }
         }
+        self.mock_response_processed = [
+            {
+                "name": "Event1",
+                "url": "www.google",
+                "language": "Spanish",
+                "start_date": "2020-05-12",
+                "category": "category A",
+                "format_": "format A",
+                "organizer": "Organizer 1",
+                "country": "Argentina"
+            },
+            {
+                "name": "Event2",
+                "url": "www.google",
+                "language": "Spanish",
+                "start_date": "2020-05-12",
+                "category": "category A",
+                "format_": "format A",
+                "organizer": "Organizer 1",
+                "country": "Argentina",
+            }
+        ]
+
+    @patch.object(
+        ApiService,
+        'format_body'
+    )
+    @patch(
+        'search_events_app.services.api_service.requests.post'
+    )
+    @patch(
+        'search_events_app.services.api_service.process_events'
+    )
+    def test_get_events(self, mock_process_events, mock_post, mock_format_body):
+        post_response = MagicMock()
+        post_response.json = MagicMock(return_value=self.mock_api_response)
+        mock_post.return_value = post_response
+        mock_process_events.return_value = self.mock_response_processed
+
+        result = ApiService.get_events(dto_filters_array=self.mock_dto_filter)
+
+        self.assertEqual(len(result), 2)
+        self.assertIsInstance(result[0], Event)
+        self.assertIsInstance(result[1], Event)
+
+    def test_format_body(self):
+        expected = {
+            "event_search": {
+                'sort': 'default',
+                'dates': 'current_future',
+                'page_size': 20,
+                'places_within': '1234'
+            }
+        }
+
+        result = ApiService.format_body(self.mock_dto_filter)
+
+        self.assertEqual(result, expected)
