@@ -15,9 +15,9 @@ class EventListView(ListView):
     def get_queryset(self):
         FilterManager.apply_filters(self.request)
         if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
-            api_service_filters = self.get_list_dto_api_service_filter_by_filters(FilterManager.latest_filters)
+            api_service_filters = FilterManager.get_list_dto_api_service_filter_by_filters()
             events = ApiService.get_events(api_service_filters)
-            post_request_dto_filters = self.get_dto_filter_by_filters(FilterManager.latest_filters)
+            post_request_dto_filters = FilterManager.get_dto_filter_by_filters()
             events = post_request_processor.post_process_events(events, post_request_dto_filters)
             StateManager.set_events(events)
             return events
@@ -41,35 +41,3 @@ class EventListView(ListView):
             } for language in languages
         ]
         return context
-
-    @classmethod
-    def get_dto_filter_by_filters(cls, filters):
-        dict_dto = {}
-        for filter_ in filters:
-            dict_dto[filter_.get_key()] = filter_.get_value()
-
-        return DTOFilter(**dict_dto)
-
-    @classmethod
-    def get_list_dto_api_service_filter_by_filters(cls, filters):
-        list_dto = []
-        dict_dto = {}
-        for filter_ in filters:
-            dict_dto['type'] = filter_.get_type()
-            dict_dto['value'] = filter_.get_request_value()
-            list_dto.append(DTOApiServiceFilter(**dict_dto))
-
-        return list_dto
-
-
-class DTOFilter:
-    
-    def __init__(self, **kwargs):
-        self.country = kwargs.get('country')
-
-
-class DTOApiServiceFilter:
-    
-    def __init__(self, **kwargs):
-        self.type = kwargs.get('type')
-        self.value = kwargs.get('value')

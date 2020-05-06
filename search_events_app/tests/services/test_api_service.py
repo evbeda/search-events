@@ -9,7 +9,7 @@ from search_events_app.models.country import Country
 from search_events_app.models.event import Event
 from search_events_app.services.api_service import ApiService
 from search_events_app.services.dummy_api import DummyApi
-from search_events_app.views import DTOApiServiceFilter
+from search_events_app.dto.dto_api_service_filter import DTOApiServiceFilter
 
 
 class TestApiService(TestCase):
