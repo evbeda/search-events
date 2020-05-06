@@ -17,7 +17,7 @@ const filterCriteria = (function() {
 			}
 		}
 		if(querySt("language")){
-			document.getElementById('country').value = querySt('language');
+			document.getElementById('language').value = querySt('language');
 		}
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
