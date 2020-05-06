@@ -1,6 +1,6 @@
 from unittest.mock import (
-    patch,
     MagicMock,
+    patch,
 )
 
 from django.test import TestCase

@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from search_events_app.models.event import Event
 from search_events_app.models.country import Country
+from search_events_app.models.event import Event
 from search_events_app.models.feature import Feature
 
 

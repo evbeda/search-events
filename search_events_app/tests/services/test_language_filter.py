@@ -2,8 +2,8 @@ from unittest.mock import MagicMock
 
 from django.test import TestCase
 
-from search_events_app.services.filters.language_filter import LanguageFilter
 from search_events_app.models.language import Language
+from search_events_app.services.filters.language_filter import LanguageFilter
 
 
 class TestLanguageFilter(TestCase):
