@@ -57,18 +57,18 @@ class TestEventListView(TestCase):
 	def test_get_context_data_languages(self, mock_objects):
 		self.client = Client()
 		languages = [
-			Language(name='German', code='de'),
-			Language(name='Spanish', code='es')
+			Language(name='Spanish', code='es'),
+			Language(name='German', code='de')
 		]
-		mock_objects.all = MagicMock(return_value=languages)
+		mock_objects.order_by = MagicMock(return_value=languages)
 		expected_result = [
-			{
-				'code': 'de',
-				'name': 'German'
-			},
 			{
 				'code': 'es',
 				'name': 'Spanish'
+			},
+			{
+				'code': 'de',
+				'name': 'German'
 			}
 		]
 		kwargs = {

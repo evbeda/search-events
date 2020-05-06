@@ -25,7 +25,8 @@ class EventListView(ListView):
 
     def get_context_data(self, **kwargs):
         countries = Country.objects.all()
-        languages = Language.objects.all()
+        languages = Language.objects.order_by('name')
+
         context = super().get_context_data(**kwargs)
         context['countries'] = [
             {
