@@ -121,4 +121,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-EL_PAGINATION_PER_PAGE = 5
+EL_PAGINATION_PER_PAGE = 8

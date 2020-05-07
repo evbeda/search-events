@@ -120,7 +120,7 @@ class TestApiService(TestCase):
             'event_search': {
                 'sort': 'default',
                 'dates': 'current_future',
-                'page_size': 20,
+                'page_size': 40,
                 'places_within': '1234'
             }
         }

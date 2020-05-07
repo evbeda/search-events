@@ -27,7 +27,7 @@ class ApiService:
             'event_search': {
                 'sort': 'default',
                 'dates': 'current_future',
-                'page_size': 20,
+                'page_size': 40,
             }
         }
         for dto_filter in dto_filters:
