@@ -10,7 +10,7 @@ def process_events(response):
             event_dict = {
                 'name': item.get('name'),
                 'url': item.get('url'),
-                'language': item.get('language'),
+                'language': get_language(item),
                 'start_date': item.get('start_date'),
                 'category': get_tag(item, 'EventbriteCategory'),
                 'format_': get_tag(item, 'EventbriteFormat'),
@@ -38,3 +38,8 @@ def get_country(item):
             if alpha2code:
                 country = Country.objects.get(alpha_2_code=alpha2code)
                 return country.name
+
+
+def get_language(item):
+    lang = item.get('language')
+    return lang.split('-')[0]
