@@ -1,12 +1,15 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
     {% load el_pagination_tags %}
+    
+    <nav class="navbar blue-eb">
+        <h1><div class="feed-header__title-top">CX Events Finder</div></h1>
+        <img class="flag" src="{% static "img/eventbrite_logo.png"%}">
+      </nav>
 
-    {% comment %} <h1>Events</h1> {% endcomment %}
-
-    <div class="container-fluid width-90">
+    <div class="container-fluid width-90 mt-4">
         {% include "filters.html" %}
         
         {% include "table_events.html" %}
