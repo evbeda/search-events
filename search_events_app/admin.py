@@ -6,3 +6,4 @@ from .models.language import Language
 
 # Register your models here.
 admin.site.register(Country)
+admin.site.register(Language)

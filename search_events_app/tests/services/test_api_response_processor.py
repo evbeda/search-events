@@ -69,7 +69,7 @@ class TestApiResponseProcessor(TestCase):
         expected_result = {
             'name': 'Carats world tour',
             'url': 'https://www.eventbrite.com/e/carats-world-tour-tickets-102537931714?aff=ebdssbonlinesearch',
-            'language': 'en-us',
+            'language': 'en',
             'start_date': '2020-07-20',
             'category': 'Music',
             'format_': 'Festival',

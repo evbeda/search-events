@@ -16,7 +16,7 @@ def get_countries():
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('search_events_app', '0005_populate_language'),
+        ('search_events_app', '0001_initial'),
     ]
     countries = get_countries()
     operations = [
