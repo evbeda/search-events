@@ -2,21 +2,23 @@ from search_events_app.models.country import Country
 
 
 def process_events(response):
-    data = response['events']['results']
+    data = response.get('events')
     events = []
-    for item in data:
-        event_dict = {
-            'name': item.get('name'),
-            'url': item.get('url'),
-            'language': item.get('language'),
-            'start_date': item.get('start_date'),
-            'category': get_tag(item, 'EventbriteCategory'),
-            'format_': get_tag(item, 'EventbriteFormat'),
-            'organizer': item.get('primary_organizer').get('name'),
-            'country': get_country(item),
+    if data:
+        data = data.get('results')
+        for item in data:
+            event_dict = {
+                'name': item.get('name'),
+                'url': item.get('url'),
+                'language': item.get('language'),
+                'start_date': item.get('start_date'),
+                'category': get_tag(item, 'EventbriteCategory'),
+                'format_': get_tag(item, 'EventbriteFormat'),
+                'organizer': item.get('primary_organizer').get('name'),
+                'country': get_country(item),
 
-        }
-        events.append(event_dict)
+            }
+            events.append(event_dict)
     return events
 
 
