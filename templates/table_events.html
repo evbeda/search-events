@@ -26,7 +26,8 @@
                         </td>
                         <td>{{ event.category }}</td>
                         <td>{{ event.format }}</td>
-                        <td>{{ event.organizer }}</td>
+                        <td>{{ event.organizer|truncatechars:2 }}</td>
+                        {% comment %} {{ value|truncatechars:9 }} {% endcomment %}
                         <td>{{ event.country }}</td>
                         <td>{{ event.start_date }}</td>
                         <td class="text-center">
