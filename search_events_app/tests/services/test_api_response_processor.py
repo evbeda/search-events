@@ -3,7 +3,9 @@ from django.test import TestCase
 from search_events_app.models.country import Country
 from search_events_app.services.api_response_processor import (
     get_country,
+    get_language,
     get_tag,
+    get_url,
     process_events,
 )
 
@@ -141,3 +143,20 @@ class TestApiResponseProcessor(TestCase):
 
         self.assertIsNone(country)
      
+    def test_language(self):
+        item = {
+            'language': 'en-gb'
+        }
+
+        result = get_language(item)
+
+        self.assertEqual(result, "en")
+
+    def test_url(self):
+        item = {
+            'url': 'https://www.evbqa.com/evento-de-prueba'
+        }
+
+        result = get_url(item)
+
+        self.assertEqual(result, 'https://www.eventbrite.com/evento-de-prueba')

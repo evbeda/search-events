@@ -9,7 +9,7 @@ def process_events(response):
         for item in data:
             event_dict = {
                 'name': item.get('name'),
-                'url': item.get('url'),
+                'url': get_url(item),
                 'language': get_language(item),
                 'start_date': item.get('start_date'),
                 'category': get_tag(item, 'EventbriteCategory'),
@@ -43,3 +43,7 @@ def get_country(item):
 def get_language(item):
     lang = item.get('language')
     return lang.split('-')[0]
+
+
+def get_url(item):
+    return item.get('url').replace('evbqa', 'eventbrite')
