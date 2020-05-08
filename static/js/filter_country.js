@@ -2,6 +2,7 @@ $('form').submit(function(e){ e.preventDefault(); });
 
 var arr, element;
 
+
 const filterCriteria = (function() {
 	var currentFocus = -1;
 
@@ -13,7 +14,7 @@ const filterCriteria = (function() {
 			var online_dom =document.getElementById('online')
 			online_dom.value = querySt('online');
 			if (online_dom.value == "on"){
-				toggleDisable("country",online_dom.value)
+				toggleDisable("divCountry", "country", online_dom.value)
 			}
 		}
 		if(querySt("language")){
@@ -140,13 +141,14 @@ function sendData(domId, array){
 	document.getElementById("country-form").submit()
 }
 
-function toggleDisable(domId, value) {
-	elem = document.getElementById(domId)
+function toggleDisable(divId, inputId, value) {
+	div = document.getElementById(divId)
+	input = document.getElementById(inputId)
 	// $( elem ).prop( "disabled", value == 'on' );
 	if(value == 'on') {
-		elem.value = ''
+		input.value = ''
 	}
-	elem.style.display = value == 'on' ? 'none' : 'block'
+	div.style.visibility = value == 'on' ? 'hidden' : 'visible'
 }
 
 function querySt(ji) {
@@ -159,4 +161,15 @@ function querySt(ji) {
             return ft[1].replace(/\+/g, " ");
         }
     }
+}
+
+function clearFilters() {
+	var filter_ids = ["online", "language", "country", "divCountry"]
+	filter_ids.forEach(function (id) {
+ 		filter = document.getElementById(id);
+ 		filter.value=""
+		filter.style.visibility = "visible"
+
+	})
+
 }

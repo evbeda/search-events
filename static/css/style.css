@@ -101,3 +101,27 @@ input::placeholder {
 .thead-blue-eb {
   background-color: #1E0A3C;
 }
+
+.clear-filter:hover{
+    background-color: #d32926;
+    color: white;
+    cursor:pointer;
+}
+
+.clear-filter{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .375rem .375rem .375rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+}
+
+
+
