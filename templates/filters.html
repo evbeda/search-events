@@ -6,8 +6,8 @@
                         <i class="material-icons">location_on</i>
                     </span>
                 </div>
-                <select onchange="toggleDisable('country', this.value);" id="online" name="online" class="custom-select h-100" id="inputGroupSelect01">
-                    <option value="both">Online &amp; Venue</option>
+                <select onchange="toggleDisable('divCountry', 'country', this.value);" id="online" name="online" class="custom-select h-100" id="inputGroupSelect01">
+                    <option value="">Online &amp; Venue</option>
                     <option value="on">Events online</option>
                     <option value="off">Events with venue</option>
                 </select>
@@ -18,25 +18,43 @@
                         <i class="material-icons">translate</i>
                     </span>
                 </div>
-                <select id="language" name="language" class="custom-select h-100" id="inputGroupSelect01">
+                <select id="language" name="language" class="custom-select h-100" >
                     <option selected value="">Any language</option>
                     {% for language in languages %}
                         <option value={{ language.code }}>{{ language.name }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="input-group-prepend pl-3 pr-0">
+            <div id="divCountry" class="input-group col-sm-3">
+              <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
                     <i class="material-icons">public</i>
                 </span>
+              </div>
+              <div class="autocomplete" >
+                    <input class="form-control" id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country" >
+              </div>
             </div>
-            <div id="divCountry" class="autocomplete pl-0 col-sm-3">
-                <input class="form-control" id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country" >
-            </div>
+            <!--<div id="divCountry" class="col-sm-6">
+                <div class="input-group-prepend pl-3 pr-0">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="material-icons">public</i>
+                    </span>
+                </div>
+                <div class="autocomplete pl-0" >
+                    <input class="form-control" id="country" type="text" onkeydown="filterCriteria({{countries}}, this);" name="country" placeholder="Country" >
+                </div>
+            </div>-->
         </div>
         <div class="row mt-3">
             <div class="col col-sm-3">
-                <button class="btn orange-eb text-white" onclick="sendData('country', {{countries}});return false;">Submit</button>
+                <button class="btn orange-eb text-white" onclick="sendData('country', {{countries}});return false;">Search</button>
             </div>
+            <div class="col col-sm-9">
+                <div class="rounded-circle clear-filter float-right" onclick="clearFilters();" title="Clear filters" id="div-clear-filter">
+                    <i class="material-icons">delete_outline</i>
+                </div>
+            </div>
+
         </div>
 </form>
