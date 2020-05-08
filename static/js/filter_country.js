@@ -144,7 +144,6 @@ function sendData(domId, array){
 function toggleDisable(divId, inputId, value) {
 	div = document.getElementById(divId)
 	input = document.getElementById(inputId)
-	// $( elem ).prop( "disabled", value == 'on' );
 	if(value == 'on') {
 		input.value = ''
 	}
@@ -164,12 +163,16 @@ function querySt(ji) {
 }
 
 function clearFilters() {
-	var filter_ids = ["online", "language", "country", "divCountry"]
-	filter_ids.forEach(function (id) {
+	var show_ids = ["divCountry"]
+	var clear_ids = ["online", "language", "country"]
+	clear_ids.forEach(function (id) {
  		filter = document.getElementById(id);
- 		filter.value=""
-		filter.style.visibility = "visible"
+ 		filter.value= ""
+	});
 
-	})
+	show_ids.forEach(function(id) {
+		filter = document.getElementById(id);
+		filter.style.visibility = "visible"
+	});
 
 }
