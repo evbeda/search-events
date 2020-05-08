@@ -26,14 +26,14 @@ input[type=submit] {
   color: #fff;
 }
 .autocomplete-items {
-    width: 90%;
+    width: 95%;
     position: absolute;
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
     z-index: 99;
     top: 100%;
-    left: 5%;
+    left: 0%;
     right: 5%;
 }
 .autocomplete-items div {
@@ -56,6 +56,13 @@ input[type=submit] {
   width: 50px;
   height: auto;
 }
+
+.reduce {
+  width: 40px;
+  height: auto;
+}
+
+
 .feed-header__title-top {
   color:#f05537
 }
@@ -65,4 +72,32 @@ input[type=submit] {
 }
 input::placeholder {
   color: #495057 !important;
+}
+
+.page-link {
+  color: #f05537;
+}
+
+.page-link:hover {
+  color: #f05537;
+}
+
+.orange-eb {
+  background-color: #f05537;
+}
+
+.orange-eb:hover {
+  background-color: #db2a07;
+}
+
+.text-orange {
+  color: #f05537;
+}
+
+.text-orange:hover {
+  color: #1E0A3C;
+}
+
+.thead-blue-eb {
+  background-color: #1E0A3C;
 }
