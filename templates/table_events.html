@@ -21,15 +21,14 @@
                     <tr>
                         <td style="word-wrap: break-word; max-width: 300px;">
                             <a class="text-orange" href="{{ event.url }}" target="_blank">
-                                {{ event.name }}
+                                {{ event.name|safe }}
                             </a>
                         </td>
-                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.category }}</td>
-                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.format }}</td>
-                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.organizer }}</td>
-                        {% comment %} {{ value|truncatechars:9 }} {% endcomment %}
-                        <td>{{ event.country|default:"Online" }}</td>
-                        <td>{{ event.start_date }}</td>
+                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.category|safe }}</td>
+                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.format|safe }}</td>
+                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.organizer|safe }}</td>
+                        <td>{{ event.country|default:"Online"|safe }}</td>
+                        <td>{{ event.start_date|safe }}</td>
                         <td class="text-center">
                             <img src="{% static "img/flags/"|add:event.language|add:".svg" %}" class="flag">
                         </td>

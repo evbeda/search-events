@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 
 from search_events_app.services import post_request_processor
-from search_events_app.services.api_service import ApiService
+from search_events_app.services.db.db_service import DBService
 from search_events_app.models.country import Country
 from search_events_app.models.language import Language
 from search_events_app.services.filter_manager import FilterManager
@@ -16,9 +16,7 @@ class EventListView(ListView):
         FilterManager.apply_filters(self.request)
         if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
             api_service_filters = FilterManager.get_list_dto_api_service_filter_by_filters()
-            events = ApiService.get_events(api_service_filters)
-            post_request_dto_filters = FilterManager.get_dto_filter_by_filters()
-            events = post_request_processor.post_process_events(events, post_request_dto_filters)
+            events = DBService.get_events(api_service_filters)
             StateManager.set_events(events)
             return events
         return StateManager.get_last_searched_events()
