@@ -35,7 +35,7 @@ class TestFilters(TestCase):
         self.assertIsNone(result)
         self.assertFalse(self.online_filter.has_changed)
 
-    def test_apply_online_filter_with_wrong_date(self):
+    def test_apply_online_filter_with_wrong_url_parameter(self):
         self.mock_request.GET.get = MagicMock(return_value='aras')
 
         result = self.online_filter.apply_filter(self.mock_request)

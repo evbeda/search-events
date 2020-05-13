@@ -16,7 +16,7 @@ omit =
     search_events_app/urls.py
     manage.py
     populate_country_table.py
-    filter.py
+    search_events_app/services/filters/filter.py
 
 
 [report]

@@ -33,3 +33,11 @@ class CountryFilter(Filter):
             return {
                 'places_within': [self.value.eventbrite_id]
             }
+
+    def get_join_query(self):
+        return ''
+
+    def get_where_query(self):
+        if self.value:
+            return f" AND country_desc='{self.value.alpha_2_code}' "
+        return ''
