@@ -9,7 +9,7 @@ from django.test import TestCase
 from search_events_app.models.country import Country
 from search_events_app.models.event import Event
 from search_events_app.models.language import Language
-from search_events_app.services.api_service import ApiService
+from search_events_app.services.db.db_service import DBService
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager
 from search_events_app.views import EventListView
@@ -109,7 +109,7 @@ class TestEventListView(TestCase):
 	)
 	def test_get_queryset_without_cached_events_and_filter_with_changes(self, mock_process_events, mock_has_changed, mock_apply_filters):
 		mock_process_events.return_value = self.events
-		with patch.object(ApiService, 'get_events', return_value= self.events):
+		with patch.object(DBService, 'get_events', return_value= self.events):
 			view = EventListView()
 			view.request = MagicMock()
 			result = view.get_queryset()
@@ -131,7 +131,7 @@ class TestEventListView(TestCase):
 	def test_get_queryset_with_cached_events_and_filter_with_changes(self, mock_process_events, mock_has_changed, mock_apply_filters):
 		StateManager.set_events(self.events)
 		mock_process_events.return_value = self.events
-		with patch.object(ApiService, 'get_events', return_value= self.events):
+		with patch.object(DBService, 'get_events', return_value= self.events):
 			view = EventListView()
 			view.request = MagicMock()
 			result = view.get_queryset()
@@ -151,7 +151,7 @@ class TestEventListView(TestCase):
 	)
 	def test_get_queryset_without_cached_events_and_filter_without_changes(self, mock_process_events, mock_has_changed, mock_apply_filters):
 		mock_process_events.return_value = self.events
-		with patch.object(ApiService, 'get_events', return_value=self.events):
+		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
 			result = view.get_queryset()
