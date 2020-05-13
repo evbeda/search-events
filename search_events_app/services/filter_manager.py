@@ -1,3 +1,4 @@
+from search_events_app.dto.dto_filter import DTOFilter
 from search_events_app.services.filters.country_filter import CountryFilter
 from search_events_app.services.filters.language_filter import LanguageFilter
 from search_events_app.services.filters.online_filter import OnlineFilter
@@ -17,6 +18,13 @@ class FilterManager:
     def filter_has_changed(cls):
         return len([latest_filter for latest_filter in cls.latest_filters if latest_filter.has_changed]) > 0
 
+    @classmethod
+    def get_dto_filter_by_filters(cls):
+        dict_dto = {}
+        for filter_ in cls.latest_filters:
+            dict_dto[filter_.get_key()] = filter_.get_value()
+
+        return DTOFilter(**dict_dto)
 
     @classmethod
     def get_list_dto_api_service_filter_by_filters(cls):

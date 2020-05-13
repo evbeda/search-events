@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.views.generic.list import ListView
 
-from search_events_app.services import post_request_processor
 from search_events_app.services.db.db_service import DBService
 from search_events_app.models.country import Country
 from search_events_app.models.language import Language

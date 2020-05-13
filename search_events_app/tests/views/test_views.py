@@ -104,17 +104,12 @@ class TestEventListView(TestCase):
 		'filter_has_changed',
 		return_value=True
 	)
-	@patch(
-		'search_events_app.views.post_request_processor.post_process_events',
-	)
-	def test_get_queryset_without_cached_events_and_filter_with_changes(self, mock_process_events, mock_has_changed, mock_apply_filters):
-		mock_process_events.return_value = self.events
-		with patch.object(DBService, 'get_events', return_value= self.events):
+	def test_get_queryset_without_cached_events_and_filter_with_changes(self, mock_has_changed, mock_apply_filters):
+		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
 			result = view.get_queryset()
 			self.assertEqual(result, self.events)
-
 
 	@patch.object(
 		FilterManager,
@@ -125,13 +120,9 @@ class TestEventListView(TestCase):
 		'filter_has_changed',
 		return_value=True
 	)
-	@patch(
-		'search_events_app.views.post_request_processor.post_process_events',
-	)
-	def test_get_queryset_with_cached_events_and_filter_with_changes(self, mock_process_events, mock_has_changed, mock_apply_filters):
+	def test_get_queryset_with_cached_events_and_filter_with_changes(self, mock_has_changed, mock_apply_filters):
 		StateManager.set_events(self.events)
-		mock_process_events.return_value = self.events
-		with patch.object(DBService, 'get_events', return_value= self.events):
+		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
 			result = view.get_queryset()
@@ -146,11 +137,7 @@ class TestEventListView(TestCase):
 		'filter_has_changed',
 		return_value=False
 	)
-	@patch(
-		'search_events_app.views.post_request_processor.post_process_events',
-	)
-	def test_get_queryset_without_cached_events_and_filter_without_changes(self, mock_process_events, mock_has_changed, mock_apply_filters):
-		mock_process_events.return_value = self.events
+	def test_get_queryset_without_cached_events_and_filter_without_changes(self, mock_has_changed, mock_apply_filters):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
