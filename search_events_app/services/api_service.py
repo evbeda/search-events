@@ -16,7 +16,8 @@ class ApiService:
         url_api_expand = 'expand.destination_event=primary_organizer%2Cprimary_venue'
         response = requests.post(
             url_api+url_api_expand+token,
-            json=body_dict
+            json=body_dict,
+            verify=False
         )
         api_events = process_events(response.json())
         return [Event(**api_event) for api_event in api_events]
