@@ -45,8 +45,8 @@ GROUP BY dw_event.event_id,
 ORDER BY SUM(f.f_item_qty) DESC
 LIMIT 20
 """
-        # for dto in dto_filters_array:
-        #     join_base_query += dto.join_value
-        #     where_base_query += dto.where_value
+        for dto in dto_filters_array:
+            join_base_query += dto.join_value
+            where_base_query += dto.where_value
         query = select_base_query+join_base_query+where_base_query+group_base_query
         return query

@@ -15,8 +15,8 @@ class EventListView(ListView):
     def get_queryset(self):
         FilterManager.apply_filters(self.request)
         if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
-            api_service_filters = FilterManager.get_list_dto_api_service_filter_by_filters()
-            events = DBService.get_events(api_service_filters)
+            db_service_filters = FilterManager.get_list_dto_db_service_filter()
+            events = DBService.get_events(db_service_filters)
             StateManager.set_events(events)
             return events
         return StateManager.get_last_searched_events()

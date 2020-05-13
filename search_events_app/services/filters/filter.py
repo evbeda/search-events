@@ -26,3 +26,11 @@ class Filter:
     @abstractmethod
     def get_request_value(self):
         pass
+    
+    @abstractmethod
+    def get_join_query(self):
+        pass
+
+    @abstractmethod
+    def get_where_query(self):
+        pass
