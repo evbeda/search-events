@@ -9,9 +9,9 @@ class OnlineFilter(Filter):
         new_filter = None
         if online:
             if online == 'on':
-                new_filter = OnlineParameters.ONLINE
+                new_filter = 'Y'
             elif online == 'off':
-                new_filter = OnlineParameters.OFFLINE
+                new_filter = 'N'
         self.has_changed = new_filter != self.value
         if self.has_changed:
             self.value = new_filter
