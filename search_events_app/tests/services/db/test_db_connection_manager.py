@@ -8,9 +8,15 @@ from search_events_app.services.db.db_connection_manager import ConnectionManage
 class TestDbConnectionManager(TestCase):
 
 	@patch(
+		'django.conf.settings.USER_OKTA'
+	)
+	@patch(
+		'django.conf.settings.PASSWORD_OKTA'
+	)
+	@patch(
 		'search_events_app.services.db.db_connection_manager.presto.connect'
 	)
-	def test_connect_without_previous_connection(self, mock_connect):
+	def test_connect_without_previous_connection(self, mock_connect, mock_user, mock_password):
 		ConnectionManager.connection = None
 		ConnectionManager.connect()
 		count = mock_connect.call_count
@@ -26,9 +32,15 @@ class TestDbConnectionManager(TestCase):
 		self.assertEqual(count, 0)
 
 	@patch(
+		'django.conf.settings.USER_OKTA'
+	)
+	@patch(
+		'django.conf.settings.PASSWORD_OKTA'
+	)
+	@patch(
 		'search_events_app.services.db.db_connection_manager.presto.connect',
 	)
-	def test_connect_raise_exception(self, mock_connect):
+	def test_connect_raise_exception(self, mock_connect, mock_user, mock_password):
 		exception = Exception('Test')
 		exception.args = [{'message': 'Test'},]
 		mock_connect.side_effect = exception
