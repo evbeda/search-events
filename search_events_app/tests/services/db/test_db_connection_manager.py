@@ -30,21 +30,3 @@ class TestDbConnectionManager(TestCase):
 		ConnectionManager.connect()
 		count = mock_connect.call_count
 		self.assertEqual(count, 0)
-
-	@patch(
-		'django.conf.settings.USER_OKTA'
-	)
-	@patch(
-		'django.conf.settings.PASSWORD_OKTA'
-	)
-	@patch(
-		'search_events_app.services.db.db_connection_manager.presto.connect',
-	)
-	def test_connect_raise_exception(self, mock_connect, mock_user, mock_password):
-		exception = Exception('Test')
-		exception.args = [{'message': 'Test'},]
-		mock_connect.side_effect = exception
-		ConnectionManager.connection = None
-		with self.assertRaises(PrestoError):
-			ConnectionManager.connect()
-
