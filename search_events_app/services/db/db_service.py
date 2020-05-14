@@ -36,21 +36,14 @@ class DBService:
         join_base_query = """FROM dw.dim_event dw_event
 INNER JOIN dw.dim_organization dw_org ON dw_event.organization_id=dw_org.organization_id
 INNER JOIN dw.dim_event_category dw_cat ON dw_event.dim_event_category_id = dw_cat.dim_event_category_id
-INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"""
+"""
         where_base_query = """
-WHERE DATE(CAST(dw_event.event_sale_end_date AS TIMESTAMP)) > now() 
-    AND DATE(CAST(dw_event.event_start_date AS TIMESTAMP)) > now()
+WHERE DATE(CAST(dw_event.event_sale_end_date AS TIMESTAMP)) > now() + interval '1' month
+  AND DATE(CAST(dw_event.event_start_date AS TIMESTAMP)) > now() + interval '1' month
+  AND DATE(CAST(dw_event.event_start_date AS TIMESTAMP)) < now() +  interval '6' month
   AND dw_event.is_available = 'Y'"""
         group_base_query = """
-GROUP BY dw_event.event_id,
-         dw_org.organization_name,
-         dw_event.event_title,
-         dw_event.event_language,
-         dw_event.country_desc,
-         dw_cat.event_category_desc,
-         dw_cat.event_format_desc,
-         dw_event.event_start_date
-ORDER BY SUM(f.f_item_qty) DESC
+        ORDER BY dw_event.event_start_date
 LIMIT 20
 """
         for dto in dto_filters_array:
