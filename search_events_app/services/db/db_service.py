@@ -1,6 +1,9 @@
+from pyhive.exc import OperationalError
 from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services.db.db_response_processor import process_events
 from search_events_app.models.event import Event
+from search_events_app.exceptions.presto_error import PrestoError
+from search_events_app.exceptions.okta_error import OktaCredentialError
 
 
 class DBService:
@@ -9,7 +12,12 @@ class DBService:
     def get_events(cls, dto_filters_array):
         query = cls.format_query(dto_filters_array)
         cursor = ConnectionManager.connect()
-        cursor.execute(query)
+        try:
+            cursor.execute(query)
+        except OperationalError:
+            raise OktaCredentialError()
+        except Exception as e:
+            raise PrestoError(e)
         result = cursor.fetchall()
         db_events = process_events(result)
         return [Event(**db_event) for db_event in db_events]

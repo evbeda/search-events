@@ -10,16 +10,12 @@ class ConnectionManager:
     @classmethod
     def connect(cls):
         if not cls.connection:
-            try:
-                connection = presto.connect(
-                    'presto-tableau.prod.dataf.eb',
-                    8443,
-                    settings.USER_OKTA,
-                    password=settings.PASSWORD_OKTA,
-                    protocol='https',
-                )
-                cls.connection = connection
-            except Exception as e:
-                message = e.args[0]['message']
-                raise PrestoError(message)
+            connection = presto.connect(
+                'presto-tableau.prod.dataf.eb',
+                8443,
+                settings.USER_OKTA,
+                password=settings.PASSWORD_OKTA,
+                protocol='https',
+            )
+            cls.connection = connection
         return cls.connection.cursor()
