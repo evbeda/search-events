@@ -20,13 +20,6 @@ def process_events(data):
     return events
 
 
-def get_tag(item, criteria):
-    tags = item.get('tags')
-    for tag in tags:
-        if tag['prefix'] == criteria:
-            return tag['display_name']
-
-
 def get_country(item):
     try:
         country = Country.objects.get(alpha_2_code=item[5])
@@ -41,4 +34,4 @@ def get_language(item):
 
 
 def get_url(item):
-    return f'https://eventbrite.com/e/{item[0]}'
+    return f'https://www.eventbrite.com/e/{item[0]}'
