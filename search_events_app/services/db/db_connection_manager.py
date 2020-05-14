@@ -10,8 +10,9 @@ class ConnectionManager:
     @classmethod
     def connect(cls):
         if not cls.connection:
+            url = 'presto-tableau.prod.dataf.eb'
             connection = presto.connect(
-                'presto-tableau.prod.dataf.eb',
+                url,
                 8443,
                 settings.USER_OKTA,
                 password=settings.PASSWORD_OKTA,
