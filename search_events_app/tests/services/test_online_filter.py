@@ -51,14 +51,28 @@ class TestFilters(TestCase):
 
         self.assertFalse(self.online_filter.has_changed)
 
-    def test_online_filter_info(self):
-        self.mock_request.GET.get = MagicMock(return_value='on')
+    def test_online_filter_info_with_online_selected(self):
 
-        self.online_filter.apply_filter(self.mock_request)
+        self.online_filter.value = OnlineParameters.ONLINE
 
+        expected_where_query = """ AND dw_event.online_flag='Y'
+        AND dw_event.country_desc IS  NULL"""
         self.assertEqual(self.online_filter.get_key(), 'online')
         self.assertEqual(self.online_filter.get_value(), OnlineParameters.ONLINE)
         self.assertEqual(self.online_filter.get_type(), 'search')
         self.assertEqual(self.online_filter.get_request_value(), {
             OnlineParameters.ONLINE.get('key'): True
         })
+        self.assertEqual(self.online_filter.get_join_query(), '')
+        self.assertEqual(self.online_filter.get_where_query(), expected_where_query)
+
+    def test_online_filter_info_without_option_selected(self):
+
+        self.online_filter.value = None
+
+        self.assertEqual(self.online_filter.get_key(), 'online')
+        self.assertIsNone(self.online_filter.get_value())
+        self.assertEqual(self.online_filter.get_type(), 'search')
+        self.assertIsNone(self.online_filter.get_request_value())
+        self.assertEqual(self.online_filter.get_join_query(), '')
+        self.assertEqual(self.online_filter.get_where_query(), '')

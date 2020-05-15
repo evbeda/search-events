@@ -44,10 +44,9 @@ class TestLanguageFilter(TestCase):
 
         self.assertFalse(self.language_filter.has_changed)
 
-    def test_language_filter_info(self):
-        self.mock_request.GET.get = MagicMock(return_value='de')
+    def test_language_filter_info_with_language_selected(self):
 
-        self.language_filter.apply_filter(self.mock_request)
+        self.language_filter.value = Language(name='German', code='de')
 
         self.assertEqual(self.language_filter.get_key(), 'language')
         self.assertEqual(self.language_filter.get_value(), 'German')
@@ -55,3 +54,16 @@ class TestLanguageFilter(TestCase):
         self.assertEqual(self.language_filter.get_request_value(), {
             'languages': ['de']
         })
+        self.assertEqual(self.language_filter.get_join_query(), '')
+        self.assertEqual(self.language_filter.get_where_query(),  " AND dw_event.event_language LIKE '%de_%' ")
+
+    def test_language_filter_info_without_language_selected(self):
+
+        self.language_filter.value = None
+
+        self.assertEqual(self.language_filter.get_key(), 'language')
+        self.assertIsNone(self.language_filter.get_value())
+        self.assertEqual(self.language_filter.get_type(), 'search')
+        self.assertIsNone(self.language_filter.get_request_value())
+        self.assertEqual(self.language_filter.get_join_query(), '')
+        self.assertEqual(self.language_filter.get_where_query(), '')
