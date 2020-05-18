@@ -18,7 +18,7 @@ class Language(models.Model, GetContextMixin):
             'languages': [
                 {
                     'code': language.code,
-                    'name': language.name
+                    'name': language.name,
                 } for language in languages
             ]
         }
