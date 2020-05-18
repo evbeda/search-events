@@ -9,8 +9,6 @@ class TestReserveadSeatingFilter(TestCase):
 
     def setUp(self):
         self.reserved_filter = ReservedSeatingFilter()
-        self.mock_request = MagicMock()
-        self.mock_request.GET = MagicMock()
 
     def test_apply_reserved_seating_filter(self):
         features_codes = ['RS', 'EB']
