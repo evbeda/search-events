@@ -1,18 +1,18 @@
 from search_events_app.services.filters.filter import Filter
+from search_events_app.services.filters.reserved_seating_filter import ReservedSeatingFilter
 
 
 class FeatureFilterManager(Filter):
     def __init__(self):
         super().__init__()
-        self.value = []
+        self.value = [ReservedSeatingFilter()]
 
     def apply_filter(self, request):
-        features_codes = request.GET.get('features').split('-')
+        features_codes = request.GET.get('feature', '').split('-')
         new_filter = None
-        if features_codes:
-            for latest_filter in self.value:
-                latest_filter.apply_filter(features_codes)
-        self.has_changed = ([latest_filter for latest_filter in self.value if latest_filter.has_changed]) > 0      
+        for latest_filter in self.value:
+            latest_filter.apply_filter(features_codes)
+        self.has_changed = len([latest_filter for latest_filter in self.value if latest_filter.has_changed]) > 0      
 
     def get_key(self):
         return ''

@@ -1,5 +1,6 @@
 from search_events_app.dto.dto_filter import DTOFilter
 from search_events_app.services.filters.country_filter import CountryFilter
+from search_events_app.services.filters.feature_filter import FeatureFilterManager
 from search_events_app.services.filters.language_filter import LanguageFilter
 from search_events_app.services.filters.online_filter import OnlineFilter
 from search_events_app.dto.dto_api_service_filter import DTOApiServiceFilter
@@ -7,7 +8,7 @@ from search_events_app.dto.dto_db_service_filter import DTODBServiceFilter
 
 
 class FilterManager:
-    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter()]
+    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FeatureFilterManager()]
 
     @classmethod
     def apply_filters(cls, request):
