@@ -33,11 +33,11 @@ class TestLanguage(TestCase):
             'languages': [
                 {
                     'code': 'es',
-                    'name': 'Spanish'
+                    'name': 'Spanish',
                 },
                 {
                     'code': 'de',
-                    'name': 'German'
+                    'name': 'German',
                 }
             ]
         }
@@ -45,4 +45,3 @@ class TestLanguage(TestCase):
         result = Language.get_context()
 
         self.assertEqual(result, expected_result)
-    

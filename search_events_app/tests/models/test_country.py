@@ -31,11 +31,11 @@ class TestCountry(TestCase):
             'countries': [
                 {
                     'alpha2Code': 'PE',
-                    'name': 'Peru'
+                    'name': 'Peru',
                 },
                 {
                     'alpha2Code': 'ES',
-                    'name': 'Spain'
+                    'name': 'Spain',
                 }
             ]
         }
@@ -43,4 +43,3 @@ class TestCountry(TestCase):
         result = Country.get_context()
 
         self.assertEqual(result, expected_result)
-    
