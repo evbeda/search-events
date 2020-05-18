@@ -32,3 +32,12 @@ class OnlineFilter(Filter):
 
     def get_key(self):
         return 'online'
+
+    def get_join_query(self):
+        return ''
+
+    def get_where_query(self):
+        if self.value:
+            return f""" AND dw_event.online_flag='{self.value.get('query_value')}'
+        AND dw_event.country_desc IS {self.value.get('venue_value')} NULL"""
+        return ''

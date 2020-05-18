@@ -6,7 +6,7 @@ from search_events_app.models.country import Country
 from search_events_app.services.filters.country_filter import CountryFilter
 
 
-class TestFilters(TestCase):
+class TestCountryFilters(TestCase):
 
     def setUp(self):
         self.country_filter = CountryFilter()
@@ -44,14 +44,27 @@ class TestFilters(TestCase):
 
         self.assertFalse(self.country_filter.has_changed)
 
-    def test_country_filter_info(self):
-        self.mock_request.GET.get = MagicMock(return_value='Argentina')
+    def test_country_filter_info_with_country_selected(self):
 
-        self.country_filter.apply_filter(self.mock_request)
+        self.country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='1234')
 
         self.assertEqual(self.country_filter.get_key(), 'country')
         self.assertEqual(self.country_filter.get_value(), 'Argentina')
         self.assertEqual(self.country_filter.get_type(), 'search')
         self.assertEqual(self.country_filter.get_request_value(), {
-            'places_within': ['85632505']
+            'places_within': ['1234']
         })
+        self.assertEqual(self.country_filter.get_join_query(), '')
+        self.assertEqual(self.country_filter.get_where_query(), " AND country_desc='AR' ")
+
+    def test_country_filter_info_without_country_selected(self):
+
+        self.country_filter.value = None
+
+        self.assertEqual(self.country_filter.get_key(), 'country')
+        self.assertIsNone(self.country_filter.get_value())
+        self.assertEqual(self.country_filter.get_type(), 'search')
+        self.assertIsNone(self.country_filter.get_request_value())
+        self.assertEqual(self.country_filter.get_join_query(), '')
+        self.assertEqual(self.country_filter.get_where_query(), '')
+
