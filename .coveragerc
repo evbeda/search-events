@@ -17,6 +17,7 @@ omit =
     manage.py
     populate_country_table.py
     search_events_app/services/filters/filter.py
+    search_events_app/mixins/get_context_mixin.py
 
 
 [report]

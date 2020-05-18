@@ -7,8 +7,7 @@ from django.test import TestCase
 
 from search_events_app.models.country import Country
 from search_events_app.models.event import Event
-from search_events_app.services.api_service import ApiService
-from search_events_app.services.dummy_api import DummyApi
+from search_events_app.services.api.api_service import ApiService
 from search_events_app.dto.dto_api_service_filter import DTOApiServiceFilter
 
 
@@ -98,10 +97,10 @@ class TestApiService(TestCase):
         'format_body'
     )
     @patch(
-        'search_events_app.services.api_service.requests.post'
+        'search_events_app.services.api.api_service.requests.post'
     )
     @patch(
-        'search_events_app.services.api_service.process_events'
+        'search_events_app.services.api.api_service.process_events'
     )
     def test_get_events(self, mock_process_events, mock_post, mock_format_body):
         post_response = MagicMock()

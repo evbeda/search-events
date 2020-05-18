@@ -20,21 +20,11 @@ class EventListView(ListView):
         return StateManager.get_last_searched_events()
 
     def get_context_data(self, **kwargs):
-        countries = Country.objects.all()
-        languages = Language.objects.order_by('name')
-
         context = super().get_context_data(**kwargs)
-        context['countries'] = [
-            {
-                'alpha2Code': country.alpha_2_code,
-                'name': country.name
-            } for country in countries
-        ]
 
-        context['languages'] = [
-            {
-                'code': language.code,
-                'name': language.name
-            } for language in languages
-        ]
+        classes = [Country, Language]
+
+        for c in classes:
+            context.update(c.get_context())
+
         return context

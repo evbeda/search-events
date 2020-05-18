@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 from django.test import TestCase
 
-from search_events_app.models.online_parameters import OnlineParameters
+from search_events_app.utils.online_parameters import OnlineParameters
 from search_events_app.services.filters.online_filter import OnlineFilter
 
 

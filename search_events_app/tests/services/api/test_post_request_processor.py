@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from search_events_app.models.event import Event
-from search_events_app.services.post_request_processor import validate_filters
+from search_events_app.services.api.post_request_processor import validate_filters
 from search_events_app.dto.dto_filter import DTOFilter
 
 
