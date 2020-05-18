@@ -7,7 +7,7 @@ from search_events_app.services.filters.filter import Filter
 class LanguageFilter(Filter):
 
     def apply_filter(self, request):
-        language_code = request.GET.get('language') if request.GET.get('language') else None
+        language_code = request.GET.get('language')
         new_filter = None
         if language_code:
             try:

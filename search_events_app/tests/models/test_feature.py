@@ -9,7 +9,5 @@ class TestFeature(TestCase):
         self.feature = Feature.objects.create(name='Embedded Checkout', code='EC')
 
     def test_feature_model(self):
-        self.assertEqual(self.feature.name, 'Embedded Checkout')
-
-    def test_feature_str(self):
-        self.assertEqual(self.feature.__str__(), 'Embedded Checkout')
+        feature = Feature('Website Widgets')
+        self.assertEqual(feature.name, 'Website Widgets')
