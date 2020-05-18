@@ -4,6 +4,8 @@ from unittest.mock import (
 )
 
 from django.test import TestCase
+from django.db.models import Q
+from django.db.models.query import QuerySet
 
 from search_events_app.models.country import Country
 
@@ -11,34 +13,25 @@ from search_events_app.models.country import Country
 class TestCountry(TestCase):
 
     def setUp(self):
-        self.country = Country.objects.create(label='Argentina', code='AR',
-        eventbrite_id='1234')
+        self.country = Country.objects.get(name='Argentina')
 
     def test_country_basic_info(self):
         self.assertEqual(self.country.name, 'Argentina')
         self.assertEqual(self.country.alpha_2_code, 'AR')
-        self.assertEqual(self.country.eventbrite_id, '1234')
 
     def test_country_str(self):
         self.assertEqual(self.country.__str__(), 'Argentina')
 
-    @patch.object(
-		Country,
-		'objects'
-	)
+    @patch.object(Country.objects, 'all')
     def test_get_context(self, mock_objects):
-        countries = [
-			Country(label='Argentina', code='AR', eventbrite_id='1234'),
-			Country(label='Spain', code='ES', eventbrite_id='4567')
-		]
-        
-        mock_objects.all = MagicMock(return_value=countries)
+        countries = Country.objects.filter(Q(name='Peru') | Q(name='Spain'))
 
+        mock_objects.return_value = countries
         expected_result = {
             'countries': [
                 {
-                    'alpha2Code': 'AR',
-                    'name': 'Argentina'
+                    'alpha2Code': 'PE',
+                    'name': 'Peru'
                 },
                 {
                     'alpha2Code': 'ES',

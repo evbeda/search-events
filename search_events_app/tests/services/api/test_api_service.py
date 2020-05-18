@@ -92,16 +92,9 @@ class TestApiService(TestCase):
             }
         ]
 
-    @patch.object(
-        ApiService,
-        'format_body'
-    )
-    @patch(
-        'search_events_app.services.api.api_service.requests.post'
-    )
-    @patch(
-        'search_events_app.services.api.api_service.process_events'
-    )
+    @patch.object(ApiService, 'format_body')
+    @patch('search_events_app.services.api.api_service.requests.post')
+    @patch('search_events_app.services.api.api_service.process_events')
     def test_get_events(self, mock_process_events, mock_post, mock_format_body):
         post_response = MagicMock()
         post_response.json = MagicMock(return_value=self.mock_api_response)

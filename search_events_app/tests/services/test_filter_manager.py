@@ -16,10 +16,7 @@ from search_events_app.services.filters.online_filter import OnlineFilter
 
 class TestFilterManager(TestCase):
 
-    @patch.object(
-        CountryFilter,
-        'apply_filter'
-    )
+    @patch.object(CountryFilter, 'apply_filter')
     def test_filter_country(self, patch_apply):
         mock_request = MagicMock()
         mock_request.GET = MagicMock()

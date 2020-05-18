@@ -32,7 +32,8 @@ class Country(models.Model, GetContextMixin):
 
     @classmethod
     def get_context(cls):
-        countries = cls.objects.all()
+        # import pdb; pdb.set_trace()
+        countries = Country.objects.all()
 
         return {
             'countries': [
