@@ -18,3 +18,4 @@ class RepeatingEventsFilter(Filter):
 		if self.value:
 			return "AND dw_event.is_repeating_event = 'Y'"
 		return ''
+
