@@ -6,6 +6,7 @@ from unittest.mock import (
 from django.test import TestCase
 
 from search_events_app.dto.dto_filter import DTOFilter
+from search_events_app.dto.dto_db_service_filter import DTODBServiceFilter
 from search_events_app.models.country import Country
 from search_events_app.models.language import Language
 from search_events_app.services.filter_manager import FilterManager
@@ -72,3 +73,16 @@ class TestFilterManager(TestCase):
             for dto in FilterManager.get_list_dto_api_service_filter_by_filters()
         ]
         self.assertEqual(result, list_dto)
+
+        def test_get_list_dto_db_service_filter(self):
+            country_filter = CountryFilter()
+            country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='85632505')
+            FilterManager.latest_filters = [country_filter]
+
+            expected_where = " AND country_desc='AR' "
+            expected_join = ''
+            result = FilterManager.get_list_dto_db_service_filter()
+
+            self.assertEqual(result[0].where_query, expected_where)
+            self.assertEqual(result[0].join_query, expected_join)
+            self.assertIsInstance(result[0], DTODBServiceFilter)
