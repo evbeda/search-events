@@ -10,9 +10,11 @@ from search_events_app.dto.dto_db_service_filter import DTODBServiceFilter
 from search_events_app.models.country import Country
 from search_events_app.models.language import Language
 from search_events_app.services.filter_manager import FilterManager
-from search_events_app.services.filters.country_filter import CountryFilter
-from search_events_app.services.filters.language_filter import LanguageFilter
-from search_events_app.services.filters.online_filter import OnlineFilter
+from search_events_app.services.filters import (
+    CountryFilter,
+    LanguageFilter,
+    OnlineFilter,
+)
 
 
 class TestFilterManager(TestCase):
