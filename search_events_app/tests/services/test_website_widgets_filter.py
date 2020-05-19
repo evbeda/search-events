@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from search_events_app.services.filters.website_widgets_filter import WebsiteWidgetsFilter
+from search_events_app.services.filters.features.website_widgets_filter import WebsiteWidgetsFilter
 
 
 class TestWebsiteWidgetsFilter(TestCase):
