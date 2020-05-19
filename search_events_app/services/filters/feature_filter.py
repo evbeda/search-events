@@ -1,4 +1,5 @@
 from search_events_app.services.filters.filter import Filter
+from search_events_app.services.filters.add_ons_filter import AddOnsFilter
 from search_events_app.services.filters.repeating_events_filter import RepeatingEventsFilter
 from search_events_app.services.filters.reserved_seating_filter import ReservedSeatingFilter
 from search_events_app.services.filters.website_widgets_filter import WebsiteWidgetsFilter
@@ -7,7 +8,7 @@ from search_events_app.services.filters.website_widgets_filter import WebsiteWid
 class FeatureFilterManager(Filter):
     def __init__(self):
         super().__init__()
-        self.value = [RepeatingEventsFilter(), ReservedSeatingFilter(), WebsiteWidgetsFilter()]
+        self.value = [RepeatingEventsFilter(), ReservedSeatingFilter(), WebsiteWidgetsFilter(), AddOnsFilter()]
 
     def apply_filter(self, request):
         features_codes = request.GET.get('feature', '').split('-')
