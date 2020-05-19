@@ -22,8 +22,7 @@ class TestLanguage(TestCase):
         self.assertEqual(self.language.__str__(), 'English')
 
     @patch.object(Language.objects, 'order_by')
-    def test_get_context(self, mock_objects)
-
+    def test_get_context(self, mock_objects):
         languages = Language.objects.filter(Q(name='Spanish') | Q(name='German'))
         mock_objects.return_value = languages
         
