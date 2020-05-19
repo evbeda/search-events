@@ -5,7 +5,6 @@ from unittest.mock import (
 
 from django.test import TestCase
 from django.db.models import Q
-from django.db.models.query import QuerySet
 
 from search_events_app.models.country import Country
 

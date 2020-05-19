@@ -4,6 +4,7 @@ from unittest.mock import (
 )
 
 from django.test import TestCase
+from django.db.models import Q
 
 from search_events_app.models.language import Language
 
@@ -21,24 +22,21 @@ class TestLanguage(TestCase):
         self.assertEqual(self.language.__str__(), 'English')
 
     @patch.object(Language.objects, 'order_by')
-    def test_get_context(self, mock_objects):
-        languages = [
-			Language(name='Spanish', code='es'),
-			Language(name='German', code='de')
-		]
-        
+    def test_get_context(self, mock_objects)
+
+        languages = Language.objects.filter(Q(name='Spanish') | Q(name='German'))
         mock_objects.return_value = languages
         
         expected_result = {
             'languages': [
                 {
+                    'code': 'de',
+                    'name': 'German',
+                },
+                {
                     'code': 'es',
                     'name': 'Spanish',
                 },
-                {
-                    'code': 'de',
-                    'name': 'German',
-                }
             ]
         }
 
