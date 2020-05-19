@@ -169,7 +169,7 @@ class TestEventListView(TestCase):
 		response = view.get(mock_request)
 		response.client = Client()
 		
-		self.assertRedirects(response,'/login')
+		self.assertRedirects(response,'/login/')
 
 	@patch("search_events_app.views.render")
 	@patch("search_events_app.views.ListView.get")
