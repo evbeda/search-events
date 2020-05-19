@@ -7,18 +7,19 @@ from search_events_app.services.db.db_connection_manager import ConnectionManage
 
 class TestDbConnectionManager(TestCase):
 
-	@patch('django.conf.settings.USER_OKTA')
-	@patch('django.conf.settings.PASSWORD_OKTA')
+
 	@patch('search_events_app.services.db.db_connection_manager.presto.connect')
-	def test_connect_without_previous_connection(self, mock_connect, mock_user, mock_password):
+	def test_connect_without_previous_connection(self, mock_connect):
 		ConnectionManager.connection = None
-		ConnectionManager.connect()
+		username = 'Usuario'
+		password_okta = 'Contraseña'
+		ConnectionManager.connect(username, password_okta)
 		count = mock_connect.call_count
 		self.assertEqual(count, 1)
 
 	@patch('search_events_app.services.db.db_connection_manager.presto.connect')
-	def test_connect_with_previous_connection(self, mock_connect):
+	def test_get_connection_with_previous_connection(self, mock_connect):
 		ConnectionManager.connection = MagicMock()
-		ConnectionManager.connect()
+		ConnectionManager.get_connection()
 		count = mock_connect.call_count
 		self.assertEqual(count, 0)

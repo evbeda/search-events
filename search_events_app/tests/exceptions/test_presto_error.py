@@ -26,4 +26,4 @@ class TestPrestoError(TestCase):
 
 	def test_create_presto_error_due_to_unexpected_error(self):
 		result = PrestoError(Exception())
-		self.assertEqual(result.message, 'There was an unexpected error with Presto, please try again')
+		self.assertEqual(result.message, 'There was an unexpected error with Presto')

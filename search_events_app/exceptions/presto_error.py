@@ -17,4 +17,4 @@ class PrestoError(Exception):
             self.message += '<a href="https://docs.evbhome.com/intro/self_signed_certs.html">link</a> '
             self.message += 'and update the path of your environment variable.'
         else:
-            self.message = 'There was an unexpected error with Presto, please try again'
+            self.message = 'There was an unexpected error with Presto'

@@ -44,6 +44,7 @@ html{
     border-radius: 50%;
 }
 .login_btn {
+    margin-top: 10%;
     width: 100%;
     background: #f05537 !important;
     color: white !important;

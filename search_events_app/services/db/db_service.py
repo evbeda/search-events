@@ -11,15 +11,12 @@ from search_events_app.utils.queries import QueryParameter
 class DBService:
 
     @classmethod
-    def get_events(cls, dto_filters_array):
+    def execute_query(cls, query):
         try:
-            query = cls.format_query(dto_filters_array)
-            cursor = ConnectionManager.connect()
+            cursor = ConnectionManager.get_connection()
             cursor.execute(query)
-            result = cursor.fetchall()
-            db_events = process_events(result)
-            return [Event(**db_event) for db_event in db_events]
-        except OperationalError:
+            return cursor.fetchall()
+        except (OperationalError, AttributeError):
             raise OktaCredentialError()
         except Exception as e:
             raise PrestoError(e)
@@ -36,3 +33,15 @@ class DBService:
             where_base_query += dto.where_query
         query = select_base_query+join_base_query+where_base_query+group_base_query+limit
         return query
+
+    @classmethod
+    def get_events(cls, dto_filters_array):
+        query = cls.format_query(dto_filters_array)
+        result = cls.execute_query(query)
+        db_events = process_events(result)
+        return [Event(**db_event) for db_event in db_events]
+
+    @classmethod
+    def create_connection(cls, username, password):
+        ConnectionManager.connect(username, password)
+        cls.execute_query('select 1')

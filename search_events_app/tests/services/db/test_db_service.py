@@ -66,16 +66,15 @@ class TestDbService(TestCase):
             }
         ]
 
-    @patch.object(ConnectionManager, 'connect')
+    @patch.object(DBService, 'execute_query')
     @patch.object(DBService, 'format_query')
     @patch('search_events_app.services.db.db_service.process_events')
-    def test_get_events_without_exception(self, mock_process_events, mock_format_query, mock_connect):
+    def test_get_events(self, mock_process_events, mock_format_query, mock_execute_query):
         mock_process_events.return_value = self.mock_response_processed
 
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock()
         mock_cursor.fetchall = MagicMock(return_value=self.mock_db_response)
-        mock_connect.return_value = mock_cursor
 
         result = DBService.get_events(dto_filters_array=self.mock_dto_filter)
 
@@ -83,25 +82,25 @@ class TestDbService(TestCase):
         self.assertIsInstance(result[0], Event)
         self.assertIsInstance(result[1], Event)
 
-    @patch.object(ConnectionManager, 'connect')
-    @patch.object(DBService, 'format_query')
-    def test_get_events_wrong_okta_credentials(self, mock_format_query, mock_connect):
+    @patch.object(ConnectionManager, 'get_connection')
+    def test_execute_query_wrong_okta_credentials(self, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=OperationalError())
         mock_connect.return_value = mock_cursor
+        query = 'SELECT 1'
 
         with self.assertRaises(OktaCredentialError):
-            DBService.get_events(dto_filters_array=self.mock_dto_filter)
+            DBService.execute_query(query)
 
-    @patch.object(ConnectionManager, 'connect')
-    @patch.object(DBService, 'format_query')
-    def test_get_events_with_presto_error(self, mock_format_query, mock_connect):
+    @patch.object(ConnectionManager, 'get_connection')
+    def test_excute_query_with_presto_error(self, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=Exception())
         mock_connect.return_value = mock_cursor
+        query = 'SELECT 1'
 
         with self.assertRaises(PrestoError):
-            DBService.get_events(dto_filters_array=self.mock_dto_filter)
+            DBService.execute_query(query)
 
 
     def test_format_query_without_filters(self):
@@ -118,3 +117,14 @@ class TestDbService(TestCase):
         result = DBService.format_query(self.mock_dto_filter)
 
         self.assertEqual(result, expected)
+
+    @patch.object(ConnectionManager, 'connect')
+    @patch.object(DBService, 'execute_query')
+    def test_create_connection(self, mock_execute_query, mock_connect):
+        DBService.create_connection('username', 'password')
+
+        result_execute = mock_execute_query.call_count
+        result_connect = mock_connect.call_count
+
+        self.assertEqual(result_execute, 1)
+        self.assertEqual(result_connect, 1)

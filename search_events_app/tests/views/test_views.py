@@ -3,8 +3,10 @@ from unittest.mock import (
 	patch,
 )
 
-from django.test import Client
-from django.test import TestCase
+from django.test import (
+	TestCase,
+	Client,
+)
 
 from search_events_app.models.country import Country
 from search_events_app.models.event import Event
@@ -13,6 +15,8 @@ from search_events_app.services.db.db_service import DBService
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager
 from search_events_app.views import EventListView
+from search_events_app.exceptions.okta_error import OktaCredentialError
+from search_events_app.exceptions.presto_error import PrestoError
 
 
 class TestEventListView(TestCase):
@@ -108,11 +112,11 @@ class TestEventListView(TestCase):
 	@patch.object(FilterManager, 'apply_filters')
 	@patch.object(FilterManager, 'filter_has_changed', return_value=True)
 	def test_get_queryset_with_cached_events_and_filter_with_changes(
-			self,
-			mock_has_changed,
-			mock_apply_filters,
-			mock_get_list_dto,
-			mock_set_events
+		self,
+		mock_has_changed,
+		mock_apply_filters,
+		mock_get_list_dto,
+		mock_set_events
 	):
 		StateManager.events = self.events
 		with patch.object(DBService, 'get_events', return_value=self.events):
@@ -130,11 +134,11 @@ class TestEventListView(TestCase):
 	@patch.object(FilterManager, 'apply_filters')
 	@patch.object(FilterManager, 'filter_has_changed', return_value=False)
 	def test_get_queryset_without_cached_events_and_filter_without_changes(
-			self,
-			mock_has_changed,
-			mock_apply_filters,
-			mock_get_list_dto,
-			mock_set_events
+		self,
+		mock_has_changed,
+		mock_apply_filters,
+		mock_get_list_dto,
+		mock_set_events
 	):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
@@ -145,3 +149,40 @@ class TestEventListView(TestCase):
 			self.assertEqual(result, self.events)
 			self.assertEqual(set_events_count, 1)
 			self.assertEqual(get_dto_list_count, 1)
+	
+	@patch("search_events_app.views.ListView.get")
+	def test_get(self, mock_super_get):
+		view = EventListView()
+		mock_request = MagicMock()
+		result_super = MagicMock()
+		mock_super_get.return_value = result_super
+
+		result = view.get(mock_request)
+
+		self.assertEqual(result, result_super)
+	
+	@patch("search_events_app.views.ListView.get")
+	def test_get_redirects_login(self, mock_super_get):
+		view = EventListView()
+		mock_request = MagicMock()
+		mock_super_get.side_effect = Exception()
+		response = view.get(mock_request)
+		response.client = Client()
+		
+		self.assertRedirects(response,'/login')
+
+	@patch("search_events_app.views.render")
+	@patch("search_events_app.views.ListView.get")
+	def test_get_render_error(self, mock_super_get, mock_render):
+		view = EventListView()
+		mock_request = MagicMock()
+		presto_error = PrestoError(Exception())
+		mock_super_get.side_effect = presto_error
+		
+		view.get(mock_request)
+		count_calls = mock_render.call_count
+		args_calls = mock_render.call_args[0]
+
+		self.assertEqual(count_calls, 1)
+		self.assertEqual(args_calls[1], 'event_list.html')
+		self.assertEqual(args_calls[2]['error'], presto_error.message)

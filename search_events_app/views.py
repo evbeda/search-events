@@ -1,15 +1,33 @@
 from django.views.generic.list import ListView
-from django.shortcuts import render
+from django.shortcuts import (
+    render,
+    redirect
+)
+from django.urls import reverse
 
 from search_events_app.services.db.db_service import DBService
+from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.models.country import Country
 from search_events_app.models.language import Language
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager
+from search_events_app.exceptions import (
+    OktaCredentialError,
+    PrestoError,
+)
 
 
 class EventListView(ListView):
     template_name = 'event_list.html'
+
+    def get(self, request):
+        try:
+            return super().get(request)
+        except PrestoError as e:
+            StateManager.reset_events()
+            return render(request, 'event_list.html', {'error': e.message})
+        except Exception as e:
+            return redirect(reverse('login'))
 
     def get_queryset(self):
         FilterManager.apply_filters(self.request)
@@ -32,4 +50,15 @@ class EventListView(ListView):
 
 
 def login(request):
-    return render(request, 'login.html')
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    else:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            DBService.create_connection(username, password)
+            return redirect('event_list')
+        except OktaCredentialError as e:
+            return render(request, 'login.html', {'error': e.message})
+        except PrestoError as e:
+            return render(request, 'login.html', {'error': e.message})
