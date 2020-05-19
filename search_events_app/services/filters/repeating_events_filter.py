@@ -2,7 +2,6 @@ from search_events_app.services.filters.filter import Filter
 
 
 class RepeatingEventsFilter(Filter):
-
 	CODE = "RE"
 
 	def apply_filter(self, feature_codes):
