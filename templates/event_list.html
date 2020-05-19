@@ -10,15 +10,13 @@
         <img class="reduce" src="{% static "img/eventbrite_logo.png"%}">
         <h1><div class="feed-header__title-top"> &nbsp; | CX Events Finder</div></h1>
     </nav>
-    {% if object_list %}
-    <div class="container-fluid width-90 mt-4">
-        {% include "filters.html" %}
-        
-        {% include "table_events.html" %}
-    </div>
-    
+    {% if error %}
+        {% include "modal_error.html" %}
     {% else %}
-    {% include "modal_error.html" %}
-    
+        <div class="container-fluid width-90 mt-4">
+            {% include "filters.html" %}
+            
+            {% include "table_events.html" %}
+        </div>
     {% endif %}
 {% endblock %}

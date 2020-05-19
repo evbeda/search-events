@@ -8,5 +8,5 @@ from .views import (
 
 urlpatterns = [
     path('', EventListView.as_view(), name='event_list'),
-    path('login', login, name='login')
+    path('login/', login, name='login')
 ]
