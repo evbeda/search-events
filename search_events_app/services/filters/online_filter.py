@@ -1,4 +1,4 @@
-from search_events_app.models.online_parameters import OnlineParameters
+from search_events_app.utils.online_parameters import OnlineParameters
 from search_events_app.services.filters.filter import Filter
 
 

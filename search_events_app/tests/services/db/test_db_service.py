@@ -66,17 +66,9 @@ class TestDbService(TestCase):
             }
         ]
 
-    @patch.object(
-        ConnectionManager,
-        'connect'
-    )
-    @patch.object(
-        DBService,
-        'format_query'
-    )
-    @patch(
-        'search_events_app.services.db.db_service.process_events'
-    )
+    @patch.object(ConnectionManager, 'connect')
+    @patch.object(DBService, 'format_query')
+    @patch('search_events_app.services.db.db_service.process_events')
     def test_get_events_without_exception(self, mock_process_events, mock_format_query, mock_connect):
         mock_process_events.return_value = self.mock_response_processed
 
@@ -91,14 +83,8 @@ class TestDbService(TestCase):
         self.assertIsInstance(result[0], Event)
         self.assertIsInstance(result[1], Event)
 
-    @patch.object(
-        ConnectionManager,
-        'connect'
-    )
-    @patch.object(
-        DBService,
-        'format_query'
-    )
+    @patch.object(ConnectionManager, 'connect')
+    @patch.object(DBService, 'format_query')
     def test_get_events_wrong_okta_credentials(self, mock_format_query, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=OperationalError())
@@ -107,14 +93,8 @@ class TestDbService(TestCase):
         with self.assertRaises(OktaCredentialError):
             DBService.get_events(dto_filters_array=self.mock_dto_filter)
 
-    @patch.object(
-        ConnectionManager,
-        'connect'
-    )
-    @patch.object(
-        DBService,
-        'format_query'
-    )
+    @patch.object(ConnectionManager, 'connect')
+    @patch.object(DBService, 'format_query')
     def test_get_events_with_presto_error(self, mock_format_query, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=Exception())

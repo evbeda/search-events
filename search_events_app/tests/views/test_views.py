@@ -21,10 +21,7 @@ class TestEventListView(TestCase):
 		self.events = [Event(name='Evento1', url='www.google.com')]
 		StateManager.reset_events()
 
-	@patch.object(
-		Country,
-		'objects'
-	)
+	@patch.object(Country, 'objects')
 	def test_get_context_data_countries(self, mock_objects):
 		self.client = Client()
 		countries = [
@@ -50,10 +47,7 @@ class TestEventListView(TestCase):
 
 		self.assertEqual(result['countries'], expected_result)
 
-	@patch.object(
-		Language,
-		'objects'
-	)
+	@patch.object(Language, 'objects')
 	def test_get_context_data_languages(self, mock_objects):
 		self.client = Client()
 		languages = [
@@ -79,15 +73,8 @@ class TestEventListView(TestCase):
 
 		self.assertEqual(result['languages'], expected_result)
 
-	@patch.object(
-		FilterManager,
-		'apply_filters'
-	)
-	@patch.object(
-		FilterManager,
-		'filter_has_changed',
-		return_value=False
-	)
+	@patch.object(FilterManager, 'apply_filters')
+	@patch.object(FilterManager, 'filter_has_changed', return_value=False)
 	def test_get_queryset_with_cached_events_and_filter_without_changes(self, mock_has_changed, mock_apply_filters):
 		StateManager.set_events(self.events)
 		view = EventListView()
@@ -95,23 +82,10 @@ class TestEventListView(TestCase):
 		result = view.get_queryset()
 		self.assertEqual(result, self.events)
 
-	@patch.object(
-		StateManager,
-		'set_events'
-	)
-	@patch.object(
-		FilterManager,
-		'get_list_dto_db_service_filter'
-	)
-	@patch.object(
-		FilterManager,
-		'apply_filters'
-	)
-	@patch.object(
-		FilterManager,
-		'filter_has_changed',
-		return_value=True
-	)
+	@patch.object(StateManager, 'set_events')
+	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
+	@patch.object(FilterManager,'apply_filters')
+	@patch.object(FilterManager, 'filter_has_changed', return_value=True)
 	def test_get_queryset_without_cached_events_and_filter_with_changes(
 			self,
 			mock_has_changed,
@@ -129,23 +103,10 @@ class TestEventListView(TestCase):
 			self.assertEqual(set_events_count, 1)
 			self.assertEqual(get_dto_list_count, 1)
 
-	@patch.object(
-		StateManager,
-		'set_events'
-	)
-	@patch.object(
-		FilterManager,
-		'get_list_dto_db_service_filter'
-	)
-	@patch.object(
-		FilterManager,
-		'apply_filters'
-	)
-	@patch.object(
-		FilterManager,
-		'filter_has_changed',
-		return_value=True
-	)
+	@patch.object(StateManager, 'set_events')
+	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
+	@patch.object(FilterManager, 'apply_filters')
+	@patch.object(FilterManager, 'filter_has_changed', return_value=True)
 	def test_get_queryset_with_cached_events_and_filter_with_changes(
 			self,
 			mock_has_changed,
@@ -164,23 +125,10 @@ class TestEventListView(TestCase):
 			self.assertEqual(set_events_count, 1)
 			self.assertEqual(get_dto_list_count, 1)
 
-	@patch.object(
-		StateManager,
-		'set_events'
-	)
-	@patch.object(
-		FilterManager,
-		'get_list_dto_db_service_filter'
-	)
-	@patch.object(
-		FilterManager,
-		'apply_filters'
-	)
-	@patch.object(
-		FilterManager,
-		'filter_has_changed',
-		return_value=False
-	)
+	@patch.object(StateManager, 'set_events')
+	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
+	@patch.object(FilterManager, 'apply_filters')
+	@patch.object(FilterManager, 'filter_has_changed', return_value=False)
 	def test_get_queryset_without_cached_events_and_filter_without_changes(
 			self,
 			mock_has_changed,

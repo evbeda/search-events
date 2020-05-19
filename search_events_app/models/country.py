@@ -1,8 +1,10 @@
 from django.db import models
 
+from search_events_app.mixins.get_context_mixin import GetContextMixin
+
 
 # Create your models here.
-class Country(models.Model):
+class Country(models.Model, GetContextMixin):
     name = models.CharField(max_length=100)
     alpha_2_code = models.CharField(max_length=2)
     eventbrite_id = models.CharField(max_length=30)
@@ -27,3 +29,17 @@ class Country(models.Model):
 
     class Meta:
         verbose_name_plural = 'Countries'
+
+    @classmethod
+    def get_context(cls):
+        # import pdb; pdb.set_trace()
+        countries = Country.objects.all()
+
+        return {
+            'countries': [
+                {
+                    'alpha2Code': country.alpha_2_code,
+                    'name': country.name,
+                } for country in countries
+            ]
+        }

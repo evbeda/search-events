@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from search_events_app.models.country import Country
-from search_events_app.services.api_response_processor import (
+from search_events_app.services.api.api_response_processor import (
     get_country,
     get_language,
     get_tag,
