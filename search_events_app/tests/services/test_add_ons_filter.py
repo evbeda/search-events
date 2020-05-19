@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from search_events_app.services.filters.add_ons_filter import AddOnsFilter
+from search_events_app.services.filters.features.add_ons_filter import AddOnsFilter
 
 
 class TestAddOnsFilter(TestCase):

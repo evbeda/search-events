@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 from django.test import TestCase
 
-from search_events_app.services.filters.reserved_seating_filter import ReservedSeatingFilter
+from search_events_app.services.filters.features.reserved_seating_filter import ReservedSeatingFilter
 
 
 class TestReserveadSeatingFilter(TestCase):

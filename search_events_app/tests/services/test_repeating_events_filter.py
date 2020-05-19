@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from search_events_app.services.filters.repeating_events_filter import RepeatingEventsFilter
+from search_events_app.services.filters.features.repeating_events_filter import RepeatingEventsFilter
 
 
 class TestRepeatingEventsFilter(TestCase):

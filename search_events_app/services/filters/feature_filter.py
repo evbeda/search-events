@@ -1,8 +1,10 @@
 from search_events_app.services.filters.filter import Filter
-from search_events_app.services.filters.add_ons_filter import AddOnsFilter
-from search_events_app.services.filters.repeating_events_filter import RepeatingEventsFilter
-from search_events_app.services.filters.reserved_seating_filter import ReservedSeatingFilter
-from search_events_app.services.filters.website_widgets_filter import WebsiteWidgetsFilter
+from search_events_app.services.filters.features import (
+    AddOnsFilter,
+    RepeatingEventsFilter,
+    ReservedSeatingFilter,
+    WebsiteWidgetsFilter,
+)
 
 
 class FeatureFilterManager(Filter):

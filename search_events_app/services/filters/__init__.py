@@ -2,6 +2,3 @@ from search_events_app.services.filters.country_filter import CountryFilter
 from search_events_app.services.filters.feature_filter import FeatureFilterManager
 from search_events_app.services.filters.language_filter import LanguageFilter
 from search_events_app.services.filters.online_filter import OnlineFilter
-from search_events_app.services.filters.repeating_events_filter import RepeatingEventsFilter
-from search_events_app.services.filters.reserved_seating_filter import ReservedSeatingFilter
-
