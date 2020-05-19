@@ -5,7 +5,7 @@ from search_events_app.services.filters.filter import Filter
 class OnlineFilter(Filter):
 
     def apply_filter(self, request):
-        online = request.GET.get('online') if request.GET.get('online') else None
+        online = request.GET.get('online')
         new_filter = None
         if online:
             if online == 'on':

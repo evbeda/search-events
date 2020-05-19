@@ -8,7 +8,7 @@ from search_events_app.models.feature import Feature
 class TestEvent(TestCase):
 
     def setUp(self):
-        self.feature = Feature('Embedded Checkout')
+        self.feature = Feature('Website Widgets')
 
     def test_event_without_country(self):
         event = Event('Name', 'www.google.com')
