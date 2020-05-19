@@ -22,12 +22,12 @@ class TestFeature(TestCase):
         expected_result = {
             'features': [
                 {
-                    'code': 'RS',
-                    'name': 'Reserved Seating',
-                },
-                {
                     'code': 'AO',
                     'name': 'Add Ons',
+                },
+                {
+                    'code': 'RS',
+                    'name': 'Reserved Seating',
                 },
             ]
         }
