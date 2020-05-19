@@ -1,4 +1,5 @@
 from django.views.generic.list import ListView
+from django.shortcuts import render
 
 from search_events_app.services.db.db_service import DBService
 from search_events_app.models.country import Country
@@ -28,3 +29,7 @@ class EventListView(ListView):
             context.update(c.get_context())
 
         return context
+
+
+def login(request):
+    return render(request, 'login.html')
