@@ -8,6 +8,7 @@ from django.test import (
 	Client,
 )
 
+from search_events_app.models import Feature
 from search_events_app.models.country import Country
 from search_events_app.models.event import Event
 from search_events_app.models.language import Language
@@ -25,57 +26,45 @@ class TestEventListView(TestCase):
 		self.events = [Event(name='Evento1', url='www.google.com')]
 		StateManager.reset_events()
 
-	@patch.object(Country, 'objects')
-	def test_get_context_data_countries(self, mock_objects):
-		self.client = Client()
-		countries = [
-			Country(label='Argentina', code='AR', eventbrite_id='1234'),
-			Country(label='Spain', code='ES', eventbrite_id='4567')
+	@patch.object(Country,'get_context')
+	@patch.object(Language, 'get_context')
+	@patch.object(Feature, 'get_context')
+	def test_get_context_data(self, mock_features, mock_languages, mock_countries):
+		arr_features = [
+				{
+					'code': 'RS',
+					'name': 'Reserved Seating',
+				},
+			]
+		arr_languages = [
+				{
+					'code': 'de',
+					'name': 'German',
+				},
 		]
-		mock_objects.all = MagicMock(return_value=countries)
-		expected_result = [
-			{
-				'alpha2Code': 'AR',
-				'name': 'Argentina'
-			},
-			{
-				'alpha2Code': 'ES',
-				'name': 'Spain'
-			}
+		arr_countries = [
+				{
+					'alpha2Code': 'PE',
+					'name': 'Peru',
+				},
 		]
+		mock_features.return_value = {
+			'features': arr_features
+		}
+		mock_languages.return_value = {
+			'languages': arr_languages
+		}
+		mock_countries.return_value = {
+			'countries': arr_countries
+		}
+		view = EventListView()
 		kwargs = {
 			'object_list': []
 		}
-
-		result = EventListView().get_context_data(**kwargs)
-
-		self.assertEqual(result['countries'], expected_result)
-
-	@patch.object(Language, 'objects')
-	def test_get_context_data_languages(self, mock_objects):
-		self.client = Client()
-		languages = [
-			Language(name='Spanish', code='es'),
-			Language(name='German', code='de')
-		]
-		mock_objects.order_by = MagicMock(return_value=languages)
-		expected_result = [
-			{
-				'code': 'es',
-				'name': 'Spanish'
-			},
-			{
-				'code': 'de',
-				'name': 'German'
-			}
-		]
-		kwargs = {
-			'object_list': []
-		}
-
-		result = EventListView().get_context_data(**kwargs)
-
-		self.assertEqual(result['languages'], expected_result)
+		result = view.get_context_data(**kwargs)
+		self.assertEqual(result['features'], arr_features)
+		self.assertEqual(result['languages'], arr_languages)
+		self.assertEqual(result['countries'], arr_countries)
 
 	@patch.object(FilterManager, 'apply_filters')
 	@patch.object(FilterManager, 'filter_has_changed', return_value=False)

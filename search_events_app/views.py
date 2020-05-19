@@ -45,8 +45,8 @@ class EventListView(ListView):
 
         classes = [Country, Language, Feature]
 
-        for c in classes:
-            context.update(c.get_context())
+        for class_ in classes:
+            context.update(class_.get_context())
 
         return context
 
