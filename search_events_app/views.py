@@ -6,14 +6,16 @@ from django.shortcuts import (
 from django.urls import reverse
 
 from search_events_app.services.db.db_service import DBService
-from search_events_app.services.db.db_connection_manager import ConnectionManager
-from search_events_app.models.country import Country
-from search_events_app.models.language import Language
 from search_events_app.services.filter_manager import FilterManager
 from search_events_app.services.state_manager import StateManager
 from search_events_app.exceptions import (
     OktaCredentialError,
     PrestoError,
+)
+from search_events_app.models import (
+    Feature,
+    Country,
+    Language,
 )
 
 
@@ -41,10 +43,10 @@ class EventListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        classes = [Country, Language]
+        classes = [Country, Language, Feature]
 
-        for c in classes:
-            context.update(c.get_context())
+        for class_ in classes:
+            context.update(class_.get_context())
 
         return context
 

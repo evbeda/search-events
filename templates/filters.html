@@ -45,11 +45,9 @@
                     </span>
                 </div>
                 <select id="feature" class="selectpicker sp2 col-sm-4" multiple data-selected-text-format="count > 2" data-live-search="true" title="Select Features">
-                    <option value="WW">Website Widgets</option>
-                    <option value="RS">Reserved Seating</option>
-                    <option value="RE">Repeating Event</option>
-                    <option value="CQ">Custom Questions</option>
-                    <option value="AO">Add-ons</option>
+                    {% for feature in features %}
+                    <option value="{{ feature.code }}">{{ feature.name }}</option>
+                    {% endfor %}
                   </select>
                   
             </div>
