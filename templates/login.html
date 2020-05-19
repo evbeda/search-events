@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}">
+<body>
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img class="brand_logo" src="{% static "img/eventbrite_logo.png"%}">
+					</div>
+                </div>
+                <div class="title">
+                    <h5>Enter your Okta credentials </h5>
+                </div>
+				<div class="d-flex justify-content-center form_container">
+					<form class="form-signin" method="post">
+                        {% csrf_token %}
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="material-icons">person</i>
+                                </span>
+							</div>
+							<input type="text" name="username" class="form-control input_user"  placeholder="Username">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="material-icons">vpn_key</i>
+                                </span>
+							</div>
+							<input type="password" name="password" class="form-control input_pass"  placeholder="Password">
+                        </div>
+                        <div class="text-center">
+                        {% if error %}
+                        <span class='text-danger'>{{error}}</span>
+                        {% endif %}
+                        </div>
+						<div class="d-flex justify-content-center mt-3 login_container">
+				 	        <button type="submit" name="button" class="btn login_btn">Login</button>
+                        </div>
+					</form>
+			    </div>
+		    </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

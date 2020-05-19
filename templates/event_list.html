@@ -3,16 +3,22 @@
 {% block content %}
 
     {% load el_pagination_tags %}
+   
+        
     
     <nav class="navbar navbar-expand-lg blue-eb">
         <img class="reduce" src="{% static "img/eventbrite_logo.png"%}">
         <h1><div class="feed-header__title-top"> &nbsp; | CX Events Finder</div></h1>
     </nav>
-
+    {% if object_list %}
     <div class="container-fluid width-90 mt-4">
         {% include "filters.html" %}
         
         {% include "table_events.html" %}
     </div>
-
+    
+    {% else %}
+    {% include "modal_error.html" %}
+    
+    {% endif %}
 {% endblock %}

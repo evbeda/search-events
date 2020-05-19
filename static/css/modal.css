@@ -1,0 +1,16 @@
+.modal {
+    display: block;
+    margin-top: 10%;
+  }
+.modal-header {
+    background-color:#1E0A3C ;
+} 
+.modal-title {
+    font-weight: bold;
+    color: #f05537;
+}
+
+.btnmodal{
+    background-color:#f05537 ;
+    color: white;
+}
