@@ -29,7 +29,8 @@ class DBService:
         group_base_query = QueryParameter.order_by
         limit = QueryParameter.limit
         for dto in dto_filters_array:
-            join_base_query += dto.join_query
+            for dto_join in dto.join_query:
+                join_base_query += " "+dto_join
             where_base_query += dto.where_query
         query = select_base_query+join_base_query+where_base_query+group_base_query+limit
         return query

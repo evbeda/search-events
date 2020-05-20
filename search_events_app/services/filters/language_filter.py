@@ -35,7 +35,7 @@ class LanguageFilter(Filter):
             }
 
     def get_join_query(self):
-        return ''
+        return ['']
 
     def get_where_query(self):
         if self.value:

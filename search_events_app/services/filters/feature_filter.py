@@ -31,9 +31,11 @@ class FeatureFilterManager(Filter):
         return ''
 
     def get_join_query(self):
-        join_query = ''
+        join_query = []
         for feature in self.value:
-            join_query += feature.get_join_query()
+            for partial_query in feature.get_join_query():
+                if partial_query not in join_query:
+                    join_query.append(partial_query)
         return join_query
 
     def get_where_query(self):

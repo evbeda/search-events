@@ -23,10 +23,12 @@ class WebsiteWidgetsFilter(Filter):
         return ''
 
     def get_join_query(self):
-        return """
-            INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id
-            INNER JOIN dw.dim_affiliate_code_group dacg ON dacg.affiliate_code = f.q_order_affiliate_code
-        """
+        if self.value:
+            join_ticket = "INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"
+            join_affiliate = "INNER JOIN dw.dim_affiliate_code_group dacg ON dacg.affiliate_code = f.q_order_affiliate_code"
+            join_query = [join_ticket, join_affiliate]
+            return join_query
+        return ['']
 
     def get_where_query(self):
         if self.value:

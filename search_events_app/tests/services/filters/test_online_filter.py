@@ -63,7 +63,7 @@ class TestOnlineFilter(TestCase):
         self.assertEqual(self.online_filter.get_request_value(), {
             OnlineParameters.ONLINE.get('key'): True
         })
-        self.assertEqual(self.online_filter.get_join_query(), '')
+        self.assertEqual(self.online_filter.get_join_query(), [''])
         self.assertEqual(self.online_filter.get_where_query(), expected_where_query)
 
     def test_online_filter_info_without_option_selected(self):
@@ -74,5 +74,5 @@ class TestOnlineFilter(TestCase):
         self.assertIsNone(self.online_filter.get_value())
         self.assertEqual(self.online_filter.get_type(), 'search')
         self.assertIsNone(self.online_filter.get_request_value())
-        self.assertEqual(self.online_filter.get_join_query(), '')
+        self.assertEqual(self.online_filter.get_join_query(), [''])
         self.assertEqual(self.online_filter.get_where_query(), '')
