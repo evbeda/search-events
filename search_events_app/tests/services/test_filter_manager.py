@@ -85,3 +85,21 @@ class TestFilterManager(TestCase):
             self.assertEqual(result[0].where_query, expected_where)
             self.assertEqual(result[0].join_query, expected_join)
             self.assertIsInstance(result[0], DTODBServiceFilter)
+
+    def test_get_list_dto_api_service_filter_by_filters(self):
+        list_dto = [
+            {'join_query': [''], 'where_query': " AND country_desc='AR' " }
+        ]
+   
+        country_filter = CountryFilter()
+        country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='85632505')
+        FilterManager.latest_filters = [country_filter]
+
+        result = [
+            {
+                'join_query': dto.join_query,
+                'where_query': dto.where_query
+            }
+            for dto in FilterManager.get_list_dto_db_service_filter()
+        ]
+        self.assertEqual(result, list_dto)
