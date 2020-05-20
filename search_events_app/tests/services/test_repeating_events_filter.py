@@ -29,7 +29,7 @@ class TestRepeatingEventsFilter(TestCase):
     def test_get_join_query(self):
 
         result = self.filter.get_join_query()
-        self.assertEqual(result, '')
+        self.assertEqual(result, [''])
 
     def test_get_where_query_with_filter_applied(self):
         self.filter.value = True

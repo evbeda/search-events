@@ -54,7 +54,7 @@ class TestCountryFilters(TestCase):
         self.assertEqual(self.country_filter.get_request_value(), {
             'places_within': ['1234']
         })
-        self.assertEqual(self.country_filter.get_join_query(), '')
+        self.assertEqual(self.country_filter.get_join_query(), [''])
         self.assertEqual(self.country_filter.get_where_query(), " AND country_desc='AR' ")
 
     def test_country_filter_info_without_country_selected(self):
@@ -65,6 +65,6 @@ class TestCountryFilters(TestCase):
         self.assertIsNone(self.country_filter.get_value())
         self.assertEqual(self.country_filter.get_type(), 'search')
         self.assertIsNone(self.country_filter.get_request_value())
-        self.assertEqual(self.country_filter.get_join_query(), '')
+        self.assertEqual(self.country_filter.get_join_query(), [''])
         self.assertEqual(self.country_filter.get_where_query(), '')
 
