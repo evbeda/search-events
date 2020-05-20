@@ -104,7 +104,8 @@ class TestDbService(TestCase):
 
 
     def test_format_query_without_filters(self):
-        expected = QueryParameter.columns_select+QueryParameter.default_tables+QueryParameter.constraints+QueryParameter.order_by+QueryParameter.limit
+        expected = QueryParameter.columns_select+QueryParameter.default_tables+QueryParameter.constraints
+        expected += QueryParameter.group_by+QueryParameter.order_by+QueryParameter.limit
 
         result = DBService.format_query([])
 
@@ -112,7 +113,8 @@ class TestDbService(TestCase):
 
     def test_format_query_with_filters(self):
         where_query = QueryParameter.constraints+" AND dw_event.event_language LIKE '%en%'"
-        expected = QueryParameter.columns_select+QueryParameter.default_tables+where_query+QueryParameter.order_by+QueryParameter.limit
+        expected = QueryParameter.columns_select+QueryParameter.default_tables+where_query+QueryParameter.group_by
+        expected += QueryParameter.order_by+QueryParameter.limit
 
         result = DBService.format_query(self.mock_dto_filter)
 
