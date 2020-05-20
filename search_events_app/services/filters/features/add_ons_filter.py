@@ -11,18 +11,6 @@ class AddOnsFilter(Filter):
         if self.has_changed:
             self.value = new_filter     
 
-    def get_key(self):
-        return ''
-
-    def get_value(self):
-        return ''
-
-    def get_type(self):
-        return ''
-
-    def get_request_value(self):
-        return ''
-
     def get_join_query(self):
         if self.value:
             query_join = ["INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"]

@@ -83,6 +83,19 @@ class TestDbService(TestCase):
         self.assertIsInstance(result[1], Event)
 
     @patch.object(ConnectionManager, 'get_connection')
+    def test_excute_query(self, mock_connect):
+        mock_cursor = MagicMock()
+        mock_cursor.execute = MagicMock()
+        mock_cursor.fetchall = MagicMock(return_value=self.mock_db_response)
+        mock_connect.return_value = mock_cursor
+        query = 'This is query'
+
+        result = DBService.execute_query(query)
+
+        self.assertEqual(len(result), 2)
+        self.assertEqual(type(result), list)
+
+    @patch.object(ConnectionManager, 'get_connection')
     def test_execute_query_wrong_okta_credentials(self, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=OperationalError())
@@ -102,7 +115,6 @@ class TestDbService(TestCase):
         with self.assertRaises(PrestoError):
             DBService.execute_query(query)
 
-
     def test_format_query_without_filters(self):
         expected = QueryParameter.columns_select+QueryParameter.default_tables+QueryParameter.constraints
         expected += QueryParameter.group_by+QueryParameter.order_by+QueryParameter.limit
@@ -118,6 +130,16 @@ class TestDbService(TestCase):
 
         result = DBService.format_query(self.mock_dto_filter)
 
+        self.assertEqual(result, expected)
+    
+    def test_format_join_query_with_filters(self):
+        mock_dto_filter = [DTODBServiceFilter(join_query=['INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id'], where_query='')]
+        join_query = QueryParameter.default_tables+" "+"INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"
+        expected = QueryParameter.columns_select+join_query+QueryParameter.constraints+QueryParameter.group_by
+        expected += QueryParameter.order_by+QueryParameter.limit
+
+        result = DBService.format_query(mock_dto_filter)
+        
         self.assertEqual(result, expected)
 
     @patch.object(ConnectionManager, 'connect')

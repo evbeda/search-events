@@ -42,4 +42,3 @@ class TestRepeatingEventsFilter(TestCase):
 
         result = self.filter.get_where_query()
         self.assertEqual(result, '')
-

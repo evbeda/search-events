@@ -6,7 +6,7 @@
                         <i class="material-icons">location_on</i>
                     </span>
                 </div>
-                <select onchange="toggleDisable('divCountry', 'country', this.value);" id="online" name="online" class="custom-select h-100" id="inputGroupSelect01">
+                <select onchange="FilterManager.toggleDisable('divCountry', 'country', this.value);" id="online" name="online" class="custom-select h-100" id="inputGroupSelect01">
                     <option value="">Online &amp; Venue</option>
                     <option value="on">Events online</option>
                     <option value="off">Events with venue</option>
@@ -54,10 +54,10 @@
         </div>
         <div class="row mt-3">
             <div class="col col-sm-3">
-                <button class="btn orange-eb text-white" onclick="sendData('country', {{countries}});return false;">Search</button>
+                <button class="btn orange-eb text-white" onclick="FormManager.formatFormData('country', {{countries}});return false;">Search</button>
             </div>
             <div class="col col-sm-9">
-                <div class="rounded-circle clear-filter float-right" onclick="clearFilters();" title="Clear filters" id="div-clear-filter">
+                <div class="rounded-circle clear-filter float-right" onclick="FilterManager.clearFilters();" title="Clear filters" id="div-clear-filter">
                     <i class="material-icons">delete_outline</i>
                 </div>
             </div>
