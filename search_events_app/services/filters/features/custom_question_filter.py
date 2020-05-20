@@ -1,8 +1,8 @@
 from search_events_app.services.filters.filter import Filter
 
 
-class ReservedSeatingFilter(Filter):
-    code = 'RS'
+class CustomQuestionFilter(Filter):
+    code = 'CQ'
 
     def apply_filter(self, feature_codes):
         new_filter = self.code in feature_codes
@@ -11,9 +11,10 @@ class ReservedSeatingFilter(Filter):
             self.value = new_filter
 
     def get_join_query(self):
+        if self.value:
+            query = ['INNER JOIN eb.questions q ON q.asset = dw_event.event_id']
+            return query
         return ['']
 
     def get_where_query(self):
-        if self.value:
-            return f" AND dw_event.is_reserved_seating = 'Y' "
         return ''
