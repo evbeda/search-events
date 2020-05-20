@@ -86,7 +86,7 @@ class TestFilterManager(TestCase):
             self.assertEqual(result[0].join_query, expected_join)
             self.assertIsInstance(result[0], DTODBServiceFilter)
 
-    def test_get_list_dto_api_service_filter_by_filters(self):
+    def test_get_list_dto_db_service_filter_by_filters(self):
         list_dto = [
             {'join_query': [''], 'where_query': " AND country_desc='AR' " }
         ]
