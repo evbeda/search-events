@@ -56,7 +56,7 @@ class TestFeatureFilterManager(TestCase):
         self.assertEqual(self.feature_filter_manager.get_value(), '')
         self.assertEqual(self.feature_filter_manager.get_type(), '')
         self.assertEqual(self.feature_filter_manager.get_request_value(), '')
-        self.assertEqual(self.feature_filter_manager.get_join_query(), ['', "INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"])
+        self.assertEqual(self.feature_filter_manager.get_join_query(), [''])
         self.assertEqual(self.feature_filter_manager.get_where_query(), " AND f.trx_type = 'add_on_ticket_purchase'")
 
     def test_feature_filter_manager_info_without_selected(self):

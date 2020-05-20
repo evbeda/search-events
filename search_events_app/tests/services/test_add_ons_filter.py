@@ -23,7 +23,7 @@ class TestAddOnsFilter(TestCase):
         self.add_ons_filter.value = True
         result = self.add_ons_filter.get_join_query()
 
-        self.assertEqual(result, ['INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id'])
+        self.assertEqual(result, [''])
 
     def test_join_query_value_false(self):
         self.add_ons_filter.value = False
