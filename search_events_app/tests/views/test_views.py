@@ -226,7 +226,7 @@ class TestEventListView(TestCase):
 
 	@patch("search_events_app.views.render")
 	@patch.object(DBService, 'create_connection')
-	def test_login_enter_credentials_with_credential_error(self, mock_create_connection, mock_render):
+	def test_login_enter_credentials_with_presto_error(self, mock_create_connection, mock_render):
 		presto_error = PrestoError(Exception())
 		mock_create_connection.side_effect = presto_error
 		mock_request = MagicMock()
