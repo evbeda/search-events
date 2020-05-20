@@ -12,6 +12,7 @@ from search_events_app.services.filters.features import (
     ReservedSeatingFilter,
     WebsiteWidgetsFilter,
 )
+from search_events_app.utils.feature_codes import FeatureCodes
 
 
 class TestFeatureFilterManager(TestCase):
@@ -22,7 +23,7 @@ class TestFeatureFilterManager(TestCase):
     def test_feature_filter_add_ons(self, patch_apply):
         mock_request = MagicMock()
         mock_request.GET = MagicMock()
-        mock_request.GET.get = MagicMock(return_value='AO')
+        mock_request.GET.get = MagicMock(return_value=FeatureCodes.add_ons)
         self.feature_filter_manager.latest_filters = [AddOnsFilter(), AddOnsFilter()]
         self.feature_filter_manager.apply_filter(mock_request)
         count = patch_apply.call_count
@@ -31,7 +32,7 @@ class TestFeatureFilterManager(TestCase):
     def test_feature_filter_manager_has_changed_true(self):
         mock_request = MagicMock()
         mock_request.GET = MagicMock()
-        mock_request.GET.get = MagicMock(return_value='AO')
+        mock_request.GET.get = MagicMock(return_value=FeatureCodes.add_ons)
         self.feature_filter_manager.latest_filters = [AddOnsFilter(), RepeatingEventsFilter(), ReservedSeatingFilter()]
 
         self.feature_filter_manager.apply_filter(mock_request)
@@ -46,7 +47,7 @@ class TestFeatureFilterManager(TestCase):
     def test_feature_filter_manager_info_with_add_on_selected(self):
         mock_request = MagicMock()
         mock_request.GET = MagicMock()
-        mock_request.GET.get = MagicMock(return_value='AO')
+        mock_request.GET.get = MagicMock(return_value=FeatureCodes.add_ons)
         self.feature_filter_manager.latest_filters = [AddOnsFilter(), RepeatingEventsFilter(), WebsiteWidgetsFilter()]
 
         self.feature_filter_manager.apply_filter(mock_request)

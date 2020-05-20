@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 from django.test import TestCase
 
 from search_events_app.services.filters.features.reserved_seating_filter import ReservedSeatingFilter
-
+from search_events_app.utils.feature_codes import FeatureCodes
 
 class TestReserveadSeatingFilter(TestCase):
 
@@ -11,7 +11,7 @@ class TestReserveadSeatingFilter(TestCase):
         self.reserved_filter = ReservedSeatingFilter()
 
     def test_apply_reserved_seating_filter(self):
-        features_codes = ['RS', 'EB']
+        features_codes = [FeatureCodes.reserved_seating, FeatureCodes.website_widgets]
 
         self.reserved_filter.apply_filter(features_codes)
         self.assertTrue(self.reserved_filter.value)
@@ -35,7 +35,7 @@ class TestReserveadSeatingFilter(TestCase):
 
     def test_apply_reserved_seating_filter_same_value(self):
         self.reserved_filter.value = True
-        features_codes = ['RS']
+        features_codes = [FeatureCodes.reserved_seating]
 
         self.reserved_filter.apply_filter(features_codes)
 

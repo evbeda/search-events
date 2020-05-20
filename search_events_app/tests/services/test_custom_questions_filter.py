@@ -3,6 +3,7 @@ from unittest.mock import MagicMock
 from django.test import TestCase
 
 from search_events_app.services.filters.features import CustomQuestionFilter
+from search_events_app.utils.feature_codes import FeatureCodes
 
 
 class TestCustomQuestionFilter(TestCase):
@@ -11,7 +12,7 @@ class TestCustomQuestionFilter(TestCase):
         self.custom_question_filter = CustomQuestionFilter()
 
     def test_apply_custom_question_filter(self):
-        features_codes = ['CQ', 'EB']
+        features_codes = [FeatureCodes.custom_question, FeatureCodes.website_widgets]
 
         self.custom_question_filter.apply_filter(features_codes)
 
@@ -37,7 +38,7 @@ class TestCustomQuestionFilter(TestCase):
 
     def test_apply_custom_question_filter_same_value(self):
         self.custom_question_filter.value = True
-        features_codes = ['CQ']
+        features_codes = [FeatureCodes.custom_question]
 
         self.custom_question_filter.apply_filter(features_codes)
 
