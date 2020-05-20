@@ -20,6 +20,9 @@ const filterCriteria = (function() {
 		if(querySt("language")){
 			document.getElementById('language').value = querySt('language');
 		}
+		if(querySt("feature")){
+			selectLastFilters("feature", querySt("feature"))
+		}
 		$(window).keydown(function(event){
 			if(event.keyCode == 13) {
 				event.preventDefault();
@@ -198,4 +201,16 @@ function clearSelected(domId){
 	
 	$(domElement.nextSibling).addClass('bs-placeholder')
 	document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title
+}
+
+function selectLastFilters(domId, stringFilters) {
+	const options = document.getElementById(domId).options;
+	const filters = stringFilters.split("-")
+
+    for(var i = 0; i < options.length; i++){
+		const option = options[i]
+		if(filters.indexOf(option.value) !== -1) {
+			option.selected = true;
+		}
+	}
 }
