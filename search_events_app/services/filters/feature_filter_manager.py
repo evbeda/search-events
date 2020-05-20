@@ -4,13 +4,20 @@ from search_events_app.services.filters.features import (
     RepeatingEventsFilter,
     ReservedSeatingFilter,
     WebsiteWidgetsFilter,
+    CustomQuestionFilter
 )
 
 
 class FeatureFilterManager(Filter):
     def __init__(self):
         super().__init__()
-        self.value = [RepeatingEventsFilter(), ReservedSeatingFilter(), WebsiteWidgetsFilter(), AddOnsFilter()]
+        self.value = [
+            RepeatingEventsFilter(),
+            ReservedSeatingFilter(),
+            WebsiteWidgetsFilter(),
+            AddOnsFilter(),
+            CustomQuestionFilter()
+        ]
 
     def apply_filter(self, request):
         features_codes = request.GET.get('feature', '').split('-')

@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.test import TestCase
 
 from search_events_app.models.feature import Feature
+from search_events_app.utils.feature_codes import FeatureCodes
 
     
 class TestFeature(TestCase):
@@ -16,7 +17,7 @@ class TestFeature(TestCase):
 
     @patch.object(Feature.objects, 'all')
     def test_get_context(self, mock_objects):
-        features = Feature.objects.filter(Q(code='AO') | Q(code='RS'))
+        features = Feature.objects.filter(Q(code=FeatureCodes.add_ons) | Q(code=FeatureCodes.reserved_seating))
         mock_objects.return_value = features
 
         expected_result = {

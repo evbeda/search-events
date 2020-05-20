@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from search_events_app.services.filters.features.add_ons_filter import AddOnsFilter
+from search_events_app.utils.feature_codes import FeatureCodes
 
 
 class TestAddOnsFilter(TestCase):
@@ -9,12 +10,12 @@ class TestAddOnsFilter(TestCase):
         self.add_ons_filter = AddOnsFilter()
 
     def test_apply_add_ons_filter(self):
-        self.add_ons_filter.apply_filter(['AO', 'RE', 'RS'])
+        self.add_ons_filter.apply_filter([FeatureCodes.add_ons, FeatureCodes.repeating_events, FeatureCodes.reserved_seating])
         
         self.assertTrue(self.add_ons_filter.value)
 
     def test_apply_without_add_ons_filter(self):
-        self.add_ons_filter.apply_filter(['RE', 'RS'])
+        self.add_ons_filter.apply_filter([FeatureCodes.repeating_events, FeatureCodes.reserved_seating])
         
         self.assertFalse(self.add_ons_filter.value)
 
