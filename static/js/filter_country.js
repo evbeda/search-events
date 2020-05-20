@@ -184,4 +184,18 @@ function clearFilters() {
 		filter.style.visibility = "visible"
 	});
 
+	clearSelected("feature");
+}
+
+function clearSelected(domId){
+	domElement = document.getElementById(domId)
+	domElement.value = ""
+    var options = domElement.options;
+
+    for(var i = 0; i < options.length; i++){
+      options[i].selected = false;
+	}
+	
+	$(domElement.nextSibling).addClass('bs-placeholder')
+	document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title
 }
