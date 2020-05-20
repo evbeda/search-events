@@ -26,7 +26,16 @@ class QueryParameter:
             AND dw_event.event_status = 'Live'
             AND dw_event.event_status_text_code NOT IN ('event_cancelled', 'tickets_sold_out', 'event_postponed')
         """
-
+    group_by = """
+        GROUP BY dw_event.event_id,
+            dw_event.event_title,
+            dw_cat.event_category_desc,
+            dw_cat.event_format_desc,
+            dw_org.organization_name,
+            dw_event.country_desc,
+            dw_event.event_start_date,
+            dw_event.event_language
+    """
     order_by = """ 
         ORDER BY dw_event.event_start_date
     """
