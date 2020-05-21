@@ -1,4 +1,0 @@
-from search_events_app.services.filters.country_filter import CountryFilter
-from search_events_app.services.filters.feature_filter_manager import FeatureFilterManager
-from search_events_app.services.filters.language_filter import LanguageFilter
-from search_events_app.services.filters.online_filter import OnlineFilter

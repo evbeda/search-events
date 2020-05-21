@@ -1,4 +1,4 @@
-from search_events_app.models.country import Country
+from search_events_app.models import Country
 
 
 def process_events(data):
