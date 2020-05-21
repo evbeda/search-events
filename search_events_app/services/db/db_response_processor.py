@@ -10,11 +10,10 @@ def process_events(data):
                 'name': item[1],
                 'category': item[2],
                 'format_': item[3],
-                'organizer': item[4],
+                'organizer': get_organizer(item),
                 'country': get_country(item),
-                'start_date': item[6],
+                'start_date': item[7],
                 'language': get_language(item),
-
             }
             events.append(event_dict)
     return events
@@ -22,16 +21,24 @@ def process_events(data):
 
 def get_country(item):
     try:
-        country = Country.objects.get(alpha_2_code=item[5])
+        country = Country.objects.get(alpha_2_code=item[6])
         return country.name
     except Exception:
         return None
 
 
 def get_language(item):
-    lang = item[7]
+    lang = item[8]
     return lang.split('_')[0]
 
 
 def get_url(item):
     return f'https://www.eventbrite.com/e/{item[0]}'
+
+
+def get_organizer(item):
+    if item[4]:
+        return item[4]
+    if item[5]:
+        return item[5]
+    return None

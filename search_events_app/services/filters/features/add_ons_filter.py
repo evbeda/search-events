@@ -10,9 +10,6 @@ class AddOnsFilter(Filter):
             self.value = new_filter     
 
     def get_join_query(self):
-        if self.value:
-            query_join = ["INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"]
-            return query_join
         return ['']
 
     def get_where_query(self):

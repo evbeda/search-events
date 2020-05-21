@@ -11,10 +11,12 @@ class WebsiteWidgetsFilter(Filter):
 
     def get_join_query(self):
         if self.value:
-            join_ticket = "INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"
-            join_affiliate = "INNER JOIN dw.dim_affiliate_code_group dacg ON dacg.affiliate_code = f.q_order_affiliate_code"
-            join_query = [join_ticket, join_affiliate]
-            return join_query
+            return [
+                'INNER JOIN ('\
+                    'SELECT affiliate_code, affiliate_group_2 '\
+                    'FROM hive.dw.dim_affiliate_code_group'\
+                ') AS dacg ON dacg.affiliate_code = f.q_order_affiliate_code'
+                ]
         return ['']
 
     def get_where_query(self):
