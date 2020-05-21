@@ -16,12 +16,12 @@ class TestPrestoError(TestCase):
 
 	def test_create_presto_error_due_to_ssl_error(self):
 		result = PrestoError(SSLError())
-		self.assertEqual(result.message, 'Update your certificate from this <a href="https://docs.evbhome.com/intro/self_signed_certs.html">link</a>.')
+		self.assertEqual(result.message, 'Download your certificate <a target="_blank" href="https://docs.evbhome.com/intro/self_signed_certs.html">HERE</a>')
 
 	def test_create_presto_error_due_to_os_error(self):
 		result = PrestoError(OSError())
 		expected_message = 'Download the certificate '
-		expected_message += '<a href="https://docs.evbhome.com/intro/self_signed_certs.html">link</a> '
+		expected_message += '<a target="_blank" href="https://docs.evbhome.com/intro/self_signed_certs.html">link</a> '
 		expected_message += 'and update the path of your environment variable.'
 		self.assertEqual(result.message, expected_message)
 
