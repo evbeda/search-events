@@ -1,4 +1,4 @@
-from .base import *  # noqa
+from search_events.settings.base import os, BASE_DIR
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
