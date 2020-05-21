@@ -1,7 +1,4 @@
 from pyhive import presto
-from django.conf import settings
-
-from search_events_app.exceptions.presto_error import PrestoError
 
 
 class ConnectionManager:

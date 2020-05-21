@@ -1,5 +1,0 @@
-from search_events_app.services.filters.features.add_ons_filter import AddOnsFilter
-from search_events_app.services.filters.features.repeating_events_filter import RepeatingEventsFilter
-from search_events_app.services.filters.features.reserved_seating_filter import ReservedSeatingFilter
-from search_events_app.services.filters.features.website_widgets_filter import WebsiteWidgetsFilter
-from search_events_app.services.filters.features.custom_question_filter import CustomQuestionFilter

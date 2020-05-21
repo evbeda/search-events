@@ -1,2 +1,3 @@
 from search_events_app.exceptions.presto_error import PrestoError
 from search_events_app.exceptions.okta_error import OktaCredentialError
+

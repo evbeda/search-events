@@ -1,8 +1,9 @@
 import requests
 
 from django.conf import settings
-from search_events_app.models.event import Event
-from .api_response_processor import process_events
+
+from search_events_app.models import Event
+from search_events_app.services.api.api_response_processor import process_events
 
 
 class ApiService:

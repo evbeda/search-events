@@ -1,12 +1,14 @@
-from search_events_app.dto.dto_filter import DTOFilter
-from search_events_app.services.filters import (
+from search_events_app.dto import (
+    DTOFilter,
+    DTOApiServiceFilter,
+    DTODBServiceFilter,
+)
+from search_events_app.filters import (
     CountryFilter,
     FeatureFilterManager,
     LanguageFilter,
     OnlineFilter,
 )
-from search_events_app.dto.dto_api_service_filter import DTOApiServiceFilter
-from search_events_app.dto.dto_db_service_filter import DTODBServiceFilter
 
 
 class FilterManager:
