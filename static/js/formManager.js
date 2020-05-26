@@ -1,4 +1,4 @@
-const FormManager = (function() {
+const formManager = (function() {
 	
 	$('form').submit(function(e){ e.preventDefault(); });
 	function formatFormData(domId, array){
