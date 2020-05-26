@@ -33,3 +33,10 @@ class TestDbConnectionManager(TestCase):
 		count = mock_connect.call_count
 		self.assertEqual(count, 0)
 
+	def test_disconnect(self):
+		ConnectionManager.disconnect()
+		
+		connection = ConnectionManager.get_connection()
+
+		self.assertIsNone(connection)
+

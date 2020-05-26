@@ -23,3 +23,8 @@ class ConnectionManager:
     def get_connection(cls):
         if cls.connection:
             return cls.connection.cursor()
+
+    @classmethod
+    def disconnect(cls):
+        cls.connection.close()
+        cls.connection = None

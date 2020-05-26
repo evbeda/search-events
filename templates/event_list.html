@@ -7,8 +7,21 @@
         
     
     <nav class="navbar navbar-expand-lg blue-eb">
-        <img class="reduce" src="{% static "img/eventbrite_logo.png"%}">
-        <h1><div class="feed-header__title-top"> &nbsp; | CX Events Finder</div></h1>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img class="reduce" src="{% static "img/eventbrite_logo.png"%}">
+            <ul class="navbar-nav mr-auto">
+                <h1><div class="feed-header__title-top"> &nbsp; | CX Events Finder</div></h1>
+            </ul>
+            <form class="feed-header__title-top form-inline my-2 my-lg-0" method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="bg-transparent feed-header__title-top" type="submit" id="basic-addon1">
+                    <div class="row">
+                        <i class="material-icons">logout</i>
+                        <div class="mt-1">Logout</div>
+                    </div>
+                </button>
+            </form>
+        </div>
     </nav>
     {% if error %}
         {% include "modal_error.html" %}

@@ -3,9 +3,9 @@ from django.shortcuts import (
     render,
     redirect
 )
-from django.urls import reverse
 
 from search_events_app.services.db.db_service import DBService
+from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services import (
     FilterManager,
     StateManager,
@@ -18,17 +18,20 @@ from search_events_app.models import (
 )
 
 
+
 class EventListView(ListView):
     template_name = 'event_list.html'
 
     def get(self, request):
+        if not ConnectionManager.get_connection():
+            return redirect('login')
         try:
             return super().get(request)
         except PrestoError as e:
             StateManager.reset_events()
             return render(request, 'event_list.html', {'error': e.message})
         except Exception as e:
-            return redirect(reverse('login'))
+            return redirect('login')
 
     def get_queryset(self):
         FilterManager.apply_filters(self.request)
