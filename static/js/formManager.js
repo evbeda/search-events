@@ -1,7 +1,7 @@
 const FormManager = (function() {
 	
 	$('form').submit(function(e){ e.preventDefault(); });
-	
+	var loader = document.createElement("div");
 	function formatFormData(domId, array){
 		var selected = [];
 		for (var option of document.getElementById('feature').options) {
@@ -13,6 +13,8 @@ const FormManager = (function() {
 		if(!data.length && elem.value != "") return false;
 		elem.value = data && data[0] ? data[0].name : "";
 		document.getElementById("country-form").submit();
+		document.getElementById("table-events").style.display = "none";
+		document.getElementById("spin").style.display = "block";
 	}
 
 	return {
