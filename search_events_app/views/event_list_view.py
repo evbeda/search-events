@@ -18,7 +18,6 @@ from search_events_app.models import (
 )
 
 
-
 class EventListView(ListView):
     template_name = 'event_list.html'
 

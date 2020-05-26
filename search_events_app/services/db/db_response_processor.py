@@ -14,6 +14,7 @@ def process_events(data):
                 'country': get_country(item),
                 'start_date': item[7],
                 'language': get_language(item),
+                'admin_url': get_admin_url(item),
             }
             events.append(event_dict)
     return events
@@ -42,3 +43,8 @@ def get_organizer(item):
     if item[5]:
         return item[5]
     return None
+
+
+def get_admin_url(item):
+    url = "https://www.eventbrite.com/myevent?slow_load=1&eid=" + f'{item[0]}'
+    return url
