@@ -49,9 +49,11 @@ class TestEvent(TestCase):
             'features': ['EB Studio', 'Facebook'],
             'language': 'English',
             'category': 'Music',
-            'format_': 'Festival'
+            'format_': 'Festival',
+            'admin_url': 'https://www.eventbrite.com/myevent?slow_load=1&eid=99894936444',
         }
         event = Event(**dict_event)
         self.assertEqual(event.language, 'English')
         self.assertEqual(event.category, 'Music')
         self.assertEqual(event.format, 'Festival')
+        self.assertEqual(event.admin_url, 'https://www.eventbrite.com/myevent?slow_load=1&eid=99894936444')
