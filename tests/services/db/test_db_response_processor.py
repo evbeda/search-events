@@ -45,7 +45,7 @@ class TestDBResponseProcessor(TestCase):
 			'format_': 'Meeting or Networking Event',
 			'organizer': 'Adam Kurtz Org',
 			'country': 'United States',
-            'admin_url': 'https://www.eventbrite.com/myevent?slow_load=1&eid=99894936444',
+			'admin_url': 'https://www.eventbrite.com/myevent?slow_load=1&eid=99894936444',
 		}
 
 		self.assertIsInstance(result[0], dict)
