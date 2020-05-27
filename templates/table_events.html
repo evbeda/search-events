@@ -16,6 +16,7 @@
                 <th>Country</th>
                 <th>Start date</th>
                 <th>Language</th>
+                <th>Admin site</th>
             </tr>
         </thead>
         
@@ -36,6 +37,11 @@
                             <td>{{ event.start_date|safe }}</td>
                             <td class="text-center">
                                 <img src="{% static "img/flags/"|add:event.language|add:".svg" %}" class="flag">
+                            </td>
+                            <td class="text-center">
+                                <a class="text-blue" href="{{event.admin_url}}" target="_blank">
+                                <u>Link</u> 
+                            </a>
                             </td>
                         </tr>
                     {% endfor %}
