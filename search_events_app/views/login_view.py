@@ -23,4 +23,3 @@ def login(request):
             return render(request, 'login.html', {'error': e.message})
         except PrestoError as e:
             return render(request, 'login.html', {'error': e.message})
-

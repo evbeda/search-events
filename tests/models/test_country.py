@@ -18,6 +18,10 @@ class TestCountry(TestCase):
     def test_country_str(self):
         self.assertEqual(self.country.__str__(), 'Argentina')
 
+    def test_verbose_name_plural(self):
+        verbose_name_plural = self.country._meta.verbose_name_plural
+        self.assertEqual(verbose_name_plural, 'Countries')
+
     @patch.object(Country.objects, 'all')
     def test_get_context(self, mock_objects):
         countries = Country.objects.filter(Q(name='Peru') | Q(name='Spain'))

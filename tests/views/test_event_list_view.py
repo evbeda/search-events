@@ -14,6 +14,7 @@ from search_events_app.models import (
 	Feature,
 	Format,
 	Language,
+	Category,
 )
 from search_events_app.services.db.db_service import DBService
 from search_events_app.services.db.db_connection_manager import ConnectionManager
@@ -30,12 +31,13 @@ class TestEventListView(TestCase):
 	def setUp(self):
 		self.events = [Event(name='Evento1', url='www.google.com')]
 		StateManager.reset_events()
-
-	@patch.object(Country,'get_context')
+	
+	@patch.object(Category, 'get_context')
+	@patch.object(Country, 'get_context')
 	@patch.object(Language, 'get_context')
 	@patch.object(Feature, 'get_context')
 	@patch.object(Format, 'get_context')
-	def test_get_context_data(self, mock_formats, mock_features, mock_languages, mock_countries):
+	def test_get_context_data(self, mock_formats, mock_features, mock_languages, mock_countries, mock_categories):
 		arr_formats = [
 				{
 					'code': 'ST',
@@ -60,6 +62,12 @@ class TestEventListView(TestCase):
 					'name': 'Peru',
 				},
 		]
+		arr_categories = [
+			{
+				'code': 'FD',
+				'name': 'Food & Drink',
+			}
+		]
 		mock_formats.return_value = {
 			'formats': arr_formats
 		}
@@ -72,6 +80,9 @@ class TestEventListView(TestCase):
 		mock_countries.return_value = {
 			'countries': arr_countries
 		}
+		mock_categories.return_value = {
+			'categories': arr_categories
+		}
 		view = EventListView()
 		kwargs = {
 			'object_list': []
@@ -81,6 +92,7 @@ class TestEventListView(TestCase):
 		self.assertEqual(result['features'], arr_features)
 		self.assertEqual(result['languages'], arr_languages)
 		self.assertEqual(result['countries'], arr_countries)
+		self.assertEqual(result['categories'], arr_categories)
 
 	@patch.object(FilterManager, 'apply_filters')
 	@patch.object(FilterManager, 'filter_has_changed', return_value=False)
@@ -93,7 +105,7 @@ class TestEventListView(TestCase):
 
 	@patch.object(StateManager, 'set_events')
 	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
-	@patch.object(FilterManager,'apply_filters')
+	@patch.object(FilterManager, 'apply_filters')
 	@patch.object(FilterManager, 'filter_has_changed', return_value=True)
 	def test_get_queryset_without_cached_events_and_filter_with_changes(
 			self,
@@ -202,6 +214,3 @@ class TestEventListView(TestCase):
 		self.assertEqual(count_calls, 1)
 		self.assertEqual(args_calls[1], 'event_list.html')
 		self.assertEqual(args_calls[2]['error'], presto_error.message)
-
-
-

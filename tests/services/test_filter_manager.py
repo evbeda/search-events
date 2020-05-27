@@ -16,6 +16,7 @@ from search_events_app.filters import (
     FormatFilter,
     LanguageFilter,
     OnlineFilter,
+    CategoryFilter,
 )
 
 
@@ -38,7 +39,7 @@ class TestFilterManager(TestCase):
         self.assertTrue(FilterManager.filter_has_changed())
 
     def test_filter_has_changed_false(self):
-        FilterManager.latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter()]
+        FilterManager.latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), CategoryFilter()]
 
         self.assertFalse(FilterManager.filter_has_changed())
 

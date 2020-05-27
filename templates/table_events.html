@@ -9,6 +9,7 @@
     <table class="table table-hover table-striped" >
         <thead class="thead-blue-eb text-white">
             <tr>
+                <th>Admin site</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Format</th>
@@ -16,7 +17,7 @@
                 <th>Country</th>
                 <th>Start date</th>
                 <th>Language</th>
-                <th>Admin site</th>
+
             </tr>
         </thead>
         
@@ -25,6 +26,11 @@
                 {% paginate object_list %}
                     {% for event in object_list %}
                         <tr>
+                            <td class="text">
+                                <a class="text-orange" href="{{event.admin_url}}" target="_blank">
+                                <p>Open Dashboard</p> 
+                            </a>
+                            </td>
                             <td style="word-wrap: break-word; max-width: 300px;">
                                 <a class="text-orange" href="{{ event.url }}" target="_blank">
                                     {{ event.name|safe }}
@@ -38,11 +44,7 @@
                             <td class="text-center">
                                 <img src="{% static "img/flags/"|add:event.language|add:".svg" %}" class="flag">
                             </td>
-                            <td class="text-center">
-                                <a class="text-blue" href="{{event.admin_url}}" target="_blank">
-                                <u>Link</u> 
-                            </a>
-                            </td>
+
                         </tr>
                     {% endfor %}
                 {% get_pages %}
