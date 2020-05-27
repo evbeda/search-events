@@ -134,3 +134,20 @@ class TestDBResponseProcessor(TestCase):
 		result = get_organizer(item)
 
 		self.assertEqual(result, 'Adam Kurtz Organization')
+
+	def test_none_organizer(self):
+		item = (
+			99894936444,
+			'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
+			'Business & Professional',
+			'Meeting or Networking Event',
+			None,
+			None,
+			'ZX',
+			'2020-12-16',
+			'en_US'
+		)
+
+		result = get_organizer(item)
+
+		self.assertIsNone(result)

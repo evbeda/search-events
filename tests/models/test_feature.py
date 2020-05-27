@@ -6,7 +6,7 @@ from django.test import TestCase
 from search_events_app.models import Feature
 from search_events_app.utils import FeatureCodes
 
-    
+
 class TestFeature(TestCase):
 
     def setUp(self):
@@ -14,6 +14,9 @@ class TestFeature(TestCase):
 
     def test_feature_model(self):
         self.assertEqual(self.feature.name, 'Website Widgets')
+
+    def test_feature_str(self):
+        self.assertEqual(self.feature.__str__(), 'Website Widgets')
 
     def test_verbose_name_plural(self):
         verbose_name_plural = self.feature._meta.verbose_name_plural
