@@ -3,6 +3,7 @@ from pyhive import presto
 
 class ConnectionManager:
     connection = None
+    username = None
     url = 'presto-tableau.prod.dataf.eb'
 
     @classmethod
@@ -17,6 +18,7 @@ class ConnectionManager:
             protocol='https',
         )
         cls.connection = connection
+        cls.username = user_okta
         return cls.connection.cursor()
 
     @classmethod

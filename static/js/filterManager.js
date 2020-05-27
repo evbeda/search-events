@@ -1,17 +1,19 @@
 const FilterManager = (function() {
 
     function reloadLastFilters() {
-        const filters = ["country", "online", "language", "format", "category"];
-
-        filters.forEach(function(filter) {
-            const lastValue = querySt(filter);
-            if(lastValue) document.getElementById(filter).value = lastValue;
-        });
-
-        validateOnlineConstraint();
-
-        features = querySt("feature");
-        if(features) selectLastFilters("feature", features);
+        try {
+            const filters = ["country", "online", "language", "format", "category"];
+    
+            filters.forEach(function(filter) {
+                const lastValue = querySt(filter);
+                if(lastValue) document.getElementById(filter).value = lastValue;
+            });
+    
+            validateOnlineConstraint();
+    
+            features = querySt("feature");
+            if(features) selectLastFilters("feature", features);
+        } catch(e) {}
     }
 
     function validateOnlineConstraint() {
