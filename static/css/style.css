@@ -64,7 +64,8 @@ input[type=submit] {
 
 
 .feed-header__title-top {
-  color:#f05537
+  color:#f05537;
+  border: none;
 }
 
 .blue-eb{
@@ -132,4 +133,14 @@ input::placeholder {
 }
 .bootstrap-select:not(.input-group-btn), .bootstrap-select[class*="col-"] {
   padding: 1 !important;
+}
+
+#spin{
+  display: none;
+  text-align: center;
+}
+#spin-border{
+  width: 4rem;
+  height: 4rem;
+  color:  #f05537;
 }

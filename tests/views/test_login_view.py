@@ -83,4 +83,3 @@ class TestLoginView(TestCase):
         self.assertEqual(count_calls, 1)
         self.assertEqual(args_calls[1], 'login.html')
         self.assertEqual(args_calls[2]['error'], presto_error.message)
-

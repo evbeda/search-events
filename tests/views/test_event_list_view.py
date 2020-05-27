@@ -15,6 +15,7 @@ from search_events_app.models import (
 	Language,
 )
 from search_events_app.services.db.db_service import DBService
+from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services import (
 	FilterManager,
 	StateManager,
@@ -154,7 +155,7 @@ class TestEventListView(TestCase):
 		self.assertEqual(result, result_super)
 
 	@patch("search_events_app.views.event_list_view.ListView.get")
-	def test_get_redirects_login(self, mock_super_get):
+	def test_get_with_exception_redirects_login(self, mock_super_get):
 		view = EventListView()
 		mock_request = MagicMock()
 		mock_super_get.side_effect = Exception()
@@ -162,6 +163,17 @@ class TestEventListView(TestCase):
 		response.client = Client()
 
 		self.assertRedirects(response,'/login/')
+
+	@patch.object(ConnectionManager, 'get_connection')
+	def test_get_without_connection_redirects_login(self, mock_get_connection):
+		mock_get_connection.return_value = None
+
+		view = EventListView()
+		mock_request = MagicMock()
+		response = view.get(mock_request)
+		response.client = Client()
+
+		self.assertRedirects(response, '/login/')
 
 	@patch("search_events_app.views.event_list_view.render")
 	@patch("search_events_app.views.event_list_view.ListView.get")
