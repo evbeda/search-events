@@ -12,6 +12,7 @@ from search_events_app.models import (
 	Country,
 	Event,
 	Feature,
+	Format,
 	Language,
 )
 from search_events_app.services.db.db_service import DBService
@@ -33,7 +34,14 @@ class TestEventListView(TestCase):
 	@patch.object(Country,'get_context')
 	@patch.object(Language, 'get_context')
 	@patch.object(Feature, 'get_context')
-	def test_get_context_data(self, mock_features, mock_languages, mock_countries):
+	@patch.object(Format, 'get_context')
+	def test_get_context_data(self, mock_formats, mock_features, mock_languages, mock_countries):
+		arr_formats = [
+				{
+					'code': 'ST',
+					'name': 'Seminar or Talk',
+				},
+			]
 		arr_features = [
 				{
 					'code': 'RS',
@@ -52,6 +60,9 @@ class TestEventListView(TestCase):
 					'name': 'Peru',
 				},
 		]
+		mock_formats.return_value = {
+			'formats': arr_formats
+		}
 		mock_features.return_value = {
 			'features': arr_features
 		}
@@ -66,6 +77,7 @@ class TestEventListView(TestCase):
 			'object_list': []
 		}
 		result = view.get_context_data(**kwargs)
+		self.assertEqual(result['formats'], arr_formats)
 		self.assertEqual(result['features'], arr_features)
 		self.assertEqual(result['languages'], arr_languages)
 		self.assertEqual(result['countries'], arr_countries)

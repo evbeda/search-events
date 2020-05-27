@@ -1,7 +1,7 @@
 const FilterManager = (function() {
 
     function reloadLastFilters() {
-        const filters = ["country", "online", "language"];
+        const filters = ["country", "online", "language", "format"];
 
         filters.forEach(function(filter) {
             const lastValue = querySt(filter);
@@ -38,7 +38,7 @@ const FilterManager = (function() {
     
     function clearFilters() {
         const show_ids = ["divCountry"];
-        const clear_ids = ["online", "language", "country"];
+        const clear_ids = ["online", "language", "country", "format"];
         clear_ids.forEach(function (id) {
              filter = document.getElementById(id);
              filter.value = "";

@@ -6,7 +6,7 @@ from search_events_app.models import Country
 from search_events_app.filters import CountryFilter
 
 
-class TestCountryFilters(TestCase):
+class TestCountryFilter(TestCase):
 
     def setUp(self):
         self.country_filter = CountryFilter()
@@ -67,4 +67,3 @@ class TestCountryFilters(TestCase):
         self.assertIsNone(self.country_filter.get_request_value())
         self.assertEqual(self.country_filter.get_join_query(), [''])
         self.assertEqual(self.country_filter.get_where_query(), '')
-
