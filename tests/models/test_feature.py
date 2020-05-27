@@ -15,6 +15,10 @@ class TestFeature(TestCase):
     def test_feature_model(self):
         self.assertEqual(self.feature.name, 'Website Widgets')
 
+    def test_verbose_name_plural(self):
+        verbose_name_plural = self.feature._meta.verbose_name_plural
+        self.assertEqual(verbose_name_plural, 'Features')
+
     @patch.object(Feature.objects, 'all')
     def test_get_context(self, mock_objects):
         features = Feature.objects.filter(Q(code=FeatureCodes.add_ons) | Q(code=FeatureCodes.reserved_seating))
