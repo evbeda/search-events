@@ -51,4 +51,6 @@ class EventListView(ListView):
         for class_ in classes:
             context.update(class_.get_context())
 
+        context['username'] = ConnectionManager.username
+
         return context

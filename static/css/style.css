@@ -144,3 +144,12 @@ input::placeholder {
   height: 4rem;
   color:  #f05537;
 }
+
+.dropdown-user {
+  color: #f05537;
+}
+
+.dropdown-user:hover {
+  color: #f05537;
+  text-decoration:none;
+}
