@@ -41,7 +41,7 @@
                         {% endif %}
                         </div>
 						<div class="d-flex justify-content-center mt-3 login_container">
-				 	        <button id="login_btn" type="submit" name="button" class="btn login_btn" onclick="loginManager.login();">Login</button>
+				 	        <button id="login_btn" type="submit" name="button" class="btn login_btn" onclick="this.form.submit();loginManager.login(); this.disabled=true;">Login</button>
 						</div>
 					</form>
 			    </div>
