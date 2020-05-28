@@ -51,7 +51,7 @@
                 </span>
             </div>
             
-            <select id="feature" class="selectpicker custom-select h-100" multiple data-selected-text-format="count > 2" data-live-search="true" title="Select Features">
+            <select id="feature" class="selectpicker custom-select h-100" multiple data-selected-text-format="count > 2" data-live-search="true" title="Any Feature">
                 {% for feature in features %}
                 <option value="{{ feature.code }}">{{ feature.name }}</option>
                 {% endfor %}
@@ -86,7 +86,6 @@
                 {% endfor %}
             </select>
         </div>
-
     </div>
 
     
