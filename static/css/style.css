@@ -150,6 +150,7 @@ input::placeholder {
 }
 
 .dropdown-user:hover {
+  cursor: pointer;
   color: #f05537;
   text-decoration:none;
 }

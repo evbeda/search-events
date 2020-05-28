@@ -1,6 +1,6 @@
 <form autocomplete="off" id="country-form">
     <div class="row">
-        <div class="input-group col-sm-3">
+        <div class="input-group col-sm-3 col-xs-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
                     <i class="material-icons">location_on</i>
@@ -14,7 +14,7 @@
             </select>
         </div>
         
-        <div class="input-group col-sm-3">
+        <div class="input-group col-sm-3 col-xs-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon2">
                     <i class="material-icons">translate</i>
@@ -29,7 +29,7 @@
             </select>
         </div>
         
-        <div id="divCountry" class="input-group col-sm-3">
+        <div id="divCountry" class="input-group col-sm-3 col-xs-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
                     <i class="material-icons">public</i>
@@ -44,7 +44,7 @@
     <input type="text" hidden id="textFeature" name="feature">
     
     <div class="row mt-2">
-        <div class="input-group col-sm-3">
+        <div class="input-group col-sm-3 col-xs-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
                     <i class="material-icons">dns</i>
@@ -57,7 +57,7 @@
                 {% endfor %}
             </select>    
         </div>
-        <div class="input-group col-sm-3" >
+        <div class="input-group col-sm-3 col-xs-3" >
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon2">
                     <i class="material-icons">view_module</i>
@@ -72,7 +72,7 @@
             </select>
         </div>
         
-        <div class="input-group col-sm-3">
+        <div class="input-group col-sm-3 col-xs-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon2">
                     <i class="material-icons">list</i>
@@ -90,11 +90,11 @@
 
     
     <div class="row mt-3">
-        <div class="col col-sm-3">
+        <div class="col col-sm-3 col-xs-3 ">
             <button class="btn orange-eb text-white" onclick="formManager.formatFormData('country', {{countries}});return false;">Search</button>
         </div>
         
-        <div class="col col-sm-9">
+        <div class="col col-sm-9 col-xs-9">
             <button type="button" class="clear-filter float-right" onclick="FilterManager.clearFilters();">Clear filters</button>
         </div>
     </div>
