@@ -46,4 +46,4 @@ def get_organizer(item):
 
 
 def get_admin_url(item):
-    return f'https://www.eventbrite.com/myevent?slow_load=1&eid={item[0]}'
+    return f'https://www.eventbrite.com/myevent?eid={item[0]}'

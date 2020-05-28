@@ -12,5 +12,3 @@ def logout(request):
         return redirect('login')
     else:
         raise SuspiciousOperation()
-
-
