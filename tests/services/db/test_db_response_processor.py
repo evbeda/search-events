@@ -45,11 +45,7 @@ class TestDBResponseProcessor(TestCase):
 			'format_': 'Meeting or Networking Event',
 			'organizer': 'Adam Kurtz Org',
 			'country': 'United States',
-<<<<<<< Updated upstream
 			'admin_url': 'https://www.eventbrite.com/myevent?eid=99894936444',
-=======
-			'admin_url': 'https://www.eventbrite.com/myevent?&eid=99894936444',
->>>>>>> Stashed changes
 		}
 
 		self.assertIsInstance(result[0], dict)
