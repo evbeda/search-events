@@ -10,20 +10,6 @@ import dj_database_url
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'PORT': '',
-    }
-}
-
-DB_FROM_ENV = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(DB_FROM_ENV)
-
-
 # Application definition
 
 MIDDLEWARE = [  # noqa
@@ -42,4 +28,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_prod')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
