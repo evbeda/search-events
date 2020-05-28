@@ -16,12 +16,7 @@ const formManager = (function() {
 		document.getElementById("spin").style.display = "block";
 	}
 
-	function logout() {
-		document.getElementById("logout-form").submit()
-	}
-
 	return {
 		formatFormData: formatFormData,
-		logout: logout
 	}
 })()
