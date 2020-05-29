@@ -9,13 +9,13 @@ class Migration(migrations.Migration):
 	operations = [
 		migrations.RunSQL(
 			'''
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('1', 'Add Ons', 'AO');
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('2', 'Bulk Attendee Upload', 'BA');
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('3', 'Custom Question', 'CQ');
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('4', 'EB Studio', 'ES');
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('5', 'Repeating Event', 'RE');
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('6', 'Reserved Seating', 'RS');
-				INSERT INTO main.search_events_app_feature (id, name, code) VALUES ('7', 'Website Widgets', 'WW');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('Add Ons', 'AO');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('Custom Question', 'CQ');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('Donation', 'DO');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('EB Studio', 'ES');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('Repeating Event', 'RE');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('Reserved Seating', 'RS');
+				INSERT INTO main.search_events_app_feature (name, code) VALUES ('Website Widgets', 'WW');
 			'''
 		)
 	]
