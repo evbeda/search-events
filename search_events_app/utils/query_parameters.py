@@ -31,7 +31,7 @@ class QueryParameters:
             WHERE is_valid = 'Y'
         ) AS f ON f.event_id = dw_event.event_id
         INNER JOIN (
-            SELECT event
+            SELECT event, SUM(is_donation) as donation
             FROM hive.eb.ticket_classes
             WHERE
             deleted='n'
