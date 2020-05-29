@@ -41,9 +41,10 @@
                             <td style="word-wrap: break-word; max-width: 150px;">{{ event.organizer|default:"None"|safe }}</td>
                             <td>{{ event.country|default:"Online"|safe }}</td>
                             <td>{{ event.start_date|safe }}</td>
-                            <td class="text-center">
+                            <td>{{ event.language }}</td>
+                            {% comment %} <td class="text-center">
                                 <img src="{% static "img/flags/"|add:event.language|add:".svg" %}" class="flag">
-                            </td>
+                            </td> {% endcomment %}
 
                         </tr>
                     {% endfor %}

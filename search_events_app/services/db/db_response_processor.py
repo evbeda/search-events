@@ -1,4 +1,7 @@
-from search_events_app.models import Country
+from search_events_app.models import (
+    Country,
+    Language,
+)
 
 
 def process_events(data):
@@ -29,8 +32,9 @@ def get_country(item):
 
 
 def get_language(item):
-    lang = item[8]
-    return lang.split('_')[0]
+    lang = item[8].split('_')[0]
+    language = Language.objects.get(code=lang)
+    return language.name
 
 
 def get_url(item):
