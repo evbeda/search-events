@@ -39,7 +39,7 @@ class TestDBResponseProcessor(TestCase):
 		expected_result = {
 			'name': 'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
 			'url': 'https://www.eventbrite.com/e/99894936444',
-			'language': 'en',
+			'language': 'English',
 			'start_date': '2020-12-16',
 			'category': 'Business & Professional',
 			'format_': 'Meeting or Networking Event',
@@ -100,7 +100,7 @@ class TestDBResponseProcessor(TestCase):
 
 		result = get_language(item)
 
-		self.assertEqual(result, "en")
+		self.assertEqual(result, "English")
 
 	def test_url(self):
 		item = (
