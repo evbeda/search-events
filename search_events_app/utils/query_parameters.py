@@ -30,6 +30,16 @@ class QueryParameters:
             FROM hive.dw.f_ticket_merchandise_purchase
             WHERE is_valid = 'Y'
         ) AS f ON f.event_id = dw_event.event_id
+        INNER JOIN (
+            SELECT event
+            FROM hive.eb.ticket_classes
+            WHERE
+            deleted='n'
+            AND end_sales > now()
+            AND (start_sales < now() OR start_sales IS NULL)
+            GROUP BY event
+            HAVING (SUM(quantity_total) > SUM(quantity_sold) OR SUM(quantity_total) = 0 OR SUM(is_donation) > 0)
+        ) AS ts ON ts.event = dw_event.event_id
     """
 
     constraints = """ 
