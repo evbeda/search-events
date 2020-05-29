@@ -1,11 +1,12 @@
 from search_events_app.filters.filter import Filter
 from search_events_app.filters.features import (
     AddOnsFilter,
+    CustomQuestionFilter,
+    DonationFilter,
+    GroupRegistrationFilter,
     RepeatingEventsFilter,
     ReservedSeatingFilter,
     WebsiteWidgetsFilter,
-    CustomQuestionFilter,
-    DonationFilter
 )
 
 
@@ -18,7 +19,8 @@ class FeatureFilterManager(Filter):
             WebsiteWidgetsFilter(),
             AddOnsFilter(),
             CustomQuestionFilter(),
-            DonationFilter()
+            DonationFilter(),
+            GroupRegistrationFilter()
         ]
 
     def apply_filter(self, request):
