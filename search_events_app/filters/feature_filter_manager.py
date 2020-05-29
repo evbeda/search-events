@@ -4,7 +4,8 @@ from search_events_app.filters.features import (
     RepeatingEventsFilter,
     ReservedSeatingFilter,
     WebsiteWidgetsFilter,
-    CustomQuestionFilter
+    CustomQuestionFilter,
+    DonationFilter
 )
 
 
@@ -16,7 +17,8 @@ class FeatureFilterManager(Filter):
             ReservedSeatingFilter(),
             WebsiteWidgetsFilter(),
             AddOnsFilter(),
-            CustomQuestionFilter()
+            CustomQuestionFilter(),
+            DonationFilter()
         ]
 
     def apply_filter(self, request):
