@@ -50,6 +50,7 @@ class QueryParameters:
                 AND now() +  interval '6' month
             AND dw_event.is_available = 'Y'
             AND dw_event.event_status = 'Live'
+            AND dw_event.is_private_event = 'N'
         """
     group_by = """
         GROUP BY dw_event.event_id,
