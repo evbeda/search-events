@@ -141,8 +141,8 @@ class TestDBResponseProcessor(TestCase):
 			'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
 			'Business & Professional',
 			'Meeting or Networking Event',
-			None,
-			None,
+			' ',
+			' ',
 			'ZX',
 			'2020-12-16',
 			'en_US'

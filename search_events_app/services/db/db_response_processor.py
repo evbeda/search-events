@@ -42,9 +42,9 @@ def get_url(item):
 
 
 def get_organizer(item):
-    if item[4]:
+    if item[4] and item[4].strip():
         return item[4]
-    if item[5]:
+    if item[5] and item[5].strip():
         return item[5]
     return None
 
