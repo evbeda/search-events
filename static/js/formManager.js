@@ -11,7 +11,8 @@ const formManager = (function() {
 		data = array.filter(e => e.name == elem.value);
 		if(!data.length && elem.value != "") return false;
 		elem.value = data && data[0] ? data[0].name : "";
-		document.getElementById("country-form").submit();
+		document.getElementById("filter-form").submit();
+		document.getElementById("filter-form").style.visibility = "hidden";
 		document.getElementById("table-events").style.display = "none";
 		document.getElementById("spin").style.display = "block";
 	}
