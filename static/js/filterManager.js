@@ -5,12 +5,13 @@ const FilterManager = (function() {
         "language": "en",
         "online": "",
         "format": "",
-        "category": ""
+        "category": "",
+        "price": ""
     }
     
     function reloadLastFilters() {
         try {
-            const filters = ["country", "online", "language", "format", "category"];
+            const filters = ["country", "online", "language", "format", "category", "price"];
             filters.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue != undefined){
@@ -57,7 +58,7 @@ const FilterManager = (function() {
     
     function clearFilters() {
         const show_ids = ["divCountry"];
-        const clear_ids = ["country", "online", "language", "format", "category"];
+        const clear_ids = ["country", "online", "language", "format", "category", "price"];
         clear_ids.forEach(function (id) {
              filter = document.getElementById(id);
              filter.value = FILTERS_BY_DEFAULT[id];

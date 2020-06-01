@@ -10,11 +10,12 @@ from search_events_app.filters import (
     FormatFilter,
     LanguageFilter,
     OnlineFilter,
+    PriceFilter,
 )
 
 
 class FilterManager:
-    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), FeatureFilterManager()]
+    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), FeatureFilterManager()]
 
     @classmethod
     def apply_filters(cls, request):
