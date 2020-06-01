@@ -14,7 +14,9 @@ const formManager = (function() {
 		document.getElementById("filter-form").submit();
 		document.getElementById("filter-form").style.visibility = "hidden";
 		document.getElementById("table-events").style.display = "none";
+		document.getElementById("divCountry").style.visibility = "hidden"
 		document.getElementById("spin").style.display = "block";
+
 	}
 
 	return {

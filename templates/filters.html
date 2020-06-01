@@ -24,11 +24,7 @@
             <select id="language" name="language" class="custom-select h-100" >
                 <option value="">Any language</option>
                 {% for language in languages %}
-                    {% if language.name != 'English' %}
-                        <option value={{ language.code }}>{{ language.name }}</option>
-                    {% else %}
-                        <option selected value={{ language.code }}>{{ language.name }}</option>
-                    {% endif %}
+                    <option value={{ language.code }}>{{ language.name }}</option>
                 {% endfor %}
             </select>
         </div>

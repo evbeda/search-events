@@ -1,12 +1,25 @@
 const FilterManager = (function() {
-
+    
+    const FILTERS_BY_DEFAULT = {
+        "country": "United States",
+        "language": "en",
+        "online": "",
+        "format": "",
+        "category": ""
+    }
+    
     function reloadLastFilters() {
         try {
             const filters = ["country", "online", "language", "format", "category"];
-    
             filters.forEach(function(filter) {
                 const lastValue = querySt(filter);
-                if(lastValue) document.getElementById(filter).value = lastValue;
+                if(lastValue != undefined){
+                    document.getElementById(filter).value = lastValue;
+                } 
+                else if (FILTERS_BY_DEFAULT[filter]) {
+                    document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter] ;
+                }
+
             });
     
             validateOnlineConstraint();
@@ -25,7 +38,11 @@ const FilterManager = (function() {
         const div = document.getElementById(divId);
         const input = document.getElementById(inputId);
         if(value == 'on') input.value = '';
+        const visibility = div.style.visibility
         div.style.visibility = value == 'on' ? 'hidden' : 'visible';
+        if(div.style.visibility != visibility && div.style.visibility== 'visible' && visibility){
+            input.value = FILTERS_BY_DEFAULT[inputId];
+        }
     }
     
     function selectLastFilters(domId, stringFilters) {
@@ -40,12 +57,12 @@ const FilterManager = (function() {
     
     function clearFilters() {
         const show_ids = ["divCountry"];
-        const clear_ids = ["online", "language", "country", "format", "category"];
+        const clear_ids = ["country", "online", "language", "format", "category"];
         clear_ids.forEach(function (id) {
              filter = document.getElementById(id);
-             filter.value = "";
+             filter.value = FILTERS_BY_DEFAULT[id];
         });
-    
+        
         show_ids.forEach(function(id) {
             filter = document.getElementById(id);
             filter.style.visibility = "visible";
@@ -67,9 +84,14 @@ const FilterManager = (function() {
         document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title;
     }
     
+    function getDefaultFilters(){
+        return FILTERS_BY_DEFAULT
+    }
+
     return {
         clearFilters: clearFilters,
         reloadLastFilters: reloadLastFilters,
-        toggleDisable: toggleDisable
+        toggleDisable: toggleDisable,
+        getDefaultFilters : getDefaultFilters
     }
 })()
