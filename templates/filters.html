@@ -7,7 +7,7 @@
                 </span>
             </div>
             
-            <select onchange="FilterManager.toggleDisable('divCountry', 'country', this.value);" id="online" name="online" class="custom-select h-100" id="inputGroupSelect01">
+            <select onchange="FilterManager.toggleDisable('divCountry', 'country', this.value);" id="online" name="online" class="custom-select h-100">
                 <option value="">Online &amp; Venue</option>
                 <option value="on">Events online</option>
                 <option value="off">Events with venue</option>
@@ -88,6 +88,21 @@
         </div>
     </div>
 
+    <div class="row mt-2">
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                    <i class="material-icons">location_on</i>
+                </span>
+            </div>
+            
+            <select id="price" name="price" class="custom-select h-100">
+                <option value="" selected>Any price</option>
+                <option value="free">Free events</option>
+                <option value="paid">Paid events</option>
+            </select>
+        </div>
+    </div>
     
     <div class="row mt-3">
         <div class="col col-sm-3 ">
