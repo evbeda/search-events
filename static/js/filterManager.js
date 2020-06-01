@@ -40,7 +40,7 @@ const FilterManager = (function() {
         if(value == 'on') input.value = '';
         const visibility = div.style.visibility
         div.style.visibility = value == 'on' ? 'hidden' : 'visible';
-        if(div.style.visibility != visibility && div.style.visibility== 'visible' && visibility){
+        if(div.style.visibility !== visibility && div.style.visibility === 'visible' && visibility){
             input.value = FILTERS_BY_DEFAULT[inputId];
         }
     }
