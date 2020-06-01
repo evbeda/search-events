@@ -136,12 +136,13 @@ input::placeholder {
 }
 
 #spin{
+  margin-top: 20%;
   display: none;
   text-align: center;
 }
 #spin-border{
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   color:  #f05537;
 }
 

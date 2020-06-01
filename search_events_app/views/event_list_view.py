@@ -14,6 +14,7 @@ from search_events_app.exceptions import PrestoError
 from search_events_app.models import (
     Category,
     Country,
+    Currency,
     Feature,
     Format,
     Language,
@@ -46,7 +47,7 @@ class EventListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        classes = [Country, Language, Feature, Format, Category]
+        classes = [Country, Language, Feature, Format, Category, Currency]
 
         for class_ in classes:
             context.update(class_.get_context())

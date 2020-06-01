@@ -6,6 +6,7 @@ from search_events_app.dto import (
 from search_events_app.filters import (
     CategoryFilter,
     CountryFilter,
+    CurrencyFilter,
     FeatureFilterManager,
     FormatFilter,
     LanguageFilter,
@@ -15,7 +16,7 @@ from search_events_app.filters import (
 
 
 class FilterManager:
-    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), FeatureFilterManager()]
+    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), CurrencyFilter(), FeatureFilterManager()]
 
     @classmethod
     def apply_filters(cls, request):

@@ -12,9 +12,8 @@ const formManager = (function() {
 		if(!data.length && elem.value != "") return false;
 		elem.value = data && data[0] ? data[0].name : "";
 		document.getElementById("filter-form").submit();
-		document.getElementById("filter-form").style.visibility = "hidden";
+		document.getElementById("filter-form").style.display = "none";
 		document.getElementById("table-events").style.display = "none";
-		document.getElementById("divCountry").style.visibility = "hidden"
 		document.getElementById("spin").style.display = "block";
 
 	}

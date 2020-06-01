@@ -6,12 +6,13 @@ const FilterManager = (function() {
         "online": "",
         "format": "",
         "category": "",
-        "price": ""
+        "price": "",
+        "currency": "USD",
     }
     
     function reloadLastFilters() {
         try {
-            const filters = ["country", "online", "language", "format", "category", "price"];
+            const filters = ["country", "online", "language", "format", "category", "price", "currency"];
             filters.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue != undefined){
@@ -24,6 +25,7 @@ const FilterManager = (function() {
             });
     
             validateOnlineConstraint();
+            validateFreeConstraint();
     
             features = querySt("feature");
             if(features) selectLastFilters("feature", features);
@@ -32,15 +34,20 @@ const FilterManager = (function() {
 
     function validateOnlineConstraint() {
         const online_dom = document.getElementById("online");
-        if (online_dom.value == "on") toggleDisable("divCountry", "country", online_dom.value);
+        if (online_dom.value == "on") toggleDisable("divCountry", "country", online_dom.value, 'on');
     }
 
-    function toggleDisable(divId, inputId, value) {
+    function validateFreeConstraint() {
+        const price_dom = document.getElementById("price");
+        if (price_dom.value == "free") toggleDisable("divCurrency", "currency", price_dom.value, 'free');
+    }
+
+    function toggleDisable(divId, inputId, value, valueToHide) {
         const div = document.getElementById(divId);
         const input = document.getElementById(inputId);
-        if(value == 'on') input.value = '';
+        if(value == valueToHide) input.value = '';
         const visibility = div.style.visibility
-        div.style.visibility = value == 'on' ? 'hidden' : 'visible';
+        div.style.visibility = value == valueToHide ? 'hidden' : 'visible';
         if(div.style.visibility !== visibility && div.style.visibility === 'visible' && visibility){
             input.value = FILTERS_BY_DEFAULT[inputId];
         }
@@ -57,8 +64,8 @@ const FilterManager = (function() {
     }
     
     function clearFilters() {
-        const show_ids = ["divCountry"];
-        const clear_ids = ["country", "online", "language", "format", "category", "price"];
+        const show_ids = ["divCountry", "divCurrency"];
+        const clear_ids = ["country", "online", "language", "format", "category", "price", "currency"];
         clear_ids.forEach(function (id) {
              filter = document.getElementById(id);
              filter.value = FILTERS_BY_DEFAULT[id];
