@@ -8,11 +8,12 @@ const FilterManager = (function() {
         "category": "",
         "price": "",
         "currency": "USD",
+        "city": ""
     }
     
     function reloadLastFilters() {
         try {
-            const filters = ["country", "online", "language", "format", "category", "price", "currency"];
+            const filters = ["country", "online", "language", "format", "category", "price", "currency", "city"];
             filters.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue != undefined){
@@ -34,22 +35,26 @@ const FilterManager = (function() {
 
     function validateOnlineConstraint() {
         const online_dom = document.getElementById("online");
-        if (online_dom.value == "on") toggleDisable("divCountry", "country", online_dom.value, 'on');
+        if (online_dom.value == "on") toggleDisable(["divCountry", "divCity"], ["country", "city"], online_dom.value, 'on');
     }
 
     function validateFreeConstraint() {
         const price_dom = document.getElementById("price");
-        if (price_dom.value == "free") toggleDisable("divCurrency", "currency", price_dom.value, 'free');
+        if (price_dom.value == "free") toggleDisable(["divCurrency"], ["currency"], price_dom.value, 'free');
     }
 
-    function toggleDisable(divId, inputId, value, valueToHide) {
-        const div = document.getElementById(divId);
-        const input = document.getElementById(inputId);
-        if(value == valueToHide) input.value = '';
-        const visibility = div.style.visibility
-        div.style.visibility = value == valueToHide ? 'hidden' : 'visible';
-        if(div.style.visibility !== visibility && div.style.visibility === 'visible' && visibility){
-            input.value = FILTERS_BY_DEFAULT[inputId];
+    function toggleDisable(divIds, inputIds, value, valueToHide) {
+        for(let i = 0; i < divIds.length; i++) {
+            const divId = divIds[i];
+            const div = document.getElementById(divId);
+            const visibility = div.style.visibility
+            div.style.visibility = value == valueToHide ? 'hidden' : 'visible';
+            if(div.style.visibility !== visibility && div.style.visibility === 'visible' && visibility){
+                const inputId = inputIds[i]
+                const input = document.getElementById(inputId);
+                if(value == valueToHide) input.value = '';
+                input.value = FILTERS_BY_DEFAULT[inputId];
+            }
         }
     }
     
@@ -64,8 +69,8 @@ const FilterManager = (function() {
     }
     
     function clearFilters() {
-        const show_ids = ["divCountry", "divCurrency"];
-        const clear_ids = ["country", "online", "language", "format", "category", "price", "currency"];
+        const show_ids = ["divCountry", "divCurrency", "divCity"];
+        const clear_ids = ["country", "online", "language", "format", "category", "price", "currency", "city"];
         clear_ids.forEach(function (id) {
              filter = document.getElementById(id);
              filter.value = FILTERS_BY_DEFAULT[id];

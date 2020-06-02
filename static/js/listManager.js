@@ -1,6 +1,6 @@
 const ListManager = (function() {
 
-    let arr, element;
+    let countries, cities, element;
     let currentFocus = -1;
 
     function addActive(x) {
@@ -41,16 +41,24 @@ const ListManager = (function() {
         return currentFocus;
     }
 
-    function getArr() {
-        return arr;
+    function getCountries() {
+        return countries;
+    }
+    
+    function getCities(country) {
+        return cities.filter(e => e.country == country);
     }
 
     function getElement() {
         return element;
     }
 
-    function setArr(value) {
-        arr = value;
+    function setCountries(value) {
+        countries = value;
+    }
+    
+    function setCities(value) {
+        cities = value;
     }
 
     function setElement(value) {
@@ -64,8 +72,10 @@ const ListManager = (function() {
         incrementCurrentFocus: incrementCurrentFocus,
         decrementCurrentFocus: decrementCurrentFocus,
         getCurrentFocus: getCurrentFocus,
-        getArr: getArr,
-        setArr: setArr,
+        getCountries: getCountries,
+        getCities: getCities,
+        setCountries: setCountries,
+        setCities: setCities,
         getElement: getElement,
         setElement: setElement
     }

@@ -30,11 +30,11 @@ class TestCountry(TestCase):
         expected_result = {
             'countries': [
                 {
-                    'alpha2Code': 'PE',
+                    'code': 'PE',
                     'name': 'Peru',
                 },
                 {
-                    'alpha2Code': 'ES',
+                    'code': 'ES',
                     'name': 'Spain',
                 }
             ]
