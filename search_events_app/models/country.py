@@ -37,7 +37,7 @@ class Country(models.Model, GetContextMixin):
         return {
             'countries': [
                 {
-                    'alpha2Code': country.alpha_2_code,
+                    'code': country.alpha_2_code,
                     'name': country.name,
                 } for country in countries
             ]
