@@ -1,7 +1,9 @@
 from django.core.exceptions import ObjectDoesNotExist
 
-from search_events_app.models import City
-from search_events_app.models import Country
+from search_events_app.models import (
+    City,
+    Country,
+)
 from search_events_app.filters.filter import Filter
 
 
