@@ -1,9 +1,9 @@
-from search_events_app.filters.features.eb_studio_filter import EBStudioFilter
 from search_events_app.filters.filter import Filter
 from search_events_app.filters.features import (
     AddOnsFilter,
     CustomQuestionFilter,
     DonationFilter,
+    EBStudioFilter,
     GroupRegistrationFilter,
     RepeatingEventsFilter,
     ReservedSeatingFilter,

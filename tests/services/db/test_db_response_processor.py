@@ -3,6 +3,7 @@ from django.test import TestCase
 from search_events_app.services.db.db_response_processor import (
 	process_events,
 	get_country,
+	get_eb_studio_url,
 	get_language,
 	get_organizer,
 	get_url,
@@ -21,7 +22,8 @@ class TestDBResponseProcessor(TestCase):
 				'Adam Kurtz Org',
 				'US',
 				'2020-12-16',
-				'en_US'
+				'en_US',
+				None
 			),
 			(
 				104429836452,
@@ -32,7 +34,8 @@ class TestDBResponseProcessor(TestCase):
 				'Mia Discenza Org',
 				None,
 				'2020-05-16',
-				'en_US'
+				'en_US',
+				'test.com'
 			)
 		]
 		result = process_events(mock_db_response)
@@ -46,6 +49,7 @@ class TestDBResponseProcessor(TestCase):
 			'organizer': 'Adam Kurtz Org',
 			'country': 'United States',
 			'admin_url': 'https://www.eventbrite.com/myevent?eid=99894936444',
+			'eb_studio_url': None,
 		}
 
 		self.assertIsInstance(result[0], dict)
@@ -149,5 +153,41 @@ class TestDBResponseProcessor(TestCase):
 		)
 
 		result = get_organizer(item)
+
+		self.assertIsNone(result)
+
+	def test_get_eb_studio_url(self):
+		item = (
+			99894936444,
+			'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
+			'Business & Professional',
+			'Meeting or Networking Event',
+			' ',
+			' ',
+			'ZX',
+			'2020-12-16',
+			'en_US',
+			'test.com',
+		)
+
+		result = get_eb_studio_url(item)
+
+		self.assertEqual(result, 'https://test.com')
+
+	def test_get_none_eb_studio_url(self):
+		item = (
+			99894936444,
+			'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
+			'Business & Professional',
+			'Meeting or Networking Event',
+			' ',
+			' ',
+			'ZX',
+			'2020-12-16',
+			'en_US',
+			None,
+		)
+
+		result = get_eb_studio_url(item)
 
 		self.assertIsNone(result)
