@@ -30,12 +30,12 @@ class TestCurrency(TestCase):
         expected_result = {
             'currencies': [
                 {
-                    'code': 'ARS',
-                    'name': 'Argentine Peso',
-                },
-                {
                     'code': 'USD',
                     'name': 'United States Dollar',
+                },
+                {
+                    'code': 'ARS',
+                    'name': 'Argentine Peso',
                 },
             ]
         }
