@@ -26,15 +26,15 @@ input[type=submit] {
   color: #fff;
 }
 .autocomplete-items {
-    width: 95%;
+    width: 90%;
     position: absolute;
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
     z-index: 99;
     top: 100%;
-    left: 0%;
-    right: 5%;
+    left: 5%;
+    right: 0%;
 }
 .autocomplete-items div {
   padding: 10px;
