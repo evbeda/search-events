@@ -48,24 +48,9 @@
                     </span>
                 </div>
                 <div class="autocomplete" >
-                        <input class="form-control" id="city" type="text" onkeydown="filterCriteria.filterCity({{cities}}, this);" name="city" placeholder="City" >
+                        <input class="form-control" id="city" type="text" onkeydown="filterCriteria.filterCity({{cities}}, this);" name="city" placeholder="State" >
                 </div>
             </div>
-
-            {% comment %} <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon2">
-                        <i class="material-icons">translate</i>
-                    </span>
-                </div>
-                
-                <select id="city" name="city" class="custom-select h-100" >
-                    <option value="">Any city</option>
-                    {% for city in cities %}
-                        <option value={{ city.code }}>{{ city.name }}</option>
-                    {% endfor %}
-                </select>
-            </div> {% endcomment %}
 
         </div>
         
