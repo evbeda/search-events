@@ -49,7 +49,15 @@ class TestPriceFilter(TestCase):
         
         self.assertEqual(self.price_filter.get_join_query(), [''])
         self.assertEqual(self.price_filter.get_where_query(), expected_where_query)
+    
+    def test_price_filter_info_with_option_selected_paid_event(self):
+        self.price_filter.value = 'paid event'
 
+        expected_where_query = " AND (dw_event.event_paid_type = 'paid event' OR dw_event.event_paid_type = 'mixed event') "
+        
+        self.assertEqual(self.price_filter.get_join_query(), [''])
+        self.assertEqual(self.price_filter.get_where_query(), expected_where_query)
+    
     def test_price_filter_info_without_option_selected(self):
         self.price_filter.value = None
 
