@@ -30,33 +30,31 @@
                 </select>
             </div>
             
-            <div id="divCountry" class="input-group col-sm-3">
+            <div id="divCountry" class="input-group col-sm-3 w-100">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">
                         <i class="material-icons">public</i>
                     </span>
                 </div>
-                <div class="autocomplete" >
-                        <input class="form-control" id="country" type="text" onkeydown="filterCriteria.filterCountry({{countries}}, this);" name="country" placeholder="Country" >
-                </div>
+
+                <input class="autocomplete form-control" id="country" type="text" onkeydown="filterCriteria.filterCountry({{countries}}, this);" name="country" placeholder="Country" >
             </div>
 
-            <div id="divCity" class="input-group col-sm-3">
+            <div id="divCity" class="input-group col-sm-3 w-100">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">
                         <i class="material-icons">location_city</i>
                     </span>
                 </div>
-                <div class="autocomplete" >
-                        <input class="form-control" id="city" type="text" onkeydown="filterCriteria.filterCity({{cities}}, this);" name="city" placeholder="State" >
-                </div>
+                
+                <input class="autocomplete form-control h-100" id="city" type="text" onkeydown="filterCriteria.filterCity({{cities}}, this);" name="city" placeholder="State" >
             </div>
-
         </div>
         
         <input type="text" hidden id="textFeature" name="feature">
         
         <div class="row mt-2">
+            
             <div class="input-group col-sm-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">
@@ -70,6 +68,7 @@
                     {% endfor %}
                 </select>    
             </div>
+
             <div class="input-group col-sm-3" >
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon2">
