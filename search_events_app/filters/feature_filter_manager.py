@@ -1,3 +1,4 @@
+from search_events_app.filters.features.eb_studio_filter import EBStudioFilter
 from search_events_app.filters.filter import Filter
 from search_events_app.filters.features import (
     AddOnsFilter,
@@ -20,7 +21,8 @@ class FeatureFilterManager(Filter):
             AddOnsFilter(),
             CustomQuestionFilter(),
             DonationFilter(),
-            GroupRegistrationFilter()
+            GroupRegistrationFilter(),
+            EBStudioFilter()
         ]
 
     def apply_filter(self, request):
