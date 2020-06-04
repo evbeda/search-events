@@ -100,6 +100,7 @@ class TestEventListView(TestCase):
 		StateManager.set_events(self.events)
 		view = EventListView()
 		view.request = MagicMock()
+		view.request.GET = {'country': '', 'format': ''}
 		result = view.get_queryset()
 		self.assertEqual(result, self.events)
 
@@ -117,6 +118,7 @@ class TestEventListView(TestCase):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
+			view.request.GET = {'country': '', 'format': ''}
 			result = view.get_queryset()
 			set_events_count = mock_set_events.call_count
 			get_dto_list_count = mock_get_list_dto.call_count
@@ -139,6 +141,7 @@ class TestEventListView(TestCase):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
+			view.request.GET = {'country': '', 'format': ''}
 			result = view.get_queryset()
 			set_events_count = mock_set_events.call_count
 			get_dto_list_count = mock_get_list_dto.call_count
@@ -160,6 +163,7 @@ class TestEventListView(TestCase):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
 			view.request = MagicMock()
+			view.request.GET = {'country': '', 'format': ''}
 			result = view.get_queryset()
 			set_events_count = mock_set_events.call_count
 			get_dto_list_count = mock_get_list_dto.call_count
@@ -214,3 +218,17 @@ class TestEventListView(TestCase):
 		self.assertEqual(count_calls, 1)
 		self.assertEqual(args_calls[1], 'event_list.html')
 		self.assertEqual(args_calls[2]['error'], presto_error.message)
+
+	def test_is_from_login_true(self):
+		view = EventListView()
+		view.request = MagicMock()
+		view.request.GET = {}
+
+		self.assertEqual(view.is_from_login(), True)
+
+	def test_is_from_login_false(self):
+		view = EventListView()
+		view.request = MagicMock()
+		view.request.GET = {'country': '', 'format': ''}
+
+		self.assertEqual(view.is_from_login(), False)

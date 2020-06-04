@@ -37,6 +37,8 @@ class EventListView(ListView):
             return redirect('login')
 
     def get_queryset(self):
+        if self.is_from_login():
+            return []
         FilterManager.apply_filters(self.request)
         if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
             db_service_filters = FilterManager.get_list_dto_db_service_filter()
@@ -56,3 +58,6 @@ class EventListView(ListView):
         context['username'] = ConnectionManager.username
 
         return context
+
+    def is_from_login(self):
+        return not len(self.request.GET.keys())
