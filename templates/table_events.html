@@ -10,6 +10,7 @@
         <thead class="thead-blue-eb text-white">
             <tr>
                 <th>Admin Dashboard</th>
+                <th>EB Studio Page</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Format</th>
@@ -29,7 +30,16 @@
                             <td class="text-center">
                                 <a class="text-orange" href="{{event.admin_url}}" target="_blank">
                                     <i class="material-icons">link</i>
-                            </a>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                {% if event.eb_studio_url %}
+                                <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
+                                    <i class="material-icons">link</i>
+                                </a>
+                                {% else %}
+                                <i>None</i>
+                                {% endif %}
                             </td>
                             <td style="word-wrap: break-word; max-width: 300px;">
                                 <a class="text-orange" href="{{ event.url }}" target="_blank">

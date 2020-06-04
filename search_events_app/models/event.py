@@ -12,6 +12,7 @@ class Event:
             format_=None,
             organizer=None,
             admin_url=None,
+            eb_studio_url=None,
             **kwargs
     ):
         self.name = name
@@ -22,8 +23,9 @@ class Event:
         self.category = category
         self.format = format_
         self.organizer = organizer
+        self.admin_url = admin_url
+        self.eb_studio_url = eb_studio_url
         if not feature:
             self.feature = []
         else:
             self.feature = feature
-        self.admin_url = admin_url

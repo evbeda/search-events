@@ -8,7 +8,8 @@ class QueryParameters:
             dw_org.organization_name,
             dw_event.country_desc,
             CAST(CAST(dw_event.event_start_date AS TIMESTAMP) AS DATE) AS start_date,
-            dw_event.event_language
+            dw_event.event_language,
+            es.domain
     """
     
     default_tables = """ 
@@ -40,6 +41,26 @@ class QueryParameters:
             GROUP BY event
             HAVING (SUM(quantity_total) > SUM(quantity_sold) OR SUM(quantity_total) = 0 OR SUM(is_donation) > 0)
         ) AS ts ON ts.event = dw_event.event_id
+        LEFT JOIN(
+            SELECT DISTINCT(es.event_id) as event, min(domain.name) as domain
+            FROM hive.theme_builder.events_theme_applications as es
+            INNER JOIN (
+                SELECT id, owner_id
+                FROM hive.theme_builder.theme_applications
+                WHERE is_published=1 AND is_deleted=0
+            ) as t on t.id = es.theme_application_id
+            INNER JOIN(
+                SELECT owner_id
+                FROM hive.theme_builder.subscriptions
+                WHERE (product_id=2 OR product_id=4) AND status NOT like '%canceled%'
+            )AS s on s.owner_id=t.owner_id
+            INNER JOIN(
+                SELECT name, theme_application_id
+                FROM hive.theme_builder.domains
+                WHERE is_active=1 and name like '%eventbritestudio%'
+            ) as domain ON domain.theme_application_id = es.theme_application_id
+            GROUP by  es.event_id
+        ) AS es ON es.event = dw_event.event_id
     """
 
     constraints = """ 
@@ -61,7 +82,8 @@ class QueryParameters:
             dw_org.organization_name,
             dw_event.country_desc,
             dw_event.event_start_date,
-            dw_event.event_language
+            dw_event.event_language,
+            es.domain
     """
     order_by = """ 
         ORDER BY SUM(f.f_item_qty) DESC, dw_event.event_start_date

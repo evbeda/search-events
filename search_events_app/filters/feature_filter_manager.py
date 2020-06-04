@@ -3,6 +3,7 @@ from search_events_app.filters.features import (
     AddOnsFilter,
     CustomQuestionFilter,
     DonationFilter,
+    EBStudioFilter,
     GroupRegistrationFilter,
     RepeatingEventsFilter,
     ReservedSeatingFilter,
@@ -20,7 +21,8 @@ class FeatureFilterManager(Filter):
             AddOnsFilter(),
             CustomQuestionFilter(),
             DonationFilter(),
-            GroupRegistrationFilter()
+            GroupRegistrationFilter(),
+            EBStudioFilter()
         ]
 
     def apply_filter(self, request):

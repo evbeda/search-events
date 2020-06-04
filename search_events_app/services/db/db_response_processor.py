@@ -18,6 +18,7 @@ def process_events(data):
                 'start_date': item[7],
                 'language': get_language(item),
                 'admin_url': get_admin_url(item),
+                'eb_studio_url': get_eb_studio_url(item),
             }
             events.append(event_dict)
     return events
@@ -46,6 +47,12 @@ def get_organizer(item):
         return item[4]
     if item[5] and item[5].strip():
         return item[5]
+    return None
+
+
+def get_eb_studio_url(item):
+    if item[9]:
+        return f'https://{item[9]}'
     return None
 
 
