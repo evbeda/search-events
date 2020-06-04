@@ -1,0 +1,24 @@
+.modal {
+    margin-top: 10%;
+    width: 95%;
+  }
+.modal-content{
+    width: 110%;
+}
+.modal-header {
+    background-color:#1E0A3C ;
+} 
+.modal-title {
+    font-weight: bold;
+    color: #f05537;
+}
+.btnmodal{
+    background-color:#f05537 ;
+    color: white;
+}
+.close{
+    color: white;
+}
+.close:hover{
+    color: whitesmoke;
+}
