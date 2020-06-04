@@ -35,7 +35,7 @@ class TestWaitlistFilter(TestCase):
                         AND quantity_total > 0
                         AND DATE(CAST(start_sales AS TIMESTAMP)) < NOW() - INTERVAL '1' DAY
                         AND DATE(CAST(end_sales AS TIMESTAMP)) > NOW() + INTERVAL '1' MONTH
-                        AND delete = 'n'
+                        AND deleted = 'n'
                     )
                 ) AS tc ON tc.id = hive.eb.waitlist.ticket
             ) AS waitlist ON waitlist.event = dw_event.event_id
