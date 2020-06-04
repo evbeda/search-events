@@ -28,6 +28,7 @@ class Migration(migrations.Migration):
 				INSERT INTO main.search_events_app_category (name, code) VALUES ('School Activities', 'SA');
 				INSERT INTO main.search_events_app_category (name, code) VALUES ('Science & Technology', 'ST');
 				INSERT INTO main.search_events_app_category (name, code) VALUES ('Seasonal & Holiday', 'SH');
+				INSERT INTO main.search_events_app_category (name, code) VALUES ('Sports & Fitness', 'SF');
 				INSERT INTO main.search_events_app_category (name, code) VALUES ('Travel & Outdoor', 'TO');
 				INSERT INTO main.search_events_app_category (name, code) VALUES ('Unknown', 'U');
 			'''

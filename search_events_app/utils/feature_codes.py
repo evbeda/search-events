@@ -6,4 +6,5 @@ class FeatureCodes:
     group_registration = 'GR'
     repeating_events = 'RE'
     reserved_seating = 'RS'
+    wait_list = 'WL'
     website_widgets = 'WW'

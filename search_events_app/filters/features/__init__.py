@@ -5,4 +5,5 @@ from search_events_app.filters.features.eb_studio_filter import EBStudioFilter
 from search_events_app.filters.features.group_registration_filter import GroupRegistrationFilter
 from search_events_app.filters.features.repeating_events_filter import RepeatingEventsFilter
 from search_events_app.filters.features.reserved_seating_filter import ReservedSeatingFilter
+from search_events_app.filters.features.wait_list_filter import WaitlistFilter
 from search_events_app.filters.features.website_widgets_filter import WebsiteWidgetsFilter
