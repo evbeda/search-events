@@ -13,10 +13,10 @@ class WaitlistFilter(Filter):
         if self.value:
             return ["""
             INNER JOIN (
-                SELECT hive.eb.waitlist.event, ticket, deleted
+                SELECT hive.eb.waitlist.event, ticket
                 FROM hive.eb.waitlist
                 INNER JOIN (
-                    SELECT id, deleted
+                    SELECT id
                     FROM hive.eb.ticket_classes
                     WHERE (
                         quantity_sold >= quantity_total
@@ -24,9 +24,9 @@ class WaitlistFilter(Filter):
                         AND quantity_total > 0
                         AND DATE(CAST(start_sales AS TIMESTAMP)) < NOW() - INTERVAL '1' DAY
                         AND DATE(CAST(end_sales AS TIMESTAMP)) > NOW() + INTERVAL '1' MONTH
+                        AND deleted = 'n'
                     )
                 ) AS tc ON tc.id = hive.eb.waitlist.ticket
-                WHERE tc.deleted = 'n'
             ) AS waitlist ON waitlist.event = dw_event.event_id
             """]
         return ['']
