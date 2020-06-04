@@ -7,6 +7,7 @@ from search_events_app.filters.features import (
     GroupRegistrationFilter,
     RepeatingEventsFilter,
     ReservedSeatingFilter,
+    WaitlistFilter,
     WebsiteWidgetsFilter,
 )
 
@@ -22,7 +23,8 @@ class FeatureFilterManager(Filter):
             CustomQuestionFilter(),
             DonationFilter(),
             GroupRegistrationFilter(),
-            EBStudioFilter()
+            EBStudioFilter(),
+            WaitlistFilter()
         ]
 
     def apply_filter(self, request):
