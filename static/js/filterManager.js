@@ -10,6 +10,13 @@ const FilterManager = (function() {
         "currency": "USD",
         "city": ""
     }
+
+    const VALUES_TO_HIDE = {
+        "online": "on",
+        "price": "free"
+    }
+
+    const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
         try {
@@ -35,25 +42,39 @@ const FilterManager = (function() {
 
     function validateOnlineConstraint() {
         const online_dom = document.getElementById("online");
-        if (online_dom.value == "on") toggleDisable(["divCountry", "divCity"], ["country", "city"], online_dom.value, 'on');
+        if (online_dom.value == "on") toggleDisable(["divCountry", "divCity"], ["country", "city"], online_dom);
     }
 
     function validateFreeConstraint() {
         const price_dom = document.getElementById("price");
-        if (price_dom.value == "free") toggleDisable(["divCurrency"], ["currency"], price_dom.value, 'free');
+        if (price_dom.value == "free") toggleDisable(["divCurrency"], ["currency"], price_dom);
     }
 
-    function toggleDisable(divIds, inputIds, value, valueToHide) {
-        for(let i = 0; i < divIds.length; i++) {
-            const divId = divIds[i];
+    function toggleDisable(divToHideIds, inputToChangeValueIds, changedDomElement) {
+        for(let i = 0; i < divToHideIds.length; i++) {
+            const divId = divToHideIds[i];
             const div = document.getElementById(divId);
-            const visibility = div.style.visibility
-            div.style.visibility = value == valueToHide ? 'hidden' : 'visible';
-            if(div.style.visibility !== visibility && div.style.visibility === 'visible' && visibility){
-                const inputId = inputIds[i]
-                const input = document.getElementById(inputId);
-                if(value == valueToHide) input.value = '';
-                input.value = FILTERS_BY_DEFAULT[inputId];
+            const previousVisibility = div.style.visibility;
+            changeFilterVisibility(div, changedDomElement);
+            const inputId = inputToChangeValueIds[i];
+            updateInputValue(inputId, previousVisibility, div.style.visibility);
+        }
+    }
+    
+    function changeFilterVisibility(domElement, changedDomElement) {
+        const actualValue = changedDomElement.value;
+        const valueToHide = VALUES_TO_HIDE[changedDomElement.id];
+        domElement.style.visibility = actualValue == valueToHide ? 'hidden' : 'visible';
+    }
+
+    function updateInputValue(inputId, previousVisibility='visible', newVisibility) {
+        const input = document.getElementById(inputId);
+        if(previousVisibility !== newVisibility) {
+            if(newVisibility === 'hidden') {
+                LATEST_FILTERS[inputId] = input.value;
+                input.value = '';
+            } else {
+                input.value = LATEST_FILTERS[inputId];
             }
         }
     }
