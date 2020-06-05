@@ -8,7 +8,7 @@
                     </span>
                 </div>
                 
-                <select onchange="FilterManager.toggleDisable(['divCountry', 'divCity'], ['country', 'city'], this.value, 'on');" id="online" name="online" class="custom-select h-100">
+                <select onchange="FilterManager.toggleDisable(['divCountry', 'divCity'], ['country', 'city'], this);" id="online" name="online" class="custom-select h-100">
                     <option value="">Online &amp; Venue</option>
                     <option value="on">Events online</option>
                     <option value="off">Events with venue</option>
@@ -108,7 +108,7 @@
                     </span>
                 </div>
                 
-                <select id="price" name="price" class="custom-select h-100" onchange="FilterManager.toggleDisable(['divCurrency'], ['currency'], this.value, 'free');">
+                <select id="price" name="price" class="custom-select h-100" onchange="FilterManager.toggleDisable(['divCurrency'], ['currency'], this);">
                     <option value="" selected>Any price</option>
                     <option value="free">Free events</option>
                     <option value="paid">Paid events</option>
