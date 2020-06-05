@@ -23,13 +23,11 @@ const FilterManager = (function() {
             const filters = ["country", "online", "language", "format", "category", "price", "currency", "city"];
             filters.forEach(function(filter) {
                 const lastValue = querySt(filter);
-                if(lastValue != undefined){
+                if(lastValue !== undefined){
                     document.getElementById(filter).value = lastValue;
-                } 
-                else if (FILTERS_BY_DEFAULT[filter]) {
-                    document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter] ;
+                } else if (FILTERS_BY_DEFAULT[filter]) {
+                    document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter];
                 }
-
             });
     
             validateOnlineConstraint();
@@ -38,6 +36,10 @@ const FilterManager = (function() {
             features = querySt("feature");
             if(features) selectLastFilters("feature", features);
         } catch(e) {}
+    }
+
+    function reloadLastState() {
+        document.getElementById("city").disabled = document.getElementById("country").value ? false : true;
     }
 
     function validateOnlineConstraint() {
@@ -95,6 +97,7 @@ const FilterManager = (function() {
         clear_ids.forEach(function (id) {
              filter = document.getElementById(id);
              filter.value = FILTERS_BY_DEFAULT[id];
+             filter.disabled = false;
         });
         
         show_ids.forEach(function(id) {
@@ -126,6 +129,7 @@ const FilterManager = (function() {
         clearFilters: clearFilters,
         reloadLastFilters: reloadLastFilters,
         toggleDisable: toggleDisable,
-        getDefaultFilters : getDefaultFilters
+        getDefaultFilters : getDefaultFilters,
+        reloadLastState: reloadLastState
     }
 })()
