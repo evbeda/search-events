@@ -75,7 +75,7 @@ const FilterManager = (function() {
             if(newVisibility === 'hidden') {
                 LATEST_FILTERS[inputId] = input.value;
                 input.value = '';
-            } else {
+            } else if(LATEST_FILTERS[inputId]){
                 input.value = LATEST_FILTERS[inputId];
             }
         }
