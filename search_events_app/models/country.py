@@ -1,6 +1,7 @@
 from django.db import models
 
 from search_events_app.mixins.get_context_mixin import GetContextMixin
+from search_events_app.models.city import City
 
 
 # Create your models here.
@@ -39,6 +40,12 @@ class Country(models.Model, GetContextMixin):
                 {
                     'code': country.alpha_2_code,
                     'name': country.name,
+                    'cities': cls.get_cities(country.alpha_2_code),
                 } for country in countries
             ]
         }
+
+    @classmethod
+    def get_cities(cls, code):
+        cities = City.objects.filter(country=code)
+        return [{'code': city.code, 'name': city.name} for city in cities]
