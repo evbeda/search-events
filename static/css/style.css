@@ -133,8 +133,18 @@ input::placeholder {
 }
 .bootstrap-select:not(.input-group-btn), .bootstrap-select[class*="col-"] {
   padding: 1 !important;
+  width: auto !important;
 }
-
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+  color: #495057;
+}
+.show>.btn-light.dropdown-toggle{
+  background-color: white;
+  border: white;
+}
+.btn-light{
+  background-color: white;
+}
 #spin{
   margin-top: 20%;
   display: none;
