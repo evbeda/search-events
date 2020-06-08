@@ -12,16 +12,24 @@ const FilterManager = (function() {
     }
 
     const VALUES_TO_HIDE = {
-        "online": "on",
-        "price": "free"
+        "online": {
+           "value": "on",
+           "divsToHide": ["divCountry", "divCity"],
+           "inputs": ["country", "city"]
+        },
+        "price": {
+            "value": "free",
+            "divsToHide": ["divCurrency"],
+            "inputs": ["currency"]
+         }
     }
-
+    
+    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city"];
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
         try {
-            const filters = ["country", "online", "language", "format", "category", "price", "currency", "city"];
-            filters.forEach(function(filter) {
+            FILTER_IDS.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue !== undefined){
                     document.getElementById(filter).value = lastValue;
@@ -30,11 +38,12 @@ const FilterManager = (function() {
                 }
             });
     
-            validateOnlineConstraint();
-            validateFreeConstraint();
+            validateConstraint("online");
+            validateConstraint("price");
+
     
             features = querySt("feature");
-            if(features) selectLastFilters("feature", features);
+            if(features) selectLastFeatures("feature", features);
         } catch(e) {}
     }
 
@@ -42,34 +51,34 @@ const FilterManager = (function() {
         document.getElementById("city").disabled = document.getElementById("country").value ? false : true;
     }
 
-    function validateOnlineConstraint() {
-        const online_dom = document.getElementById("online");
-        if (online_dom.value == "on") toggleDisable(["divCountry", "divCity"], ["country", "city"], online_dom);
+    function validateConstraint(domId) {
+        if (online_dom.value == VALUES_TO_HIDE[domId]["value"]){
+            toggleDisable(domId);
+        }  
     }
 
-    function validateFreeConstraint() {
-        const price_dom = document.getElementById("price");
-        if (price_dom.value == "free") toggleDisable(["divCurrency"], ["currency"], price_dom);
-    }
-
-    function toggleDisable(divToHideIds, inputToChangeValueIds, changedDomElement) {
+    function toggleDisable(domId) {
+        const valuesToHide = VALUES_TO_HIDE[domId];
+        const changedDomElement = document.getElementById(domId);
+        const divToHideIds = valuesToHide["divsToHide"];
+        const inputToChangeValueIds = valuesToHide["inputs"];
         for(let i = 0; i < divToHideIds.length; i++) {
             const divId = divToHideIds[i];
             const div = document.getElementById(divId);
             const previousVisibility = div.style.visibility;
             changeFilterVisibility(div, changedDomElement);
             const inputId = inputToChangeValueIds[i];
-            updateInputValue(inputId, previousVisibility, div.style.visibility);
+            updateInputValue(inputId, div.style.visibility, previousVisibility);
         }
     }
     
     function changeFilterVisibility(domElement, changedDomElement) {
         const actualValue = changedDomElement.value;
-        const valueToHide = VALUES_TO_HIDE[changedDomElement.id];
+        const valueToHide = VALUES_TO_HIDE[changedDomElement.id]["value"];
         domElement.style.visibility = actualValue == valueToHide ? 'hidden' : 'visible';
     }
 
-    function updateInputValue(inputId, previousVisibility='visible', newVisibility) {
+    function updateInputValue(inputId, newVisibility, previousVisibility='visible') {
         const input = document.getElementById(inputId);
         if(previousVisibility !== newVisibility) {
             if(newVisibility === 'hidden') {
@@ -81,35 +90,39 @@ const FilterManager = (function() {
         }
     }
     
-    function selectLastFilters(domId, stringFilters) {
+    function selectLastFeatures(domId, stringFeatures) {
         const options = document.getElementById(domId).options;
-        const filters = stringFilters.split("-");
+        const features = stringFeatures.split("-");
     
         for(var i = 0; i < options.length; i++){
             const option = options[i];
-            if(filters.indexOf(option.value) !== -1) option.selected = true;
+            if(features.indexOf(option.value) !== -1) option.selected = true;
         }
     }
     
     function clearFilters() {
-        const show_ids = ["divCountry", "divCurrency", "divCity"];
-        const clear_ids = ["country", "online", "language", "format", "category", "price", "currency", "city"];
-        clear_ids.forEach(function (id) {
-             filter = document.getElementById(id);
-             filter.value = FILTERS_BY_DEFAULT[id];
-             filter.disabled = false;
+        restoreFilterValuesByDefault();
+        showFilters(["divCountry", "divCurrency", "divCity"]);
+        clearSelectedFeatures();
+    }
+
+    function restoreFilterValuesByDefault (){
+        FILTER_IDS.forEach(function (id) {
+            filter = document.getElementById(id);
+            filter.value = FILTERS_BY_DEFAULT[id];
+            filter.disabled = false;
         });
-        
+    }
+
+    function showFilters(show_ids){
         show_ids.forEach(function(id) {
             filter = document.getElementById(id);
             filter.style.visibility = "visible";
         });
-    
-        clearSelected("feature");
     }
-    
-    function clearSelected(domId) {
-        const domElement = document.getElementById(domId);
+
+    function clearSelectedFeatures() {
+        const domElement = document.getElementById("feature");
         domElement.value = "";
         const options = domElement.options;
     
@@ -126,10 +139,10 @@ const FilterManager = (function() {
     }
 
     return {
-        clearFilters: clearFilters,
-        reloadLastFilters: reloadLastFilters,
-        toggleDisable: toggleDisable,
-        getDefaultFilters : getDefaultFilters,
-        reloadLastState: reloadLastState
+        clearFilters,
+        reloadLastFilters,
+        toggleDisable,
+        getDefaultFilters,
+        reloadLastState
     }
 })()
