@@ -1,7 +1,6 @@
 from unittest.mock import patch
 
 from django.test import TestCase
-from django.db.models import Q
 
 from search_events_app.models import Country
 
@@ -23,20 +22,25 @@ class TestCountry(TestCase):
         self.assertEqual(verbose_name_plural, 'Countries')
 
     @patch.object(Country.objects, 'all')
-    def test_get_context(self, mock_objects):
-        countries = Country.objects.filter(Q(name='Peru') | Q(name='Spain'))
+    @patch.object(Country, 'get_cities')
+    def test_get_context(self, mock_cities, mock_all):
+        countries = Country.objects.filter(name='Argentina')
+        cities = [
+            {
+                'code': '',
+                'name': 'Mendoza',
+            }
+        ]
+        mock_cities.return_value = cities
+        mock_all.return_value = countries
 
-        mock_objects.return_value = countries
         expected_result = {
             'countries': [
                 {
-                    'code': 'PE',
-                    'name': 'Peru',
+                    'code': 'AR',
+                    'name': 'Argentina',
+                    'cities': cities,
                 },
-                {
-                    'code': 'ES',
-                    'name': 'Spain',
-                }
             ]
         }
 

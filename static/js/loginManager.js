@@ -5,6 +5,7 @@ $('form').submit(function(e){ e.preventDefault(); });
     };
 
     return {
-        login: login
+        login,
     }
+
 })()

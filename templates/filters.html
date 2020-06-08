@@ -1,4 +1,4 @@
-<body onload="ListManager.setCountries({{countries}});ListManager.setCities({{cities}});">
+<body onload="StateManager.setCountries({{countries}});">
     <form autocomplete="off" id="filter-form">
         <div class="row">
             <div class="input-group col-sm-3">
@@ -8,7 +8,7 @@
                     </span>
                 </div>
                 
-                <select onchange="FilterManager.toggleDisable(['divCountry', 'divCity'], ['country', 'city'], this);" id="online" name="online" class="custom-select h-100">
+                <select onchange="FilterManager.toggleDisable('online');" id="online" name="online" class="custom-select h-100">
                     <option value="">Online &amp; Venue</option>
                     <option value="on">Events online</option>
                     <option value="off">Events with venue</option>
@@ -22,7 +22,7 @@
                     </span>
                 </div>
 
-                <input class="autocomplete form-control" id="country" type="text" onkeydown="filterCriteria.filterCountry({{countries}}, this);" name="country" placeholder="Country" >
+                <input class="autocomplete form-control" id="country" type="text" onkeydown="StateManager.filterCountry({{countries}}, this);" name="country" placeholder="Country" >
             </div>
 
             <div id="divCity" class="input-group col-sm-3 w-100">
@@ -32,7 +32,7 @@
                     </span>
                 </div>
                 
-                <input class="autocomplete form-control h-100" id="city" type="text" onkeydown="filterCriteria.filterCity({{cities}}, this);" name="city" placeholder="State" >
+                <input class="autocomplete form-control h-100" id="city" type="text" onkeydown="StateManager.filterCity(this);" name="city" placeholder="State" >
             </div>
         </div>
         
@@ -62,7 +62,7 @@
                     </span>
                 </div>
                 
-                <select id="price" name="price" class="custom-select h-100" onchange="FilterManager.toggleDisable(['divCurrency'], ['currency'], this);">
+                <select id="price" name="price" class="custom-select h-100" onchange="FilterManager.toggleDisable('price');">
                     <option value="" selected>Any price</option>
                     <option value="free">Free events</option>
                     <option value="paid">Paid events</option>
@@ -132,7 +132,7 @@
         
         <div class="row mt-3">
             <div class="col col-sm-3 ">
-                <button class="btn orange-eb text-white" onclick="formManager.formatFormData('country', {{countries}});return false;">Search</button>
+                <button class="btn orange-eb text-white" onclick="formManager.formatFormData();return false;">Search</button>
             </div>
             
             <div class="col col-sm-9">

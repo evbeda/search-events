@@ -1,6 +1,6 @@
 const ListManager = (function() {
 
-    let countries, cities, element;
+    let element;
     let currentFocus = -1;
 
     function addActive(x) {
@@ -41,24 +41,8 @@ const ListManager = (function() {
         return currentFocus;
     }
 
-    function getCountries() {
-        return countries;
-    }
-    
-    function getCities(country) {
-        return cities.filter(e => e.country == country);
-    }
-
     function getElement() {
         return element;
-    }
-
-    function setCountries(value) {
-        countries = value;
-    }
-    
-    function setCities(value) {
-        cities = value;
     }
 
     function setElement(value) {
@@ -66,17 +50,13 @@ const ListManager = (function() {
     }
 
     return {
-        addActive: addActive,
-        removeActive: removeActive,
-        closeAllLists: closeAllLists,
-        incrementCurrentFocus: incrementCurrentFocus,
-        decrementCurrentFocus: decrementCurrentFocus,
-        getCurrentFocus: getCurrentFocus,
-        getCountries: getCountries,
-        getCities: getCities,
-        setCountries: setCountries,
-        setCities: setCities,
-        getElement: getElement,
-        setElement: setElement
+        addActive,
+        removeActive,
+        closeAllLists,
+        incrementCurrentFocus,
+        decrementCurrentFocus,
+        getCurrentFocus,
+        getElement,
+        setElement,
     }
 })()
