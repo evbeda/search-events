@@ -28,27 +28,3 @@ class TestCity(TestCase):
     def test_verbose_name_plural(self):
         verbose_name_plural = self.city_mendoza._meta.verbose_name_plural
         self.assertEqual(verbose_name_plural, 'Cities')
-
-    @patch.object(City.objects, 'all')
-    def test_get_context(self, mock_objects):
-        cities = City.objects.filter(Q(name='Acre', country='BR') | Q(name='Indiana', country='US'))
-        mock_objects.return_value = cities
-
-        expected_result = {
-            'cities': [
-                {
-                    'code': 'IN',
-                    'name': 'Indiana',
-                    'country': 'US',
-                },
-                {
-                    'code': '',
-                    'name': 'Acre',
-                    'country': 'BR',
-                },
-            ]
-        }
-
-        result = City.get_context()
-
-        self.assertEqual(result, expected_result)

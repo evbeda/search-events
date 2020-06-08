@@ -38,7 +38,7 @@ const inputEvents = (function() {
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(itemsList);
         
-        countries = ListManager.getCountries();
+        countries = StateManager.getCountries();
         document.getElementById('city').disabled = countries.map(e => e.name).indexOf(val) == -1
         for (i = 0; i < countries.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
@@ -82,9 +82,9 @@ const inputEvents = (function() {
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(itemsList);
         
-        countries = ListManager.getCountries()
+        countries = StateManager.getCountries()
         country = countries.filter(e => e.name == document.getElementById("country").value)
-        cities = ListManager.getCities(country[0].code);
+        cities = StateManager.getCities();
         for (i = 0; i < cities.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
             if ((cities[i].code.toUpperCase() == val.toUpperCase() && val.length == 2) || (cities[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase() && val.length >= 1)) {
