@@ -30,7 +30,7 @@ class SpecificEventsQueryParameters:
 
     constraints = """ 
         WHERE 
-           DATE(CAST(dw_event.event_sale_end_date AS TIMESTAMP)) >= NOW()
+           CAST(CAST(dw_event.event_start_date AS TIMESTAMP) AS DATE) >= NOW()
         """
     group_by = ''
 

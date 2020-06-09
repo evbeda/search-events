@@ -1,13 +1,21 @@
 <body onload="StateManager.setCountries({{countries}});">
     <form autocomplete="off" id="specific-form">
         <div class="row mb-2">
-            <div class="col-sm-3">
+            <div class="input-group col-sm-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <i class="material-icons">search</i>
                     </span>
-                    <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
                 </div>
+                <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
+            </div>
+            <div class="input-group col-sm-3" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">supervisor_account</i>
+                    </span>
+                </div>
+                <input name="organizer" id="organizer" type="search" class="form-control" placeholder="Organizer" aria-label="Organizer" aria-describedby="basic-addon1">
             </div>
         </div>
         {% include "filters/shared_filters.html" %}
