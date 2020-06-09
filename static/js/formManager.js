@@ -4,11 +4,13 @@ const formManager = (function() {
 
 	$('form').submit(function(e){ e.preventDefault(); });
 
-	function formatFormData(){
-		fillFeatureUrlValue();
+	function formatFormData(formId){
+		if(formId === 'features-form'){
+			fillFeatureUrlValue();
+		}
 		validateCountryAndCity();
-		document.getElementById("filter-form").submit();
-		showSpinner();
+		document.getElementById(formId).submit();
+		showSpinner(formId);
 	}
 
 	function fillFeatureUrlValue(){
@@ -38,8 +40,8 @@ const formManager = (function() {
 		}
 	}
 	
-	function showSpinner(){
-		document.getElementById("filter-form").style.display = "none";
+	function showSpinner(formId){
+		document.getElementById(formId).style.display = "none";
 		document.getElementById("table-events").style.display = "none";
 		document.getElementById("spin").style.display = "block";
 	}

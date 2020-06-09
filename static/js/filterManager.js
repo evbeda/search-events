@@ -28,7 +28,9 @@ const FilterManager = (function() {
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
+        
         try {
+            
             FILTER_IDS.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue !== undefined){
@@ -37,14 +39,14 @@ const FilterManager = (function() {
                     document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter];
                 }
             });
-    
+            
             validateConstraint("online");
             validateConstraint("price");
 
-    
+           
             features = querySt("feature");
             if(features) selectLastFeatures("feature", features);
-        } catch(e) {}
+        } catch(e) {throw e}
     }
 
     function reloadLastState() {
@@ -52,7 +54,8 @@ const FilterManager = (function() {
     }
 
     function validateConstraint(domId) {
-        if (online_dom.value == VALUES_TO_HIDE[domId]["value"]){
+        domElement = document.getElementById(domId)
+        if (domElement.value == VALUES_TO_HIDE[domId]["value"]){
             toggleDisable(domId);
         }  
     }

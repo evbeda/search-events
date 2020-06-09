@@ -4,7 +4,10 @@ from django.shortcuts import (
     redirect
 )
 
-from search_events_app.factories.query_parameter_factory import QueryParameterFactory
+from search_events_app.factories import (
+    QueryParameterFactory,
+    TemplateFactory
+)
 from search_events_app.services.db.db_service import DBService
 from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services import (
@@ -24,9 +27,9 @@ from search_events_app.models import (
 
 
 class EventListView(ListView):
-    template_name = 'event_list.html'
 
     def get(self, request):
+        self.template_name = TemplateFactory.get_template(request)
         if not ConnectionManager.get_connection():
             return redirect('login')
         try:
