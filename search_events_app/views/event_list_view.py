@@ -4,6 +4,7 @@ from django.shortcuts import (
     redirect
 )
 
+from search_events_app.factories.query_parameter_factory import QueryParameterFactory
 from search_events_app.services.db.db_service import DBService
 from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services import (
@@ -42,7 +43,8 @@ class EventListView(ListView):
         FilterManager.apply_filters(self.request)
         if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
             db_service_filters = FilterManager.get_list_dto_db_service_filter()
-            events = DBService.get_events(db_service_filters)
+            query_parameters = QueryParameterFactory.get_query_parameters(self.request)
+            events = DBService.get_events(db_service_filters, query_parameters)
             StateManager.set_events(events)
             return events
         return StateManager.get_last_searched_events()

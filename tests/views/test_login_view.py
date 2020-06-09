@@ -42,7 +42,7 @@ class TestLoginView(TestCase):
         response = login(mock_request)
         response.client = Client()
 
-        self.assertRedirects(response, '/')
+        self.assertRedirects(response, '/FindFeature/')
 
     @patch("search_events_app.views.login_view.render")
     @patch.object(DBService, 'create_connection')
