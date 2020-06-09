@@ -35,7 +35,6 @@ const FilterManager = (function() {
             FILTER_IDS.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue !== undefined){
-                    console.log(lastValue)
                     document.getElementById(filter).value = lastValue;
                 } else if (FILTERS_BY_DEFAULT[filter]) {
                     document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter];
