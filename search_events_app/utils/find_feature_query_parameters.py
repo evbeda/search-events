@@ -1,4 +1,4 @@
-class QueryParameters:
+class FindFeatureQueryParameters:
     columns_select = """
         SELECT dw_event.event_id*1003 AS id,
             dw_event.event_title,

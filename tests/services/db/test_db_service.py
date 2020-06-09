@@ -14,7 +14,7 @@ from search_events_app.exceptions import (
     OktaCredentialError,
     PrestoError,
 )
-from search_events_app.utils import QueryParameters
+from search_events_app.utils import FindFeatureQueryParameters
 
 
 class TestDbService(TestCase):
@@ -22,27 +22,27 @@ class TestDbService(TestCase):
     def setUp(self):
         self.mock_dto_filter = [DTODBServiceFilter(join_query='', where_query=" AND dw_event.event_language LIKE '%en%'")]
         self.mock_db_response = [
-			(
-				99894936444,
-				'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
-				'Business & Professional',
-				'Meeting or Networking Event',
-				'Adam Kurtz',
-				'US',
-				'2020-12-16',
-				'en_US'
-			),
-			(
-				104429836452,
-				'Shawn Mendes The Virtual Tour',
-				'Music',
-				'Concert or Performance',
-				'Mia Discenza',
-				None,
-				'2020-05-16',
-				'en_US'
-			)
-		]
+            (
+                99894936444,
+                'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
+                'Business & Professional',
+                'Meeting or Networking Event',
+                'Adam Kurtz',
+                'US',
+                '2020-12-16',
+                'en_US'
+            ),
+            (
+                104429836452,
+                'Shawn Mendes The Virtual Tour',
+                'Music',
+                'Concert or Performance',
+                'Mia Discenza',
+                None,
+                '2020-05-16',
+                'en_US'
+            )
+        ]
         self.mock_response_processed = [
             {
                 'name': 'LEARN WHAT IT TAKES TO BUY A HOME IN LAS VEGAS (FREE WINE &amp; PIZZA)',
@@ -76,7 +76,7 @@ class TestDbService(TestCase):
         mock_cursor.execute = MagicMock()
         mock_cursor.fetchall = MagicMock(return_value=self.mock_db_response)
 
-        result = DBService.get_events(dto_filters_array=self.mock_dto_filter)
+        result = DBService.get_events(dto_filters_array=self.mock_dto_filter, query_parameters=FindFeatureQueryParameters)
 
         self.assertEqual(len(result), 2)
         self.assertIsInstance(result[0], Event)
@@ -116,29 +116,29 @@ class TestDbService(TestCase):
             DBService.execute_query(query)
 
     def test_format_query_without_filters(self):
-        expected = QueryParameters.columns_select + QueryParameters.default_tables + QueryParameters.constraints
-        expected += QueryParameters.group_by + QueryParameters.order_by + QueryParameters.limit
+        expected = FindFeatureQueryParameters.columns_select + FindFeatureQueryParameters.default_tables + FindFeatureQueryParameters.constraints
+        expected += FindFeatureQueryParameters.group_by + FindFeatureQueryParameters.order_by + FindFeatureQueryParameters.limit
 
-        result = DBService.format_query([])
+        result = DBService.format_query([], FindFeatureQueryParameters)
 
         self.assertEqual(result, expected)
 
     def test_format_query_with_filters(self):
-        where_query = QueryParameters.constraints + " AND dw_event.event_language LIKE '%en%'"
-        expected = QueryParameters.columns_select + QueryParameters.default_tables + where_query + QueryParameters.group_by
-        expected += QueryParameters.order_by + QueryParameters.limit
+        where_query = FindFeatureQueryParameters.constraints + " AND dw_event.event_language LIKE '%en%'"
+        expected = FindFeatureQueryParameters.columns_select + FindFeatureQueryParameters.default_tables + where_query + FindFeatureQueryParameters.group_by
+        expected += FindFeatureQueryParameters.order_by + FindFeatureQueryParameters.limit
 
-        result = DBService.format_query(self.mock_dto_filter)
+        result = DBService.format_query(self.mock_dto_filter, FindFeatureQueryParameters)
 
         self.assertEqual(result, expected)
     
     def test_format_join_query_with_filters(self):
         mock_dto_filter = [DTODBServiceFilter(join_query=['INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id'], where_query='')]
-        join_query = QueryParameters.default_tables + " " + "INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"
-        expected = QueryParameters.columns_select + join_query + QueryParameters.constraints + QueryParameters.group_by
-        expected += QueryParameters.order_by + QueryParameters.limit
+        join_query = FindFeatureQueryParameters.default_tables + " " + "INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"
+        expected = FindFeatureQueryParameters.columns_select + join_query + FindFeatureQueryParameters.constraints + FindFeatureQueryParameters.group_by
+        expected += FindFeatureQueryParameters.order_by + FindFeatureQueryParameters.limit
 
-        result = DBService.format_query(mock_dto_filter)
+        result = DBService.format_query(mock_dto_filter, FindFeatureQueryParameters)
         
         self.assertEqual(result, expected)
 
