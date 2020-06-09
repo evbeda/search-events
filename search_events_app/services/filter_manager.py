@@ -8,6 +8,7 @@ from search_events_app.filters import (
     CityFilter,
     CountryFilter,
     CurrencyFilter,
+    EventNameFilter,
     FeatureFilterManager,
     FormatFilter,
     LanguageFilter,
@@ -17,7 +18,7 @@ from search_events_app.filters import (
 
 
 class FilterManager:
-    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), CurrencyFilter(), CityFilter(), FeatureFilterManager()]
+    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), CurrencyFilter(), CityFilter(), FeatureFilterManager(), EventNameFilter()]
 
     @classmethod
     def apply_filters(cls, request):
