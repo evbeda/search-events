@@ -9,13 +9,21 @@
                 </div>
                 <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
             </div>
-            <div class="input-group col-sm-3" >
+            <div class="input-group col-sm-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <i class="material-icons">supervisor_account</i>
                     </span>
                 </div>
                 <input name="organizer" id="organizer" type="search" class="form-control" placeholder="Organizer" aria-label="Organizer" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group col-sm-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">person</i>
+                    </span>
+                </div>
+                <input class="form-control" id="buyer" type="search" name="buyer" placeholder="Buyer name">
             </div>
         </div>
         {% include "filters/shared_filters.html" %}

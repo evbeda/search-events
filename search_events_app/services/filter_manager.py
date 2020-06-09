@@ -4,6 +4,7 @@ from search_events_app.dto import (
     DTODBServiceFilter,
 )
 from search_events_app.filters import (
+    BuyerFilter,
     CategoryFilter,
     CityFilter,
     CountryFilter,
@@ -19,7 +20,7 @@ from search_events_app.filters import (
 
 
 class FilterManager:
-    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), CurrencyFilter(), CityFilter(), FeatureFilterManager(), EventNameFilter(), OrganizerFilter()]
+    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), CurrencyFilter(), CityFilter(), FeatureFilterManager(), EventNameFilter(), OrganizerFilter(), BuyerFilter()]
 
     @classmethod
     def apply_filters(cls, request):

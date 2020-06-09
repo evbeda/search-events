@@ -1,3 +1,4 @@
+from search_events_app.filters.buyer_filter import BuyerFilter
 from search_events_app.filters.category_filter import CategoryFilter
 from search_events_app.filters.city_filter import CityFilter
 from search_events_app.filters.country_filter import CountryFilter

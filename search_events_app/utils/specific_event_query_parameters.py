@@ -1,15 +1,16 @@
 class SpecificEventsQueryParameters:
     columns_select = """
-        SELECT 
-           dw_event.event_id*1003 AS id,
-           dw_event.event_title,
-           dw_cat.event_category_desc,
-           dw_cat.event_format_desc,
-           dw_organizer.organizer_name,
-           dw_org.organization_name,
-           dw_event.country_desc,
-           CAST(CAST(dw_event.event_start_date AS TIMESTAMP) AS DATE) AS start_date,
-           dw_event.event_language
+         SELECT
+            DISTINCT
+               dw_event.event_id*1003 AS id,
+               dw_event.event_title,
+               dw_cat.event_category_desc,
+               dw_cat.event_format_desc,
+               dw_organizer.organizer_name,
+               dw_org.organization_name,
+               dw_event.country_desc,
+               CAST(CAST(dw_event.event_start_date AS TIMESTAMP) AS DATE) AS start_date,
+               dw_event.event_language
     """
 
     default_tables = """ 
@@ -34,6 +35,17 @@ class SpecificEventsQueryParameters:
         """
     group_by = ''
 
-    order_by = ''
+    order_by = """ 
+         ORDER BY
+            CAST(CAST(dw_event.event_start_date AS TIMESTAMP) AS DATE) ASC,
+            dw_event.event_id*1003,
+            dw_event.event_title,
+            dw_cat.event_category_desc,
+            dw_cat.event_format_desc,
+            dw_organizer.organizer_name,
+            dw_org.organization_name,
+            dw_event.country_desc,
+            dw_event.event_language
+    """
 
     limit = ' LIMIT 50'

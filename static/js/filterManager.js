@@ -10,7 +10,8 @@ const FilterManager = (function() {
         "currency": "USD",
         "city": "",
         "event_name": "",
-        "organizer": ""
+        "organizer": "",
+        "buyer": ""
     }
 
     const VALUES_TO_HIDE = {
@@ -26,7 +27,7 @@ const FilterManager = (function() {
          }
     }
     
-    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name", "organizer"];
+    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name", "organizer", "buyer"];
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
@@ -36,7 +37,7 @@ const FilterManager = (function() {
             FILTER_IDS.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue !== undefined){
-                    document.getElementById(filter).value = lastValue;
+                    document.getElementById(filter).value = lastValue.trim();
                 } else if (FILTERS_BY_DEFAULT[filter]) {
                     document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter];
                 }
@@ -112,13 +113,13 @@ const FilterManager = (function() {
     }
 
     function restoreFilterValuesByDefault (){
-        try{
+        try {
             FILTER_IDS.forEach(function (id) {
                 filter = document.getElementById(id);
                 filter.value = FILTERS_BY_DEFAULT[id];
                 filter.disabled = false;
             });
-        }catch(e){}
+        } catch (e) {}
     }
 
     function showFilters(show_ids){
@@ -129,18 +130,18 @@ const FilterManager = (function() {
     }
 
     function clearSelectedFeatures() {
-        try{
+        try {
             const domElement = document.getElementById("feature");
             domElement.value = "";
             const options = domElement.options;
         
             for(let i = 0; i < options.length; i++) {
-            options[i].selected = false;
+              options[i].selected = false;
             }
             
             $(domElement.nextSibling).addClass('bs-placeholder');
             document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title;
-        }catch(e){}
+        } catch(e) {}
     }
     
     function getDefaultFilters(){
