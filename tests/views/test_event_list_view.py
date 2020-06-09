@@ -8,6 +8,7 @@ from django.test import (
 	Client,
 )
 
+from search_events_app.factories.query_parameter_factory import QueryParameterFactory
 from search_events_app.models import (
 	Country,
 	Event,
@@ -104,6 +105,7 @@ class TestEventListView(TestCase):
 		result = view.get_queryset()
 		self.assertEqual(result, self.events)
 
+	@patch.object(QueryParameterFactory, 'get_query_parameters')
 	@patch.object(StateManager, 'set_events')
 	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
 	@patch.object(FilterManager, 'apply_filters')
@@ -113,7 +115,8 @@ class TestEventListView(TestCase):
 			mock_has_changed,
 			mock_apply_filters,
 			mock_get_list_dto,
-			mock_set_events
+			mock_set_events,
+			mock_get_query_parameters
 	):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
@@ -122,10 +125,13 @@ class TestEventListView(TestCase):
 			result = view.get_queryset()
 			set_events_count = mock_set_events.call_count
 			get_dto_list_count = mock_get_list_dto.call_count
+			get_query_parameters_count = mock_get_query_parameters.call_count
 			self.assertEqual(result, self.events)
 			self.assertEqual(set_events_count, 1)
 			self.assertEqual(get_dto_list_count, 1)
+			self.assertEqual(get_query_parameters_count, 1)
 
+	@patch.object(QueryParameterFactory, 'get_query_parameters')
 	@patch.object(StateManager, 'set_events')
 	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
 	@patch.object(FilterManager, 'apply_filters')
@@ -135,7 +141,8 @@ class TestEventListView(TestCase):
 		mock_has_changed,
 		mock_apply_filters,
 		mock_get_list_dto,
-		mock_set_events
+		mock_set_events,
+		mock_get_query_parameters
 	):
 		StateManager.events = self.events
 		with patch.object(DBService, 'get_events', return_value=self.events):
@@ -145,10 +152,13 @@ class TestEventListView(TestCase):
 			result = view.get_queryset()
 			set_events_count = mock_set_events.call_count
 			get_dto_list_count = mock_get_list_dto.call_count
+			get_query_parameters_count = mock_get_query_parameters.call_count
 			self.assertEqual(result, self.events)
 			self.assertEqual(set_events_count, 1)
 			self.assertEqual(get_dto_list_count, 1)
+			self.assertEqual(get_query_parameters_count, 1)
 
+	@patch.object(QueryParameterFactory, 'get_query_parameters')
 	@patch.object(StateManager, 'set_events')
 	@patch.object(FilterManager, 'get_list_dto_db_service_filter')
 	@patch.object(FilterManager, 'apply_filters')
@@ -158,7 +168,8 @@ class TestEventListView(TestCase):
 		mock_has_changed,
 		mock_apply_filters,
 		mock_get_list_dto,
-		mock_set_events
+		mock_set_events,
+		mock_get_query_parameters
 	):
 		with patch.object(DBService, 'get_events', return_value=self.events):
 			view = EventListView()
@@ -167,9 +178,11 @@ class TestEventListView(TestCase):
 			result = view.get_queryset()
 			set_events_count = mock_set_events.call_count
 			get_dto_list_count = mock_get_list_dto.call_count
+			get_query_parameters_count = mock_get_query_parameters.call_count
 			self.assertEqual(result, self.events)
 			self.assertEqual(set_events_count, 1)
 			self.assertEqual(get_dto_list_count, 1)
+			self.assertEqual(get_query_parameters_count, 1)
 
 	@patch("search_events_app.views.event_list_view.ListView.get")
 	def test_get(self, mock_super_get):
