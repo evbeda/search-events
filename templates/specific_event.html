@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load el_pagination_tags %}
+{% include "modal_query_default.html" %}
+{% include "navbar.html" %}
+
+    {% if error %}
+        {% include "modal_error.html" %}
+    {% else %}
+        <div class="container-fluid width-90 mt-4">
+            {% include "filters/filters_specific_event.html" %}
+            {% include "table_events.html" %}
+        </div>
+    {% endif %}
+{% endblock %}

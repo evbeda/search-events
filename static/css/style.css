@@ -193,3 +193,7 @@ input::placeholder {
 .dropdown-item {
   align-self: auto;
 }
+
+.item.active{
+  color: white
+}

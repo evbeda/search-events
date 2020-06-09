@@ -1,0 +1,23 @@
+<body onload="StateManager.setCountries({{countries}});">
+    <form autocomplete="off" id="features-form">
+        {% include "filters/shared_filters.html" %}
+        <div class="row mt-2">
+            <input type="text" hidden id="textFeature" name="feature">    
+            {% include "filters/category_format_filter.html" %}
+            <div class="input-group col-sm-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="material-icons">dns</i>
+                    </span>
+                </div>
+                
+                <select id="feature" class="selectpicker custom-select h-100" multiple data-selected-text-format="count > 2" data-live-search="true" title="Any Feature">
+                    {% for feature in features %}
+                    <option value="{{ feature.code }}">{{ feature.name }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+        </div>
+        {% include "filters/buttons_filter.html" %}
+    </form>
+</body>

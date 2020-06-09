@@ -1,0 +1,31 @@
+
+    <div class="input-group col-sm-3" >
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2">
+                <i class="material-icons">view_module</i>
+            </span>
+        </div>
+        
+        <select id="category" name="category" class="custom-select h-100" >
+            <option selected value="">Any category</option>
+            {% for category in categories %}
+                <option value={{ category.code }}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="input-group col-sm-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2">
+                <i class="material-icons">list</i>
+            </span>
+        </div>
+        
+        <select id="format" name="format" class="custom-select h-100" >
+            <option selected value="">Any format</option>
+            {% for format in formats %}
+                <option value={{ format.code }}>{{ format.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+

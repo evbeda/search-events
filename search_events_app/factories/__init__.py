@@ -1,0 +1,2 @@
+from search_events_app.factories.query_parameter_factory import QueryParameterFactory
+from search_events_app.factories.template_factory import TemplateFactory
