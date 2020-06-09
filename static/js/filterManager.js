@@ -8,7 +8,8 @@ const FilterManager = (function() {
         "category": "",
         "price": "",
         "currency": "USD",
-        "city": ""
+        "city": "",
+        "event_name": "",
     }
 
     const VALUES_TO_HIDE = {
@@ -24,7 +25,7 @@ const FilterManager = (function() {
          }
     }
     
-    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city"];
+    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name"];
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
