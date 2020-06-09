@@ -165,3 +165,31 @@ input::placeholder {
   color: #f05537;
   text-decoration:none;
 }
+.vl {
+  border-left: 6px solid #f05537;
+  height: 54px;
+  margin: 0 15px;
+}
+
+.container-between {
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.orange-arrow::after {
+  color: #f05537 !important;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 75%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    width: 10rem;
+}
+
+.dropdown-item {
+  align-self: auto;
+}
