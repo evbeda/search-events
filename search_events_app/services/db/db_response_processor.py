@@ -51,9 +51,12 @@ def get_organizer(item):
 
 
 def get_eb_studio_url(item):
-    if item[9]:
-        return f'https://{item[9]}'
-    return None
+    try:
+        if item[9]:
+            return f'https://{item[9]}'
+        return None
+    except Exception:
+        return None
 
 
 def get_admin_url(item):
