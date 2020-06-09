@@ -1,0 +1,38 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg blue-eb container-between">
+    <div class="d-flex align-items-center">
+		<img class="reduce item" src="{% static "img/eventbrite_logo.png"%}">
+		<div class="vl"></div>
+		<div class="feed-header__title-top pr-0 mr-0 item">
+			<h1 class="mb-0">Events Finder</h1>
+		</div>
+	</div>
+
+    <div class="d-flex align-items-center">
+        <a class="mt-1 item dropdown-user" href="#">Find specific event</a>
+        <a class="mt-1 pl-4 item dropdown-user" href="#">Show samples</a>
+    </div>
+    
+    <div class="d-flex align-items-center">
+		<div class="d-flex align-items-center dropdown-user" data-toggle="modal" data-target="#helpModal">
+			<i class="material-icons">help</i>
+			<div class="mt-1">How it works</div>
+		</div>
+
+		<div id="navbarDropdown">
+			<a class="d-flex align-items-center nav-link dropdown-user dropdown-toggle orange-arrow" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="material-icons dropdown-user">person</i>
+				<span class="dropdown-user">{{ username }}</span>
+			</a>
+			<form class="dropdown-menu ml-auto form-inline my-2 my-lg-0" method="POST" action="{% url 'logout' %}">
+				{% csrf_token %}
+				<button class="d-flex dropdown-item" type="submit">
+					<div class="mt-1">Logout</div>
+					<i class="material-icons ml-auto">logout</i>
+				</button>
+			</form>
+		</div>
+    </div>
+</nav>
