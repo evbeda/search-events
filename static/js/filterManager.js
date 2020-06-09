@@ -10,6 +10,7 @@ const FilterManager = (function() {
         "currency": "USD",
         "city": "",
         "event_name": "",
+        "organizer": ""
     }
 
     const VALUES_TO_HIDE = {
@@ -25,7 +26,7 @@ const FilterManager = (function() {
          }
     }
     
-    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name"];
+    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name", "organizer"];
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
@@ -111,11 +112,13 @@ const FilterManager = (function() {
     }
 
     function restoreFilterValuesByDefault (){
-        FILTER_IDS.forEach(function (id) {
-            filter = document.getElementById(id);
-            filter.value = FILTERS_BY_DEFAULT[id];
-            filter.disabled = false;
-        });
+        try{
+            FILTER_IDS.forEach(function (id) {
+                filter = document.getElementById(id);
+                filter.value = FILTERS_BY_DEFAULT[id];
+                filter.disabled = false;
+            });
+        }catch(e){}
     }
 
     function showFilters(show_ids){
@@ -126,16 +129,18 @@ const FilterManager = (function() {
     }
 
     function clearSelectedFeatures() {
-        const domElement = document.getElementById("feature");
-        domElement.value = "";
-        const options = domElement.options;
-    
-        for(let i = 0; i < options.length; i++) {
-          options[i].selected = false;
-        }
+        try{
+            const domElement = document.getElementById("feature");
+            domElement.value = "";
+            const options = domElement.options;
         
-        $(domElement.nextSibling).addClass('bs-placeholder');
-        document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title;
+            for(let i = 0; i < options.length; i++) {
+            options[i].selected = false;
+            }
+            
+            $(domElement.nextSibling).addClass('bs-placeholder');
+            document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title;
+        }catch(e){}
     }
     
     function getDefaultFilters(){
