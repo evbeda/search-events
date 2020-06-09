@@ -229,7 +229,7 @@ class TestEventListView(TestCase):
 		args_calls = mock_render.call_args[0]
 
 		self.assertEqual(count_calls, 1)
-		self.assertEqual(args_calls[1], 'event_list.html')
+		self.assertEqual(args_calls[1], 'find_feature.html')
 		self.assertEqual(args_calls[2]['error'], presto_error.message)
 
 	def test_is_from_login_true(self):

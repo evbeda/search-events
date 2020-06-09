@@ -36,7 +36,7 @@ class EventListView(ListView):
             return super().get(request)
         except PrestoError as e:
             StateManager.reset_events()
-            return render(request, 'event_list.html', {'error': e.message})
+            return render(request, 'find_feature.html', {'error': e.message})
         except Exception as e:
             return redirect('login')
 
