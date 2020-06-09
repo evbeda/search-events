@@ -8,7 +8,8 @@ const FilterManager = (function() {
         "category": "",
         "price": "",
         "currency": "USD",
-        "city": ""
+        "city": "",
+        "event_name": "",
     }
 
     const VALUES_TO_HIDE = {
@@ -24,7 +25,7 @@ const FilterManager = (function() {
          }
     }
     
-    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city"];
+    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name"];
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
@@ -34,6 +35,7 @@ const FilterManager = (function() {
             FILTER_IDS.forEach(function(filter) {
                 const lastValue = querySt(filter);
                 if(lastValue !== undefined){
+                    console.log(lastValue)
                     document.getElementById(filter).value = lastValue;
                 } else if (FILTERS_BY_DEFAULT[filter]) {
                     document.getElementById(filter).value = FILTERS_BY_DEFAULT[filter];

@@ -1,5 +1,15 @@
 <body onload="StateManager.setCountries({{countries}});">
     <form autocomplete="off" id="specific-form">
+        <div class="row mb-2">
+            <div class="col-sm-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">search</i>
+                    </span>
+                    <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
+                </div>
+            </div>
+        </div>
         {% include "filters/shared_filters.html" %}
         <div class="row mt-2">    
             {% include "filters/category_format_filter.html" %}
