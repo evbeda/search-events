@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 from django.test import TestCase
 
-from search_events_app.factories.query_parameter_factory import QueryParameterFactory
+from search_events_app.factories import QueryParameterFactory
 from search_events_app.utils import SpecificEventsQueryParameters, FindFeatureQueryParameters
 
 

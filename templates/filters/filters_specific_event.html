@@ -1,0 +1,9 @@
+<body onload="StateManager.setCountries({{countries}});">
+    <form autocomplete="off" id="specific-form">
+        {% include "filters/shared_filters.html" %}
+        <div class="row mt-2">    
+            {% include "filters/category_format_filter.html" %}
+        </div>
+        {% include "filters/buttons_filter.html" %}
+    </form>
+</body>
