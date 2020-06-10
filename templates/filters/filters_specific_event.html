@@ -1,3 +1,8 @@
+<!-- Datepicker -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <body onload="StateManager.setCountries({{countries}});">
     <form autocomplete="off" id="specific-form">
         <div class="row mb-2">
@@ -26,7 +31,17 @@
                 <input class="form-control" id="buyer" type="search" name="buyer" placeholder="Buyer name">
             </div>
         </div>
+
         <div class="row mb-2">
+            <div class="input-group col-sm-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">today</i>
+                    </span>
+                </div>
+                <input type="search" class="form-control" id="datefilter" name="datefilter" placeholder="Range Start Date">
+            </div>
+
             <div class="input-group col-sm-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
