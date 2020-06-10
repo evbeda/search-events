@@ -26,6 +26,16 @@
                 <input class="form-control" id="buyer" type="search" name="buyer" placeholder="Buyer name">
             </div>
         </div>
+        <div class="row mb-2">
+            <div class="input-group col-sm-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">directions</i>
+                    </span>
+                </div>
+                <input type="search" class="form-control" placeholder="Venue" id="venue" name="venue">
+            </div>
+        </div>
         {% include "filters/shared_filters.html" %}
         <div class="row mt-2">    
             {% include "filters/category_format_filter.html" %}
