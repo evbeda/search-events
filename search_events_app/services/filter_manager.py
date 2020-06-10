@@ -16,12 +16,28 @@ from search_events_app.filters import (
     OnlineFilter,
     OrganizerFilter,
     PriceFilter,
+    StartDateFilter,
     VenueFilter,
 )
 
 
 class FilterManager:
-    latest_filters = [CountryFilter(), OnlineFilter(), LanguageFilter(), FormatFilter(), CategoryFilter(), PriceFilter(), CurrencyFilter(), CityFilter(), FeatureFilterManager(), EventNameFilter(), OrganizerFilter(), BuyerFilter(), VenueFilter()]
+    latest_filters = [
+        CountryFilter(),
+        OnlineFilter(),
+        LanguageFilter(),
+        FormatFilter(),
+        CategoryFilter(),
+        PriceFilter(),
+        CurrencyFilter(),
+        CityFilter(),
+        FeatureFilterManager(),
+        EventNameFilter(),
+        OrganizerFilter(),
+        BuyerFilter(),
+        VenueFilter(),
+        StartDateFilter()
+    ]
 
     @classmethod
     def apply_filters(cls, request):
