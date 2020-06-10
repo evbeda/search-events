@@ -12,7 +12,8 @@ const FilterManager = (function() {
         "event_name": "",
         "organizer": "",
         "buyer": "",
-        "venue": ""
+        "venue": "",
+        "datefilter": ""
     }
 
     const VALUES_TO_HIDE = {
@@ -28,7 +29,7 @@ const FilterManager = (function() {
          }
     }
     
-    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name", "organizer", "buyer", "venue"];
+    const FILTER_IDS = ["country", "online", "language", "format", "category", "price", "currency", "city", "event_name", "organizer", "buyer", "venue", "datefilter"];
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {

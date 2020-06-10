@@ -124,6 +124,21 @@ input::placeholder {
     border: 1px solid #ced4da;
 }
 
+.clear-datepicker{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .375rem .375rem .375rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+}
+
 .bootstrap-select .dropdown-toggle .filter-option {
   position: relative !important;
   padding-top: 0 !important;
@@ -196,4 +211,19 @@ input::placeholder {
 
 .item.active{
   color: white
+}
+
+.in-range {
+  background-color: #f05537 !important;
+  opacity: 0.5 !important;
+}
+
+.start-date {
+  background-color: #f05537 !important;
+  opacity: 1 !important;
+}
+
+.end-date {
+  background-color: #f05537 !important;
+  opacity: 1 !important;
 }
