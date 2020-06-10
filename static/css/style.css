@@ -197,3 +197,18 @@ input::placeholder {
 .item.active{
   color: white
 }
+
+.in-range {
+  background-color: #f05537 !important;
+  opacity: 0.5 !important;
+}
+
+.start-date {
+  background-color: #f05537 !important;
+  opacity: 1 !important;
+}
+
+.end-date {
+  background-color: #f05537 !important;
+  opacity: 1 !important;
+}

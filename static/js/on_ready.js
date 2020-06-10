@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    DatePickerManager.loadDatePickers();
+
     document.addEventListener("click", function (e) {
         ListManager.closeAllLists();
     });
