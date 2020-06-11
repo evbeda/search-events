@@ -10,7 +10,9 @@
         <thead class="thead-blue-eb text-white">
             <tr>
                 <th>Admin Dashboard</th>
+                {% if has_eb_studio %}
                 <th>EB Studio Page</th>
+                {% endif %}
                 <th>Name</th>
                 <th>Category</th>
                 <th>Format</th>
@@ -32,6 +34,7 @@
                                     <i class="material-icons">link</i>
                                 </a>
                             </td>
+                            {% if has_eb_studio %}
                             <td class="text-center">
                                 {% if event.eb_studio_url %}
                                 <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
@@ -41,6 +44,7 @@
                                 <i>None</i>
                                 {% endif %}
                             </td>
+                            {% endif %}
                             <td style="word-wrap: break-word; max-width: 300px;">
                                 <a class="text-orange" href="{{ event.url }}" target="_blank">
                                     {{ event.name|safe }}
