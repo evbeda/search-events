@@ -17,7 +17,6 @@ from search_events_app.services import (
 from search_events_app.exceptions import PrestoError
 from search_events_app.models import (
     Category,
-    City,
     Country,
     Currency,
     Feature,
@@ -27,6 +26,8 @@ from search_events_app.models import (
 
 
 class EventListView(ListView):
+
+    has_eb_studio = False
 
     def get(self, request):
         self.template_name = TemplateFactory.get_template(request)
@@ -49,8 +50,11 @@ class EventListView(ListView):
             query_parameters = QueryParameterFactory.get_query_parameters(self.request)
             events = DBService.get_events(db_service_filters, query_parameters)
             StateManager.set_events(events)
+            self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
             return events
-        return StateManager.get_last_searched_events()
+        events = StateManager.get_last_searched_events()
+        self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
+        return events
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,6 +65,7 @@ class EventListView(ListView):
             context.update(class_.get_context())
 
         context['username'] = ConnectionManager.username
+        context['has_eb_studio'] = self.has_eb_studio
 
         return context
 
