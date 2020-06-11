@@ -43,6 +43,7 @@ const formManager = (function() {
 	function showSpinner(formId){
 		document.getElementById(formId).style.display = "none";
 		document.getElementById("table-events").style.display = "none";
+		document.getElementById("accordion").style.display = "none";
 		document.getElementById("spin").style.display = "block";
 	}
 
