@@ -50,6 +50,14 @@
                 </div>
                 <input type="search" class="form-control" placeholder="Venue" id="venue" name="venue">
             </div>
+            <div class="input-group col-sm-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">credit_card</i>
+                    </span>
+                </div>
+                <input type="search" maxlength="4" class="form-control" placeholder="Last four" id="card" name="card" onpaste="return false;">
+            </div>
         </div>
         {% include "filters/shared_filters.html" %}
         <div class="row mt-2">    

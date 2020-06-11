@@ -7,6 +7,7 @@ from search_events_app.filters.event_name_filter import EventNameFilter
 from search_events_app.filters.feature_filter_manager import FeatureFilterManager
 from search_events_app.filters.format_filter import FormatFilter
 from search_events_app.filters.language_filter import LanguageFilter
+from search_events_app.filters.last_four_filter import LastFourFilter
 from search_events_app.filters.online_filter import OnlineFilter
 from search_events_app.filters.organizer_filter import OrganizerFilter
 from search_events_app.filters.price_filter import PriceFilter
