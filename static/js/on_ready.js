@@ -26,4 +26,11 @@ $(document).ready(function() {
             return false;
         }
     });
+
+    $("#card").keydown(function(e){
+        if(((e.keyCode < KEY_CODES.ZERO) || (e.keyCode > KEY_CODES.NINE))&& e.keyCode != KEY_CODES.DELETE && ((e.keyCode < KEY_CODES.LEFT) || (e.keyCode > KEY_CODES.DOWN))){
+            console.log('error')
+            e.preventDefault();
+        }
+    });
 });
