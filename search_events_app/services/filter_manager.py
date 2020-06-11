@@ -13,6 +13,7 @@ from search_events_app.filters import (
     FeatureFilterManager,
     FormatFilter,
     LanguageFilter,
+    LastFourFilter,
     OnlineFilter,
     OrganizerFilter,
     PriceFilter,
@@ -36,7 +37,8 @@ class FilterManager:
         OrganizerFilter(),
         BuyerFilter(),
         VenueFilter(),
-        StartDateFilter()
+        StartDateFilter(),
+        LastFourFilter()
     ]
 
     @classmethod
