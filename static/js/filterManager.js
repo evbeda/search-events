@@ -151,11 +151,22 @@ const FilterManager = (function() {
         return FILTERS_BY_DEFAULT
     }
 
+    function toggleFilterVisibility(){
+        if($('#collapseOne').hasClass('show')){
+            document.getElementById('collapseIcon').innerText = 'visibility_off'
+            document.getElementById('collapseText').innerText = 'Show Filters'
+        } else{
+            document.getElementById('collapseIcon').innerText = 'visibility'
+            document.getElementById('collapseText').innerText = 'Hide Filters'
+        }    
+    }
+
     return {
         clearFilters,
         reloadLastFilters,
         toggleDisable,
         getDefaultFilters,
-        reloadLastState
+        reloadLastState,
+        toggleFilterVisibility
     }
 })()

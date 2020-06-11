@@ -1,24 +1,54 @@
 .modal {
     margin-top: 10%;
     width: 95%;
-  }
-.modal-content{
+}
+
+.modal-content {
     width: 110%;
 }
+
 .modal-header {
     background-color:#1E0A3C ;
 } 
+
 .modal-title {
     font-weight: bold;
     color: #f05537;
 }
-.btnmodal{
+
+.btnmodal {
     background-color:#f05537 ;
     color: white;
 }
-.close{
+
+.close {
     color: white;
 }
-.close:hover{
+
+.close:hover {
     color: whitesmoke;
+}
+
+.tab-navigation {
+    color: #f05537;
+}
+
+.tab-navigation:hover {
+    text-decoration: none;
+    color: #1E0A3C;
+}
+.tab-navigation.active {
+    color:#1E0A3C ;
+    text-decoration: underline;
+}
+
+.little-vl {
+    border-left: 2px solid #f05537;
+    height: 18px;
+    margin: 0 15px;
+}
+
+.nav-tabs {
+    border-bottom: 0px;
+    justify-content: center;
 }

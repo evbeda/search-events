@@ -12,19 +12,45 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Every event you'll see listed on the results section meet at least all the following characteristics:</p>
-          <ul>
-            <li type="circle">Public</li>
-            <li type="circle">Live status</li>
-            <li type="circle">Event Start Date within a timeframe of 1 to 6 months from now.</li>
-            <li type="circle">Sales End Date at least 1 month from now.</li> 
-            <li type="circle">Events are sorted by the amount of tickets sold (descending)</li>
-          </ul>
-          <p>These constraints aim to provide more compelling examples by bringing popular events that will still be live for a while.</p>
- 
-          <p> Any additional filters (Country, Category, Features, etc.) you might add will be applied on top of these constraints.</p>
+          <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs mb-4" role="tablist">
+                <li role="presentation" class="active"><a class="tab-navigation active" href="#findFeature" aria-controls="findFeature" role="tab" data-toggle="tab"><b> Find feature</b></a>
+                <li class="little-vl"></li>
+                </li>
+                <li role="presentation" ><a class="tab-navigation" href="#specificEvent" aria-controls="specificEvent" role="tab" data-toggle="tab"><b>Specific Event</b></a>
+
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="findFeature">
+                    <p>Every event you'll see listed on the results section meet at least all the following characteristics:</p>
+                    <ul>
+                      <li type="circle">Public</li>
+                      <li type="circle">Live status</li>
+                      <li type="circle">Event Start Date within a timeframe of 1 to 6 months from now.</li>
+                      <li type="circle">Sales End Date at least 1 month from now.</li> 
+                      <li type="circle">Events are sorted by the amount of tickets sold (descending)</li>
+                    </ul>
+                    <p>These constraints aim to provide more compelling examples by bringing popular events that will still be live for a while.</p>
             
-          <p><b>PRO TIP:</b> Make sure you double check features are visible (not hidden) before sharing them by taking a look on the event listing page and/or the Admin link.</p>
+                    <p> Any additional filters (Country, Category, Features, etc.) you might add will be applied on top of these constraints.</p>
+                      
+                    <p><b>PRO TIP:</b> Make sure you double check features are visible (not hidden) before sharing them by taking a look on the event listing page and/or the Admin link.</p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="specificEvent">
+                  <p> You'll be able to support attendees by searching for upcoming events even with only a few clues.</p>
+                  <p>  Event Name, Organizer Name, Attendee Name and Venue Location fields support partial inputs. </p>
+
+                  <p>  E.g:  </p>
+
+                  <p>By entering "Cooking" on the Event Name field, you'll be able to find the "2020 World Championship Barbecue Cooking Contest" event.</p>
+
+                  <p> Or, by entering "Riverside" on the Venue Location field, you'll be able to find an event with the following location: "Tom Lee Park 357 Riverside Dr Memphis, TN 38103" </p> 
+                </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>
