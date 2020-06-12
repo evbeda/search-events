@@ -30,5 +30,5 @@ class CityFilter(Filter):
         if self.value:
             if self.value.code:
                 return f" AND dw_event.event_venue_state = '{self.value.code}' "
-            return f" AND dw_event.event_venue_state = '{self.value.name}' OR dw_event.event_venue_city = '{self.value.name}' "
+            return f" AND (dw_event.event_venue_state = '{self.value.name}' OR dw_event.event_venue_city = '{self.value.name}')"
         return ''
