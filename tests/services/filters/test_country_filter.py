@@ -55,7 +55,7 @@ class TestCountryFilter(TestCase):
             'places_within': ['1234']
         })
         self.assertEqual(self.country_filter.get_join_query(), [''])
-        self.assertEqual(self.country_filter.get_where_query(), " AND country_desc='AR' ")
+        self.assertEqual(self.country_filter.get_where_query(), "AND country_desc='AR'")
 
     def test_country_filter_info_without_country_selected(self):
 

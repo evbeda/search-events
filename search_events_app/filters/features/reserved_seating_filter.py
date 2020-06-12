@@ -14,5 +14,5 @@ class ReservedSeatingFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND dw_event.is_reserved_seating = 'Y' "
+            return f"AND dw_event.is_reserved_seating = 'Y'"
         return ''

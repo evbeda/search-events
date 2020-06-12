@@ -50,7 +50,7 @@ class TestCurrencyFilter(TestCase):
         self.currency_filter.value = Currency(name='United States Dollar', code='USD')
 
         self.assertEqual(self.currency_filter.get_join_query(), [''])
-        self.assertEqual(self.currency_filter.get_where_query(), " AND dw_event.event_currency = 'USD' ")
+        self.assertEqual(self.currency_filter.get_where_query(), "AND dw_event.event_currency = 'USD'")
 
     def test_currency_filter_info_without_currency_selected(self):
 

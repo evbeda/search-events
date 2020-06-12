@@ -17,11 +17,11 @@ class BuyerFilter(Filter):
     def get_join_query(self):
         if self.value:
             return [
-                "INNER JOIN ("\
-                "SELECT event, CONCAT(first_name, ' ', last_name) AS attendee_name "\
-                "FROM hive.eb.attendees "\
-                f"WHERE LOWER(CONCAT(first_name, ' ', last_name)) LIKE '%{self.value.lower()}%'"\
-            ") AS at ON at.event = dw_event.event_id"
+                'INNER JOIN ('
+                    "SELECT event, CONCAT(first_name, ' ', last_name) AS attendee_name "
+                    'FROM hive.eb.attendees '
+                    f"WHERE LOWER(CONCAT(first_name, ' ', last_name)) LIKE '%{self.value.lower()}%'"
+                ') AS at ON at.event = dw_event.event_id'
             ]
         return ['']
 

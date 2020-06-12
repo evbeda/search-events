@@ -15,17 +15,17 @@ class LastFourFilter(Filter):
 
     def get_join_query(self):
         if self.value:
-            return [f"""
-                INNER JOIN (
-                    SELECT o.event, o.id
-                    FROM hive.eb.orders o
-                    INNER JOIN (
-                        SELECT order_id
-                        FROM hive.eb.orders_payment
-                        WHERE last_four = '{self.value}'
-                        ) AS op ON op.order_id = o.id
-                ) AS o on o.event = dw_event.event_id
-                """]
+            return [
+                'INNER JOIN ('
+                    'SELECT o.event, o.id '
+                    'FROM hive.eb.orders o '
+                    'INNER JOIN ('
+                        'SELECT order_id '
+                        'FROM hive.eb.orders_payment '
+                        f"WHERE last_four = '{self.value}'"
+                        ') AS op ON op.order_id = o.id'
+                ') AS o on o.event = dw_event.event_id'
+            ]
         return ['']
 
     def get_where_query(self):

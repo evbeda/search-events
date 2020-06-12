@@ -14,5 +14,5 @@ class DonationFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return ' AND ts.donation > 0 '
+            return 'AND ts.donation > 0'
         return ''

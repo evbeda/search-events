@@ -49,7 +49,7 @@ class TestCategoryFilter(TestCase):
         self.category_filter.value = Category(name='Fashion & Beauty', code='FB')
 
         self.assertEqual(self.category_filter.get_join_query(), [''])
-        self.assertEqual(self.category_filter.get_where_query(), " AND dw_cat.event_category_desc = 'Fashion & Beauty' ")
+        self.assertEqual(self.category_filter.get_where_query(), "AND dw_cat.event_category_desc = 'Fashion & Beauty'")
 
     def test_category_filter_info_without_category_selected(self):
 

@@ -27,5 +27,5 @@ class FormatFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND dw_cat.event_format_desc='{self.value.name}' "
+            return f"AND dw_cat.event_format_desc='{self.value.name}'"
         return ''

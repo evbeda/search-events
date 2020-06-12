@@ -18,10 +18,8 @@ class OrganizerFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f"""
-             AND (
-                LOWER(dw_organizer.organizer_name) LIKE '%{self.value.lower()}%' 
-                OR LOWER(dw_org.organization_name) LIKE '%{self.value.lower()}%'
-            )
-            """
+            return 'AND ('\
+                f"LOWER(dw_organizer.organizer_name) LIKE '%{self.value.lower()}%' "\
+                f"OR LOWER(dw_org.organization_name) LIKE '%{self.value.lower()}%'"\
+            ')'
         return ''

@@ -37,12 +37,10 @@ class TestOrganizerFilter(TestCase):
         self.assertFalse(self.organizer_filter.has_changed)
 
     def test_organizer_filter_info_with_organizer_selected(self):
-        expected_result ="""
-             AND (
-                LOWER(dw_organizer.organizer_name) LIKE '%hernan casciari%' 
-                OR LOWER(dw_org.organization_name) LIKE '%hernan casciari%'
-            )
-            """
+        expected_result ='AND ('\
+                f"LOWER(dw_organizer.organizer_name) LIKE '%hernan casciari%' " \
+                f"OR LOWER(dw_org.organization_name) LIKE '%hernan casciari%'" \
+            ')'
         self.organizer_filter.value = "Hernan Casciari"
 
         self.assertEqual(self.organizer_filter.get_join_query(), [''])
