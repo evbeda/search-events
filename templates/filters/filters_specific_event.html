@@ -1,68 +1,65 @@
-<!-- Datepicker -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+{% extends "filters/filters.html" %}
 
-<body onload="StateManager.setCountries({{countries}});">
-    <form autocomplete="off" id="specific-form">
-        <div class="row mb-2">
-            <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="material-icons">search</i>
-                    </span>
-                </div>
-                <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
+{% block content %}
+    <div class="row mb-2">
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">search</i>
+                </span>
             </div>
-            <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="material-icons">supervisor_account</i>
-                    </span>
-                </div>
-                <input name="organizer" id="organizer" type="search" class="form-control" placeholder="Organizer Name" aria-label="Organizer" aria-describedby="basic-addon1">
+            <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
+        </div>
+        
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">supervisor_account</i>
+                </span>
             </div>
-            <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="material-icons">person</i>
-                    </span>
-                </div>
-                <input class="form-control" id="buyer" type="search" name="buyer" placeholder="Attendee Name">
+            <input name="organizer" id="organizer" type="search" class="form-control" placeholder="Organizer Name" aria-label="Organizer" aria-describedby="basic-addon1">
+        </div>
+        
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">person</i>
+                </span>
             </div>
+            <input class="form-control" id="buyer" type="search" name="buyer" placeholder="Attendee Name">
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">today</i>
+                </span>
+            </div>
+            <input type="search" class="form-control" id="datefilter" name="datefilter" placeholder="Range Start Date">
+        </div>
+        
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">directions</i>
+                </span>
+            </div>
+            <input type="search" class="form-control" placeholder="Venue Location" id="venue" name="venue">
         </div>
 
-        <div class="row mb-2">
-            <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="material-icons">today</i>
-                    </span>
-                </div>
-                <input type="search" class="form-control" id="datefilter" name="datefilter" placeholder="Range Start Date">
+        <div class="input-group col-sm-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">credit_card</i>
+                </span>
             </div>
-
-            <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="material-icons">directions</i>
-                    </span>
-                </div>
-                <input type="search" class="form-control" placeholder="Venue Location" id="venue" name="venue">
-            </div>
-            <div class="input-group col-sm-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="material-icons">credit_card</i>
-                    </span>
-                </div>
-                <input type="search" maxlength="4" class="form-control" placeholder="Last 4 Digits" id="card" name="card" onpaste="return false;">
-            </div>
+            <input type="search" maxlength="4" class="form-control" placeholder="Last 4 Digits" id="card" name="card" onkeydown="FormManager.validateNumbers(event, 'card');" onpaste="return false;">
         </div>
-        {% include "filters/shared_filters.html" %}
-        <div class="row mt-2">    
-            {% include "filters/category_format_filter.html" %}
-        </div>
-        {% include "filters/buttons_filter.html" %}
-    </form>
-</body>
+    </div>
+    {% include "filters/shared_filters.html" %}
+    <div class="row mt-2">    
+        {% include "filters/category_format_filter.html" %}
+    </div>
+{% endblock %}

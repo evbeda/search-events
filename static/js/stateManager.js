@@ -8,7 +8,7 @@ const StateManager = (function() {
 	}
 	
 	function filterCity(inputElement) {
-		const dataCountries = countries.filter(c => c.name == document.getElementById('country').value)
+		const dataCountries = countries.filter(c => c.name == document.getElementById('country').value);
 		if (dataCountries && dataCountries.length){
 			setCities(dataCountries[0].cities);
 		}
@@ -34,9 +34,9 @@ const StateManager = (function() {
 	return {
 		filterCountry,
 		filterCity,
-		setCountries,
-		setCities,
-		getCities,
 		getCountries,
+		setCountries,
+		getCities,
+		setCities
 	}
 })()

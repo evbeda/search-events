@@ -51,12 +51,11 @@ const ListManager = (function() {
 
     return {
         addActive,
-        removeActive,
         closeAllLists,
         incrementCurrentFocus,
         decrementCurrentFocus,
         getCurrentFocus,
         getElement,
-        setElement,
+        setElement
     }
 })()

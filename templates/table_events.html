@@ -1,17 +1,18 @@
 {% load el_pagination_tags %}
 {% load static %}
+
 <div class="col" id="spin">
-    <div class="spinner-border" role="status" id="spin-border" >
+    <div class="spinner-border" role="status" id="spin-border">
       <span class="sr-only">Loading...</span>
     </div>
 </div>
 <div class="row justify-content-center" id="table-events">
-    <table class="table table-hover table-striped" >
+    <table class="table table-hover table-striped">
         <thead class="thead-blue-eb text-white">
             <tr>
                 <th>Admin Dashboard</th>
                 {% if has_eb_studio %}
-                <th class="text-center">EB Studio Page</th>
+                    <th class="text-center">EB Studio Page</th>
                 {% endif %}
                 <th class="text-center">Name</th>
                 <th>Category</th>
@@ -25,44 +26,39 @@
         </thead>
         
         <tbody>
-            
-                {% paginate object_list %}
-                    {% for event in object_list %}
-                        <tr>
-                            <td class="text-center">
-                                <a class="text-orange" href="{{event.admin_url}}" target="_blank">
-                                    <i class="material-icons">link</i>
-                                </a>
-                            </td>
-                            {% if has_eb_studio %}
+            {% paginate object_list %}
+                {% for event in object_list %}
+                    <tr>
+                        <td class="text-center">
+                            <a class="text-orange" href="{{event.admin_url}}" target="_blank">
+                                <i class="material-icons">link</i>
+                            </a>
+                        </td>
+                        {% if has_eb_studio %}
                             <td class="text-center">
                                 {% if event.eb_studio_url %}
-                                <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
-                                    <i class="material-icons">link</i>
-                                </a>
+                                    <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
+                                        <i class="material-icons">link</i>
+                                    </a>
                                 {% else %}
-                                <i>None</i>
+                                    <i>None</i>
                                 {% endif %}
                             </td>
-                            {% endif %}
-                            <td style="word-wrap: break-word; max-width: 300px;">
-                                <a class="text-orange" href="{{ event.url }}" target="_blank">
-                                    {{ event.name|safe }}
-                                </a>
-                            </td>
-                            <td style="word-wrap: break-word; max-width: 150px;">{{ event.category|safe }}</td>
-                            <td style="word-wrap: break-word; max-width: 150px;">{{ event.format|safe }}</td>
-                            <td style="word-wrap: break-word; max-width: 150px;">{{ event.organizer|default:"None"|safe }}</td>
-                            <td>{{ event.country|default:"Online"|safe }}</td>
-                            <td>{{ event.start_date|safe }}</td>
-                            <td>{{ event.language }}</td>
-                            {% comment %} <td class="text-center">
-                                <img src="{% static "img/flags/"|add:event.language|add:".svg" %}" class="flag">
-                            </td> {% endcomment %}
-
-                        </tr>
-                    {% endfor %}
-                {% get_pages %}
+                        {% endif %}
+                        <td style="word-wrap: break-word; max-width: 300px;">
+                            <a class="text-orange" href="{{ event.url }}" target="_blank">
+                                {{ event.name|safe }}
+                            </a>
+                        </td>
+                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.category|safe }}</td>
+                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.format|safe }}</td>
+                        <td style="word-wrap: break-word; max-width: 150px;">{{ event.organizer|default:"None"|safe }}</td>
+                        <td>{{ event.country|default:"Online"|safe }}</td>
+                        <td>{{ event.start_date|safe }}</td>
+                        <td>{{ event.language }}</td>
+                    </tr>
+                {% endfor %}
+            {% get_pages %}
         </tbody>
     </table>
     {% if object_list %}

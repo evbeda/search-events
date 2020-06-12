@@ -34,9 +34,7 @@ const FilterManager = (function() {
     const LATEST_FILTERS = {}
     
     function reloadLastFilters() {
-        
         try {
-            
             FILTER_IDS.forEach(function(filter) {
                 const lastValue =  querySt(filter);
                 if(lastValue !== undefined){
@@ -52,7 +50,7 @@ const FilterManager = (function() {
            
             features = querySt("feature");
             if(features) selectLastFeatures("feature", features);
-        } catch(e) {throw e}
+        } catch(e) {}
     }
 
     function reloadLastState() {
@@ -115,7 +113,7 @@ const FilterManager = (function() {
         clearSelectedFeatures();
     }
 
-    function restoreFilterValuesByDefault (){
+    function restoreFilterValuesByDefault () {
         try {
             FILTER_IDS.forEach(function (id) {
                 filter = document.getElementById(id);
@@ -146,18 +144,14 @@ const FilterManager = (function() {
             document.getElementsByClassName("filter-option-inner-inner")[0].innerText = domElement.title;
         } catch(e) {}
     }
-    
-    function getDefaultFilters(){
-        return FILTERS_BY_DEFAULT
-    }
 
-    function toggleFilterVisibility(){
-        if($('#collapseOne').hasClass('show')){
-            document.getElementById('collapseIcon').innerText = 'visibility_off'
-            document.getElementById('collapseText').innerText = 'Show Filters'
-        } else{
-            document.getElementById('collapseIcon').innerText = 'visibility'
-            document.getElementById('collapseText').innerText = 'Hide Filters'
+    function toggleFilterVisibility() {
+        if($('#collapseOne').hasClass('show')) {
+            document.getElementById('collapseIcon').innerText = 'visibility_off';
+            document.getElementById('collapseText').innerText = 'Show Filters';
+        } else {
+            document.getElementById('collapseIcon').innerText = 'visibility';
+            document.getElementById('collapseText').innerText = 'Hide Filters';
         }    
     }
 
@@ -165,7 +159,6 @@ const FilterManager = (function() {
         clearFilters,
         reloadLastFilters,
         toggleDisable,
-        getDefaultFilters,
         reloadLastState,
         toggleFilterVisibility
     }

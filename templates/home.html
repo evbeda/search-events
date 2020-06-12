@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include "modal_query_default.html" %}
+    {% include "navbar.html" %}
+
+    {% if error %}
+        {% include "modal_error.html" %}
+    {% else %}
+        <div class="container-fluid width-90 mt-4">
+            <div id="accordion">
+                <div class="card">
+                    <a id="collapse" class="card-header blue-eb" data-toggle="collapse" href="#collapseOne" onclick="FilterManager.toggleFilterVisibility();">
+                        <div class="text-white d-flex align-items-center">
+                            <div id="collapseText">Hide Filters</div> 
+                            <i class="material-icons ml-2" id="collapseIcon">visibility</i>
+                        </div>
+                    </a>
+                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            {% block home_content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include "table_events.html" %}
+        </div>
+    {% endif %}
+{% endblock %}
