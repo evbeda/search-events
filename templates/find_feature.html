@@ -1,32 +1,5 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
-{% load el_pagination_tags %}
-{% include "modal_query_default.html" %}
-{% include "navbar.html" %}
+{% extends "home.html" %}
 
-    {% if error %}
-        {% include "modal_error.html" %}
-    {% else %}
-        <div class="container-fluid width-90 mt-4">
-            <div id="accordion">
-
-                <div class="card">
-                    <a id="collapse" class="card-header blue-eb d-flex" data-toggle="collapse" href="#collapseOne" onclick="FilterManager.toggleFilterVisibility();" >
-                        <div class="text-white d-flex align-items-center">
-                          <div id="collapseText">Hide Filters</div> 
-                          <i class="material-icons ml-2" id="collapseIcon">visibility</i>
-                        </div>
-                        </a>
-                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                    <div class="card-body">
-                        {% include "filters/filters_find_feature.html" %}
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            {% include "table_events.html" %}
-        </div>
-    {% endif %}
+{% block home_content %}
+    {% include "filters/filters_find_feature.html" %}
 {% endblock %}

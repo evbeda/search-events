@@ -93,7 +93,8 @@ input::placeholder {
 }
 
 .orange-eb {
-  background-color: #f05537;
+  background-color: #f05537 !important;
+  border-radius: 5px;
 }
 
 .orange-eb:hover {
@@ -119,6 +120,7 @@ input::placeholder {
 }
 
 .clear-filter{
+    border-radius: 5px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -192,7 +194,7 @@ input::placeholder {
 }
 
 .vl {
-  border-left: 6px solid #f05537;
+  border-left: 3px solid #f05537;
   height: 54px;
   margin: 0 15px;
 }
