@@ -63,14 +63,14 @@ class TestCityFilter(TestCase):
         self.city_filter.value = City(name='Indiana', country='US', code='IN')
 
         self.assertEqual(self.city_filter.get_join_query(), [''])
-        self.assertEqual(self.city_filter.get_where_query(), " AND dw_event.event_venue_state = 'IN' ")
+        self.assertEqual(self.city_filter.get_where_query(), "AND dw_event.event_venue_state = 'IN'")
 
     def test_city_filter_info_with_city_selected(self):
 
         self.city_filter.value = City(name='Mendoza', country='AR')
 
         self.assertEqual(self.city_filter.get_join_query(), [''])
-        self.assertEqual(self.city_filter.get_where_query(), " AND (dw_event.event_venue_state = 'Mendoza' OR dw_event.event_venue_city = 'Mendoza')")
+        self.assertEqual(self.city_filter.get_where_query(), "AND (dw_event.event_venue_state = 'Mendoza' OR dw_event.event_venue_city = 'Mendoza')")
 
     def test_city_filter_info_without_city_selected(self):
 

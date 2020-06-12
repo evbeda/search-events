@@ -39,17 +39,17 @@ class TestLastFourFilter(TestCase):
     def test_last_four_info_with_last_four_selected(self):
 
         self.last_four.value = '4356'
-        expected_result = [f"""
-                INNER JOIN (
-                    SELECT o.event, o.id
-                    FROM hive.eb.orders o
-                    INNER JOIN (
-                        SELECT order_id
-                        FROM hive.eb.orders_payment
-                        WHERE last_four = '4356'
-                        ) AS op ON op.order_id = o.id
-                ) AS o on o.event = dw_event.event_id
-                """]
+        expected_result = [
+                'INNER JOIN ('
+                    'SELECT o.event, o.id '
+                    'FROM hive.eb.orders o '
+                    'INNER JOIN ('
+                        'SELECT order_id '
+                        'FROM hive.eb.orders_payment '
+                        "WHERE last_four = '4356'"
+                        ') AS op ON op.order_id = o.id'
+                ') AS o on o.event = dw_event.event_id'
+            ]
 
         self.assertEqual(self.last_four.get_join_query(), expected_result)
         self.assertEqual(self.last_four.get_where_query(), '')

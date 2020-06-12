@@ -36,7 +36,7 @@ class TestAddOnsFilter(TestCase):
 
         result = self.add_ons_filter.get_where_query()
 
-        self.assertEqual(result, " AND f.trx_type = 'add_on_ticket_purchase'")
+        self.assertEqual(result, "AND f.trx_type = 'add_on_ticket_purchase'")
 
     def test_where_query_value_false(self):
         self.add_ons_filter.value = False

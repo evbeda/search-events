@@ -16,5 +16,5 @@ class EventNameFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND LOWER(dw_event.event_title) LIKE '%{self.value.lower().strip()}%' "
+            return f"AND LOWER(dw_event.event_title) LIKE '%{self.value.lower().strip()}%'"
         return ''

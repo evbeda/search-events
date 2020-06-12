@@ -50,7 +50,7 @@ class TestFormatFilter(TestCase):
 
         self.assertEqual(self.format_filter.get_value(), 'Game or Competition')
         self.assertEqual(self.format_filter.get_join_query(), [''])
-        self.assertEqual(self.format_filter.get_where_query(), " AND dw_cat.event_format_desc='Game or Competition' ")
+        self.assertEqual(self.format_filter.get_where_query(), "AND dw_cat.event_format_desc='Game or Competition'")
 
     def test_format_filter_info_without_format_selected(self):
 

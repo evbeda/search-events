@@ -22,5 +22,5 @@ class CategoryFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND dw_cat.event_category_desc = '{self.value.name}' "
+            return f"AND dw_cat.event_category_desc = '{self.value.name}'"
         return ''

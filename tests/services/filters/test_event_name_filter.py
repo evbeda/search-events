@@ -42,7 +42,7 @@ class TestEventNameFilter(TestCase):
         self.event_name_filter.value = "music"
 
         self.assertEqual(self.event_name_filter.get_join_query(), [''])
-        self.assertEqual(self.event_name_filter.get_where_query(), " AND LOWER(dw_event.event_title) LIKE '%music%' ")
+        self.assertEqual(self.event_name_filter.get_where_query(), "AND LOWER(dw_event.event_title) LIKE '%music%'")
 
     def test_event_name_filter_info_without_event_searched(self):
 

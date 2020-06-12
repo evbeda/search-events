@@ -55,8 +55,7 @@ class TestOnlineFilter(TestCase):
 
         self.online_filter.value = OnlineParameters.ONLINE
 
-        expected_where_query = """ AND dw_event.online_flag='Y'
-        AND dw_event.country_desc IS  NULL"""
+        expected_where_query = """AND dw_event.online_flag='Y' AND dw_event.country_desc IS  NULL"""
         self.assertEqual(self.online_filter.get_key(), 'online')
         self.assertEqual(self.online_filter.get_value(), OnlineParameters.ONLINE)
         self.assertEqual(self.online_filter.get_type(), 'search')

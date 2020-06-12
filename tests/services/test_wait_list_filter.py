@@ -22,24 +22,24 @@ class TestWaitlistFilter(TestCase):
     def test_join_query_value_true(self):
         self.waitlist_filter.value = True
         result = self.waitlist_filter.get_join_query()
-        result_query = ["""
-            INNER JOIN (
-                SELECT hive.eb.waitlist.event, ticket
-                FROM hive.eb.waitlist
-                INNER JOIN (
-                    SELECT id
-                    FROM hive.eb.ticket_classes
-                    WHERE (
-                        quantity_sold >= quantity_total
-                        AND is_donation = 0
-                        AND quantity_total > 0
-                        AND DATE(CAST(start_sales AS TIMESTAMP)) < NOW() - INTERVAL '1' DAY
-                        AND DATE(CAST(end_sales AS TIMESTAMP)) > NOW() + INTERVAL '1' MONTH
-                        AND deleted = 'n'
-                    )
-                ) AS tc ON tc.id = hive.eb.waitlist.ticket
-            ) AS waitlist ON waitlist.event = dw_event.event_id
-            """]
+        result_query = [
+            'INNER JOIN ('
+                'SELECT hive.eb.waitlist.event, ticket '
+                'FROM hive.eb.waitlist '
+                'INNER JOIN ('
+                    'SELECT id '
+                    'FROM hive.eb.ticket_classes '
+                    'WHERE ('
+                        'quantity_sold >= quantity_total '
+                        'AND is_donation = 0 '
+                        'AND quantity_total > 0 '
+                        "AND DATE(CAST(start_sales AS TIMESTAMP)) < NOW() - INTERVAL '1' DAY "
+                        "AND DATE(CAST(end_sales AS TIMESTAMP)) > NOW() + INTERVAL '1' MONTH "
+                        "AND deleted = 'n'"
+                    ')'
+                ') AS tc ON tc.id = hive.eb.waitlist.ticket'
+            ') AS waitlist ON waitlist.event = dw_event.event_id'
+            ]
 
         self.assertEqual(result, result_query)
 

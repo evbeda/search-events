@@ -39,5 +39,5 @@ class CountryFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND country_desc='{self.value.alpha_2_code}' "
+            return f"AND country_desc='{self.value.alpha_2_code}'"
         return ''
