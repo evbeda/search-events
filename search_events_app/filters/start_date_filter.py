@@ -21,7 +21,7 @@ class StartDateFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return "AND CAST(CAST(event_start_date AS TIMESTAMP) AS DATE)" \
-                        f" BETWEEN CAST('{self.value['start']}' AS DATE) " \
-                        f"AND CAST('{self.value['end']}' AS DATE) "
+            return 'AND CAST(CAST(event_start_date AS TIMESTAMP) AS DATE) ' \
+                        f"BETWEEN CAST('{self.value['start']}' AS DATE) " \
+                        f"AND CAST('{self.value['end']}' AS DATE)"
         return ''

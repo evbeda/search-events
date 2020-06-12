@@ -12,9 +12,9 @@ class GroupRegistrationFilter(Filter):
     def get_join_query(self):
         if self.value:
             return [
-                'INNER JOIN ('\
-                'SELECT event_id '\
-                'FROM hive.eb.team'\
+                'INNER JOIN ('
+                'SELECT event_id '
+                'FROM hive.eb.team'
                 ') AS team ON dw_event.event_id = team.event_id'
             ]
         return ['']

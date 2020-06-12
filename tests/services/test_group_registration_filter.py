@@ -27,12 +27,13 @@ class TestGroupRegistrationFilter(TestCase):
     def test_join_query_value_true(self):
         self.group_registration_filter.value = True
         result = self.group_registration_filter.get_join_query()
-        
-        self.assertEqual(result, ['INNER JOIN ('\
-                'SELECT event_id '\
-                'FROM hive.eb.team'\
+  
+        self.assertEqual(result, [
+                'INNER JOIN ('
+                'SELECT event_id '
+                'FROM hive.eb.team'
                 ') AS team ON dw_event.event_id = team.event_id'
-                ])
+            ])
 
     def test_where_query_(self):
         self.group_registration_filter.value = False

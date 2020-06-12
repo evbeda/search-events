@@ -44,7 +44,7 @@ class TestReservedSeatingFilter(TestCase):
 
         self.reserved_filter.value = True
 
-        expected_where_query = " AND dw_event.is_reserved_seating = 'Y' "
+        expected_where_query = "AND dw_event.is_reserved_seating = 'Y'"
         self.assertEqual(self.reserved_filter.get_join_query(), [''])
         self.assertEqual(self.reserved_filter.get_where_query(), expected_where_query)
 

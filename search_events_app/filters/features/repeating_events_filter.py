@@ -14,6 +14,6 @@ class RepeatingEventsFilter(Filter):
 
 	def get_where_query(self):
 		if self.value:
-			return " AND dw_event.is_repeating_event = 'Y'"
+			return "AND dw_event.is_repeating_event = 'Y'"
 		return ''
 

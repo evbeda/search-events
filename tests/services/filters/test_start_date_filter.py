@@ -52,7 +52,7 @@ class TestStartDateFilter(TestCase):
         }
         expected_result = "AND CAST(CAST(event_start_date AS TIMESTAMP) AS DATE)" \
                         " BETWEEN CAST('2020-06-24' AS DATE) " \
-                        "AND CAST('2020-06-25' AS DATE) "
+                        "AND CAST('2020-06-25' AS DATE)"
 
         self.assertEqual(self.start_date_filter.get_join_query(), [''])
         self.assertEqual(self.start_date_filter.get_where_query(), expected_result)

@@ -35,7 +35,7 @@ class TestDonationFilter(TestCase):
 
         result = self.donation_filter.get_where_query()
 
-        self.assertEqual(result, ' AND ts.donation > 0 ')
+        self.assertEqual(result, 'AND ts.donation > 0')
 
     def test_where_query_value_false(self):
         self.donation_filter.value = False

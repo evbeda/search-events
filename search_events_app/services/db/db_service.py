@@ -33,7 +33,7 @@ class DBService:
         for dto in dto_filters_array:
             for dto_join in dto.join_query:
                 join_base_query += " "+dto_join
-            where_base_query += dto.where_query
+            where_base_query += " "+dto.where_query
         query = select_base_query+join_base_query+where_base_query+group_by_base_query+order_by_base_query+limit
         return query
 

@@ -27,9 +27,10 @@ class TestWebsiteWidgetsFilter(TestCase):
     def test_join_query_value_true(self):
         self.website_widgets_filter.value = True
         result = self.website_widgets_filter.get_join_query()
-        self.assertEqual(result, ['INNER JOIN ('\
-                    'SELECT affiliate_code, affiliate_group_2 '\
-                    'FROM hive.dw.dim_affiliate_code_group'\
+        self.assertEqual(result, [
+                'INNER JOIN ('
+                    'SELECT affiliate_code, affiliate_group_2 '
+                    'FROM hive.dw.dim_affiliate_code_group'
                 ') AS dacg ON dacg.affiliate_code = f.q_order_affiliate_code'
                 ])
 
@@ -38,7 +39,7 @@ class TestWebsiteWidgetsFilter(TestCase):
 
         result = self.website_widgets_filter.get_where_query()
 
-        self.assertEqual(result, " AND dacg.affiliate_group_2 = 'Website Widgets'")
+        self.assertEqual(result, "AND dacg.affiliate_group_2 = 'Website Widgets'")
 
     def test_where_query_value_false(self):
         self.website_widgets_filter.value = False

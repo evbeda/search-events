@@ -35,7 +35,7 @@ class TestRepeatingEventsFilter(TestCase):
         self.filter.value = True
 
         result = self.filter.get_where_query()
-        self.assertEqual(result, " AND dw_event.is_repeating_event = 'Y'")
+        self.assertEqual(result, "AND dw_event.is_repeating_event = 'Y'")
 
     def test_get_where_query_without_filter_applied(self):
         self.filter.value = False

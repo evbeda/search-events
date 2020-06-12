@@ -22,5 +22,5 @@ class CurrencyFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND dw_event.event_currency = '{self.value.code}' "
+            return f"AND dw_event.event_currency = '{self.value.code}'"
         return ''

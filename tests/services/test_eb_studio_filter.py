@@ -37,4 +37,4 @@ class TestEBStudioFilter(TestCase):
 
         result = self.eb_studio_filter.get_where_query()
 
-        self.assertEqual(result, ' AND es.domain IS NOT NULL')
+        self.assertEqual(result, 'AND es.domain IS NOT NULL')

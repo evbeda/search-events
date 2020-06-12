@@ -39,5 +39,5 @@ class LanguageFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f" AND dw_event.event_language LIKE '%{self.value.code}_%' "
+            return f"AND dw_event.event_language LIKE '%{self.value.code}_%'"
         return ''

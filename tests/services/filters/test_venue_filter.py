@@ -37,14 +37,12 @@ class TestVenueFilter(TestCase):
         self.assertFalse(self.venue_filter.has_changed)
 
     def test_venue_filter_info_with_venue_selected(self):
-        expected_result ="""
-                AND (
-                    LOWER(CONCAT(venue_desc, ', ', event_venue_city, ', ', 
-                    event_venue_state, ' ', event_venue_postal_code))
-                    LIKE '%maipu, mendoza%'
-                )
-            """
-        self.venue_filter.value = "Maipu, Mendoza"
+        expected_result = 'AND (' \
+                    "LOWER(CONCAT(venue_desc, ', ', event_venue_city, ', ', " \
+                    "event_venue_state, ' ', event_venue_postal_code)) " \
+                    f"LIKE '%maipu, mendoza%'" \
+                ')'
+        self.venue_filter.value = 'Maipu, Mendoza'
 
         self.assertEqual(self.venue_filter.get_join_query(), [''])
         self.assertEqual(self.venue_filter.get_where_query(), expected_result)

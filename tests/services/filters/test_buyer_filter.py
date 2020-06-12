@@ -48,12 +48,12 @@ class TestBuyerFilter(TestCase):
 
         self.buyer_filter.value = 'John Adams'
         expected_result = [
-            "INNER JOIN ("\
-                "SELECT event, CONCAT(first_name, ' ', last_name) AS attendee_name "\
-                "FROM hive.eb.attendees "\
-                "WHERE LOWER(CONCAT(first_name, ' ', last_name)) LIKE '%john adams%'"\
-            ") AS at ON at.event = dw_event.event_id"
-        ]
+                'INNER JOIN ('
+                    "SELECT event, CONCAT(first_name, ' ', last_name) AS attendee_name "
+                    'FROM hive.eb.attendees '
+                    f"WHERE LOWER(CONCAT(first_name, ' ', last_name)) LIKE '%john adams%'"
+                ') AS at ON at.event = dw_event.event_id'
+            ]
 
         self.assertEqual(self.buyer_filter.get_join_query(), expected_result)
         self.assertEqual(self.buyer_filter.get_where_query(), '')

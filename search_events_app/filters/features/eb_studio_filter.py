@@ -14,6 +14,6 @@ class EBStudioFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return " AND es.domain IS NOT NULL"
+            return 'AND es.domain IS NOT NULL'
         return ''
 

@@ -19,6 +19,6 @@ class PriceFilter(Filter):
     def get_where_query(self):
         if self.value:
             if self.value == 'paid event':
-                return f" AND (dw_event.event_paid_type = '{self.value}' OR dw_event.event_paid_type = 'mixed event') "
-            return f" AND dw_event.event_paid_type = '{self.value}'"
+                return f"AND (dw_event.event_paid_type = '{self.value}' OR dw_event.event_paid_type = 'mixed event')"
+            return f"AND dw_event.event_paid_type = '{self.value}'"
         return ''

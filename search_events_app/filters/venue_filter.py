@@ -18,11 +18,9 @@ class VenueFilter(Filter):
 
     def get_where_query(self):
         if self.value:
-            return f"""
-                AND (
-                    LOWER(CONCAT(venue_desc, ', ', event_venue_city, ', ', 
-                    event_venue_state, ' ', event_venue_postal_code))
-                    LIKE '%{self.value.lower()}%'
-                )
-            """
+            return 'AND (' \
+                    "LOWER(CONCAT(venue_desc, ', ', event_venue_city, ', ', " \
+                    "event_venue_state, ' ', event_venue_postal_code)) " \
+                    f"LIKE '%{self.value.lower()}%'" \
+                ')'
         return ''
