@@ -5,5 +5,7 @@ const KEY_CODES = {
     ZERO: 48,
     NINE: 57,
     DELETE: 8,
-    LEFT: 37
+    LEFT: 37,
+    R: 82,
+    C: 67
 };

@@ -8,8 +8,8 @@
         
         <select onchange="FilterManager.toggleDisable('online');" id="online" name="online" class="custom-select h-100">
             <option value="">Online &amp; Venue</option>
-            <option value="on">Events online</option>
-            <option value="off">Events with venue</option>
+            <option value="on">Events Online</option>
+            <option value="off">Events with Venue</option>
         </select>
     </div>
     
@@ -20,7 +20,7 @@
             </span>
         </div>
 
-        <input class="autocomplete form-control" id="country" type="search" onkeydown="StateManager.filterCountry({{countries}}, this);" name="country" placeholder="Country" >
+        <input class="autocomplete form-control" id="country" type="search" onkeydown="StateManager.filterCountry({{countries}}, this);" name="country" placeholder="Any Country">
     </div>
 
     <div id="divCity" class="input-group col-sm-3 w-100">
@@ -30,7 +30,7 @@
             </span>
         </div>
         
-        <input class="autocomplete form-control h-100" id="city" type="search" onkeydown="StateManager.filterCity(this);" name="city" placeholder="State" >
+        <input class="autocomplete form-control h-100" id="city" type="search" onkeydown="StateManager.filterCity(this);" name="city" placeholder="Any State">
     </div>
 </div>
 
@@ -43,8 +43,8 @@
             </span>
         </div>
         
-        <select id="language" name="language" class="custom-select h-100" >
-            <option value="">Any language</option>
+        <select id="language" name="language" class="custom-select h-100">
+            <option value="">Any Language</option>
             {% for language in languages %}
                 <option value={{ language.code }}>{{ language.name }}</option>
             {% endfor %}
@@ -59,9 +59,9 @@
         </div>
         
         <select id="price" name="price" class="custom-select h-100" onchange="FilterManager.toggleDisable('price');">
-            <option value="" selected>Any price</option>
-            <option value="free">Free events</option>
-            <option value="paid">Paid events</option>
+            <option value="" selected>Any Price</option>
+            <option value="free">Free Events</option>
+            <option value="paid">Paid Events</option>
         </select>
     </div>
     <div class="input-group col-sm-3" id="divCurrency">
@@ -70,8 +70,8 @@
                 <i class="material-icons">monetization_on</i>
             </span>
         </div>
-        <select id="currency" name="currency" class="custom-select h-100" >
-            <option selected value="">Any currency</option>
+        <select id="currency" name="currency" class="custom-select h-100">
+            <option selected value="">Any Currency</option>
             {% for currency in currencies %}
                 <option value={{ currency.code }}>{{ currency.name }} ({{ currency.code }})</option>
             {% endfor %}
