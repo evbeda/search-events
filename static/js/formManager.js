@@ -36,33 +36,34 @@ const FormManager = (function() {
 	}
 
 	function validateFilters() {
+		const countries = StateManager.getCountries();
+		const selectedCountry = countries.filter(e => e.name == document.getElementById("country").value);
+
+		if(!validateCountry()) return false;
+
+		const dataArray = [countries];
+		if (selectedCountry && selectedCountry.length) {
+			StateManager.setCities(selectedCountry[0].cities);
+			const cities = StateManager.getCities();
+			const selectedCity = cities.filter(e => e.name == document.getElementById("city").value);
+			const cityValid = document.getElementById("city").value === "" || (selectedCity && selectedCity.length);
+			validateField("city", cityValid);
+			dataArray.push(cities);
+		}
+
+		for(let i=0; i<dataArray.length; i++){
+			const domId = domIds[i];
+			const elem = document.getElementById(domId);
+			const data = dataArray[i].filter(e => e.name == elem.value);
+			if(!data.length && elem.value != "") return false;
+			elem.value = data && data[0] ? data[0].name : "";
+		}
+
 		try {
 			if(!validateLastFourDigits()) return false;
-			
-			const countries = StateManager.getCountries();
-			const selectedCountry = countries.filter(e => e.name == document.getElementById("country").value);
-			if(!validateCountry()) return false;
-	
-			const dataArray = [countries];
-			if (selectedCountry && selectedCountry.length) {
-				StateManager.setCities(selectedCountry[0].cities);
-				const cities = StateManager.getCities();
-				const selectedCity = cities.filter(e => e.name == document.getElementById("city").value);
-				const cityValid = document.getElementById("city").value === "" || (selectedCity && selectedCity.length);
-				validateField("city", cityValid);
-				dataArray.push(cities);
-			}
-	
-			for(let i=0; i<dataArray.length; i++){
-				const domId = domIds[i];
-				const elem = document.getElementById(domId);
-				const data = dataArray[i].filter(e => e.name == elem.value);
-				if(!data.length && elem.value != "") return false;
-				elem.value = data && data[0] ? data[0].name : "";
-			}
-	
+		} catch(e) {
 			return true;
-		} catch(e) {}
+		}
 	}
 
 	function validateLastFourDigits() {
