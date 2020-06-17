@@ -103,8 +103,10 @@ class TestEventListView(TestCase):
 	@patch.object(FilterManager, 'filter_has_changed', return_value=False)
 	def test_get_queryset_with_cached_events_and_filter_without_changes(self, mock_has_changed, mock_apply_filters):
 		StateManager.set_events(self.events)
+		StateManager.url = 'find_features'
 		view = EventListView()
 		view.request = MagicMock()
+		view.request.path = 'find_features'
 		view.request.GET = {'country': '', 'format': ''}
 		result = view.get_queryset()
 		self.assertEqual(result, self.events)
