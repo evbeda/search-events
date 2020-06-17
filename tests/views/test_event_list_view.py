@@ -88,12 +88,16 @@ class TestEventListView(TestCase):
 		kwargs = {
 			'object_list': []
 		}
+		view.request = MagicMock()
+		view.request.path = 'SpecificEvent'
+
 		result = view.get_context_data(**kwargs)
 		self.assertEqual(result['formats'], arr_formats)
 		self.assertEqual(result['features'], arr_features)
 		self.assertEqual(result['languages'], arr_languages)
 		self.assertEqual(result['countries'], arr_countries)
 		self.assertEqual(result['categories'], arr_categories)
+		self.assertTrue(result['specific_event'])
 
 	@patch.object(FilterManager, 'apply_filters')
 	@patch.object(FilterManager, 'filter_has_changed', return_value=False)

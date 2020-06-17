@@ -19,6 +19,7 @@ def process_events(data):
                 'language': get_language(item),
                 'admin_url': get_admin_url(item),
                 'eb_studio_url': get_eb_studio_url(item),
+                'status': get_status(item),
             }
             events.append(event_dict)
     return events
@@ -54,6 +55,15 @@ def get_eb_studio_url(item):
     try:
         if item[9]:
             return f'https://{item[9]}'
+        return None
+    except Exception:
+        return None
+
+
+def get_status(item):
+    try:
+        if item[9]:
+            return item[9]
         return None
     except Exception:
         return None

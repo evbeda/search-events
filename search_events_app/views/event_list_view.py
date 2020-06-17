@@ -66,6 +66,7 @@ class EventListView(ListView):
 
         context['username'] = ConnectionManager.username
         context['has_eb_studio'] = self.has_eb_studio
+        context['specific_event'] = 'SpecificEvent' in self.request.path
 
         return context
 
