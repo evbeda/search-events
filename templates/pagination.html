@@ -2,30 +2,18 @@
 
 <nav aria-label="Page navigation example" class="float-right">
     <ul class="pagination align-self-end">
-        {% if pages.current.number > pages.first.number%}
-            <li class="page-item">
-                <a class="page-link" href="{{ pages.first.path }}">First</a>
-            </li>
-        {% endif %}
-
         {% for page in pages %}
             {% if page.number == pages.current.number %}
                 <li class="page-item active">
                     <a style="background-color: #f05537; border-color: #f05537;" class="page-link" href="{{ page.path }}">{{ page.number }}</a>
                 </li>
             {% else %} 
-                {% if page.number >= pages.current.number|add:"-1" and page.number <= pages.current.number|add:"1" %}                
+                {% if page.number >= pages.current.number|add:"-6" and page.number <= pages.current.number|add:"6" %}                
                     <li class="page-item">
                         <a class="page-link" href="{{ page.path }}">{{ page.number }}</a>
                     </li>
                 {% endif %}
             {% endif %}
         {% endfor %}
-
-        {% if pages.current.number < pages.last.number%}
-            <li class="page-item">
-                <a class="page-link" href="{{ pages.last.path }}">Last</a>
-            </li>
-        {% endif %}
     </ul>
 </nav>
