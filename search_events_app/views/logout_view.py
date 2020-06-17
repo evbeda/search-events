@@ -1,3 +1,4 @@
+from django.contrib.sessions.models import Session
 from django.shortcuts import (
     redirect,
 )
@@ -8,7 +9,8 @@ from search_events_app.services.db.db_connection_manager import ConnectionManage
 
 def logout(request):
     if request.method == 'POST':
-        ConnectionManager.disconnect()
+        ConnectionManager.disconnect(request.session)
+        Session.objects.filter(pk=request.session.session_key).delete()
         return redirect('login')
     else:
         raise SuspiciousOperation()

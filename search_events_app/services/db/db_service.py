@@ -12,9 +12,9 @@ from search_events_app.exceptions import (
 class DBService:
 
     @classmethod
-    def execute_query(cls, query):
+    def execute_query(cls, query, session):
         try:
-            cursor = ConnectionManager.get_connection()
+            cursor = ConnectionManager.get_connection(session)
             cursor.execute(query)
             return cursor.fetchall()
         except (OperationalError, AttributeError):
@@ -38,13 +38,13 @@ class DBService:
         return query
 
     @classmethod
-    def get_events(cls, dto_filters_array, query_parameters):
+    def get_events(cls, dto_filters_array, query_parameters, session):
         query = cls.format_query(dto_filters_array, query_parameters)
-        result = cls.execute_query(query)
+        result = cls.execute_query(query, session)
         db_events = process_events(result)
         return [Event(**db_event) for db_event in db_events]
 
     @classmethod
-    def create_connection(cls, username, password):
-        ConnectionManager.connect(username, password)
-        cls.execute_query('select 1')
+    def create_connection(cls, username, password, session):
+        ConnectionManager.connect(username, password, session)
+        cls.execute_query('select 1', session)
