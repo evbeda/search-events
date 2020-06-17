@@ -21,6 +21,9 @@
                 <th>Country</th>
                 <th>Start date</th>
                 <th>Language</th>
+                {% if specific_event %}
+                <th class="text-center">Status</th>
+                {% endif %}
 
             </tr>
         </thead>
@@ -56,6 +59,9 @@
                         <td>{{ event.country|default:"Online"|safe }}</td>
                         <td>{{ event.start_date|safe }}</td>
                         <td>{{ event.language }}</td>
+                        {% if specific_event %}
+                            <td>{{event.status}}</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             {% get_pages %}

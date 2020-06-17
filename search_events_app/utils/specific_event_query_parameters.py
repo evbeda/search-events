@@ -10,7 +10,8 @@ class SpecificEventsQueryParameters:
                dw_org.organization_name,
                dw_event.country_desc,
                CAST(CAST(dw_event.event_start_date AS TIMESTAMP) AS DATE) AS start_date,
-               dw_event.event_language
+               dw_event.event_language,
+               dw_event.event_status
     """
 
     default_tables = """ 
@@ -45,7 +46,8 @@ class SpecificEventsQueryParameters:
             dw_organizer.organizer_name,
             dw_org.organization_name,
             dw_event.country_desc,
-            dw_event.event_language
+            dw_event.event_language,
+            dw_event.event_status
     """
 
     limit = ' LIMIT 50'
