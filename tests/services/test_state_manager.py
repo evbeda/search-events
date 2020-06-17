@@ -1,4 +1,5 @@
 from django.test import TestCase
+from unittest.mock import MagicMock
 
 from search_events_app.models import Event
 from search_events_app.services import StateManager
@@ -28,3 +29,11 @@ class TestStateManager(TestCase):
         StateManager.events = self.events
         result = StateManager.get_last_searched_events()
         self.assertEqual(result, self.events)
+
+    def test_change_url(self):
+        mock_request = MagicMock()
+        mock_request.path = 'Last_url'
+
+        StateManager.change_url(mock_request)
+
+        self.assertEqual(StateManager.url, 'Last_url')

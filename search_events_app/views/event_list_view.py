@@ -45,12 +45,13 @@ class EventListView(ListView):
         if self.is_from_login():
             return []
         FilterManager.apply_filters(self.request)
-        if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
+        if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events() or self.request.path != StateManager.url:
             db_service_filters = FilterManager.get_list_dto_db_service_filter()
             query_parameters = QueryParameterFactory.get_query_parameters(self.request)
             events = DBService.get_events(db_service_filters, query_parameters)
             StateManager.set_events(events)
             self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
+            StateManager.change_url(self.request)
             return events
         events = StateManager.get_last_searched_events()
         self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
