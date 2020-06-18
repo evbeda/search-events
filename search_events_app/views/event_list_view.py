@@ -9,7 +9,6 @@ from search_events_app.factories import (
     TemplateFactory
 )
 from search_events_app.services.db.db_service import DBService
-from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services import (
     FilterManager,
     StateManager,
@@ -31,7 +30,7 @@ class EventListView(ListView):
 
     def get(self, request):
         self.template_name = TemplateFactory.get_template(request)
-        if not ConnectionManager.get_connection(request.session):
+        if not DBService.is_connected(request.session):
             return redirect('login')
         try:
             return super().get(request)

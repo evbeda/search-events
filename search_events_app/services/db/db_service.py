@@ -14,7 +14,7 @@ class DBService:
     @classmethod
     def execute_query(cls, query, session):
         try:
-            cursor = ConnectionManager.get_connection(session)
+            cursor = ConnectionManager.get_connection(session.session_key)
             cursor.execute(query)
             return cursor.fetchall()
         except (OperationalError, AttributeError):
@@ -48,3 +48,14 @@ class DBService:
     def create_connection(cls, username, password, session):
         ConnectionManager.connect(username, password, session)
         cls.execute_query('select 1', session)
+
+    @classmethod
+    def is_connected(cls, session):
+        if ConnectionManager.get_connection(session.session_key):
+            return True
+        else:
+            return False
+
+    @classmethod
+    def disconnect(cls, session):
+        ConnectionManager.disconnect(session)

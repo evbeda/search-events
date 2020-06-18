@@ -22,7 +22,7 @@ class TestDbConnectionManager(TestCase):
 		ConnectionManager.connection.close = MagicMock()
 		count = ConnectionManager.connection.close
 		
-		ConnectionManager.connect('username', 'password_okta')
+		ConnectionManager.connect('username', 'password_okta', MagicMock())
 		
 		self.assertEqual(count.call_count, 1)
 	

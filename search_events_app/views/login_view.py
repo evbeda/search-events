@@ -1,4 +1,3 @@
-from django.contrib.sessions.models import Session
 from django.shortcuts import (
     render,
     redirect
@@ -12,28 +11,21 @@ from search_events_app.exceptions import (
 
 
 def login(request):
+    session = request.session
+
     if request.method == 'GET':
-        try:
-            session = Session.objects.get(pk=request.session.session_key)
+        if DBService.is_connected(session):
             return redirect('find_feature')
-        except:
+        else:
             return render(request, 'login.html')
     else:
         username = request.POST.get('username')
         password = request.POST.get('password')
+        session.create()
         try:
-            session = Session.objects.get(pk=request.session.session_key)
-        except:
-            if not request.session.exists(request.session.session_key):
-                request.session.create()
-                session = request.session
-                try:
-                    DBService.create_connection(username, password, session)
-                    session['username'] = username
-                    import ipdb; ipdb.set_trace()
-                except OktaCredentialError as e:
-                    return render(request, 'login.html', {'error': e.message})
-                except PrestoError as e:
-                    return render(request, 'login.html', {'error': e.message})
-        
+            DBService.create_connection(username, password, session)
+            session['username'] = username
+        except (OktaCredentialError, PrestoError) as e:
+            DBService.disconnect(session)
+            return render(request, 'login.html', {'error': e.message})
         return redirect('find_feature')
