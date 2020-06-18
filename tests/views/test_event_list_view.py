@@ -191,7 +191,9 @@ class TestEventListView(TestCase):
 			self.assertEqual(get_query_parameters_count, 1)
 
 	@patch("search_events_app.views.event_list_view.ListView.get")
-	def test_get(self, mock_super_get):
+	@patch.object(DBService, 'is_connected')
+	def test_get(self, mock_is_connected, mock_super_get):
+		mock_is_connected.return_value = True
 		view = EventListView()
 		mock_request = MagicMock()
 		result_super = MagicMock()
@@ -200,6 +202,15 @@ class TestEventListView(TestCase):
 		result = view.get(mock_request)
 
 		self.assertEqual(result, result_super)
+
+	@patch.object(DBService, 'is_connected')
+	def test_get_without_connection_redirects_login(self, mock_is_connected):
+		mock_is_connected.return_value = False
+		view = EventListView()
+		mock_request = MagicMock()
+		response = view.get(mock_request)
+		response.client = Client()
+		self.assertRedirects(response,'/login/')
 
 	@patch("search_events_app.views.event_list_view.ListView.get")
 	def test_get_with_exception_redirects_login(self, mock_super_get):
@@ -211,20 +222,11 @@ class TestEventListView(TestCase):
 
 		self.assertRedirects(response,'/login/')
 
-	@patch.object(ConnectionManager, 'get_connection')
-	def test_get_without_connection_redirects_login(self, mock_get_connection):
-		mock_get_connection.return_value = None
-
-		view = EventListView()
-		mock_request = MagicMock()
-		response = view.get(mock_request)
-		response.client = Client()
-
-		self.assertRedirects(response, '/login/')
-
 	@patch("search_events_app.views.event_list_view.render")
 	@patch("search_events_app.views.event_list_view.ListView.get")
-	def test_get_render_error(self, mock_super_get, mock_render):
+	@patch.object(DBService, 'is_connected')
+	def test_get_render_error(self, mock_is_connected, mock_super_get, mock_render):
+		mock_is_connected.return_value = True
 		view = EventListView()
 		mock_request = MagicMock()
 		presto_error = PrestoError(Exception())

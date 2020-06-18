@@ -24,7 +24,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '2ga9fa-(4tv(sqr!nu%qhib#a!d(ub(yiwf^@to#u75mra*8dx'
 SECRET_KEY = get_env_variable('SECRET_KEY')
-TOKEN_API = get_env_variable('TOKEN_API')
 USER_OKTA = get_env_variable('USER_OKTA')
 PASSWORD_OKTA = get_env_variable('PASSWORD_OKTA')
 

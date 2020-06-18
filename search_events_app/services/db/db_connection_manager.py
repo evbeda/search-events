@@ -38,7 +38,7 @@ class ConnectionManager:
         sessions_to_delete = []
         if len(cls.connections.keys()) > 50:
             for session_key, connection_dict in cls.connections.items():
-                if connection_dict['date'] <= expires:
+                if connection_dict['date'] < expires:
                     sessions_to_delete.append(session_key)
             for session_key in sessions_to_delete:
                 del cls.connections[session_key]

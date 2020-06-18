@@ -16,8 +16,7 @@ def login(request):
     if request.method == 'GET':
         if DBService.is_connected(session):
             return redirect('find_feature')
-        else:
-            return render(request, 'login.html')
+        return render(request, 'login.html')
     else:
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -28,4 +27,5 @@ def login(request):
         except (OktaCredentialError, PrestoError) as e:
             DBService.disconnect(session)
             return render(request, 'login.html', {'error': e.message})
+
         return redirect('find_feature')

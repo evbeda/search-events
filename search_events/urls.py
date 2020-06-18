@@ -22,20 +22,9 @@ from django.urls import (
 
 from search_events_app import urls as search_events_app_urls
 
-# def background_process():
-#     import time
-#     while True:
-#         print("process started")
-#         time.sleep(2)
-#         print("process finished")
-
 
 def clear_all_sessions():
     Session.objects.all().delete()
-    # import threading
-    # t = threading.Thread(target=background_process, args=(), kwargs={})
-    # t.setDaemon(False)
-    # t.start()
 
 
 clear_all_sessions()
