@@ -23,12 +23,13 @@ class TestLogoutView(TestCase):
     def setUp(self):
         self.mock_request = MagicMock()
 
-    def test_redirects_login(self):
+    @patch.object(DBService, 'disconnect')
+    def test_redirects_login(self, mock_disconnect):
         self.mock_request.method = 'POST'
 
         response = logout(self.mock_request)
         response.client = Client()
-        
+        self.assertEquals(mock_disconnect.call_count, 1)
         self.assertRedirects(response, '/login/')
 
     def test_raises_exception_method_get(self):

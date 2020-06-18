@@ -48,12 +48,6 @@ class TestCountryFilter(TestCase):
 
         self.country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='1234')
 
-        self.assertEqual(self.country_filter.get_key(), 'country')
-        self.assertEqual(self.country_filter.get_value(), 'Argentina')
-        self.assertEqual(self.country_filter.get_type(), 'search')
-        self.assertEqual(self.country_filter.get_request_value(), {
-            'places_within': ['1234']
-        })
         self.assertEqual(self.country_filter.get_join_query(), [''])
         self.assertEqual(self.country_filter.get_where_query(), "AND country_desc='AR'")
 
@@ -61,9 +55,5 @@ class TestCountryFilter(TestCase):
 
         self.country_filter.value = None
 
-        self.assertEqual(self.country_filter.get_key(), 'country')
-        self.assertIsNone(self.country_filter.get_value())
-        self.assertEqual(self.country_filter.get_type(), 'search')
-        self.assertIsNone(self.country_filter.get_request_value())
         self.assertEqual(self.country_filter.get_join_query(), [''])
         self.assertEqual(self.country_filter.get_where_query(), '')

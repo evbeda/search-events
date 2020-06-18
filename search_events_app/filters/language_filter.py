@@ -18,22 +18,6 @@ class LanguageFilter(Filter):
         if self.has_changed:
             self.value = new_filter
 
-    def get_key(self):
-        return 'language'
-
-    def get_value(self):
-        if self.value:
-            return self.value.name
-
-    def get_type(self):
-        return 'search'
-
-    def get_request_value(self):
-        if self.value:
-            return {
-                'languages': [self.value.code]
-            }
-
     def get_join_query(self):
         return ['']
 
