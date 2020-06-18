@@ -52,10 +52,6 @@ class TestFeatureFilterManager(TestCase):
 
         self.feature_filter_manager.apply_filter(mock_request)
 
-        self.assertEqual(self.feature_filter_manager.get_key(), '')
-        self.assertEqual(self.feature_filter_manager.get_value(), '')
-        self.assertEqual(self.feature_filter_manager.get_type(), '')
-        self.assertEqual(self.feature_filter_manager.get_request_value(), '')
         self.assertEqual(self.feature_filter_manager.get_join_query(), [''])
         self.assertEqual(self.feature_filter_manager.get_where_query(), "AND f.trx_type = 'add_on_ticket_purchase'")
 
@@ -67,9 +63,5 @@ class TestFeatureFilterManager(TestCase):
 
         self.feature_filter_manager.apply_filter(mock_request)
 
-        self.assertEqual(self.feature_filter_manager.get_key(), '')
-        self.assertEqual(self.feature_filter_manager.get_value(), '')
-        self.assertEqual(self.feature_filter_manager.get_type(), '')
-        self.assertEqual(self.feature_filter_manager.get_request_value(), '')
         self.assertEqual(self.feature_filter_manager.get_join_query(), [''])
         self.assertEqual(self.feature_filter_manager.get_where_query(), '')

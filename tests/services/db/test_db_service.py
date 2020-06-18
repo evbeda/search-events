@@ -76,44 +76,57 @@ class TestDbService(TestCase):
         mock_cursor.execute = MagicMock()
         mock_cursor.fetchall = MagicMock(return_value=self.mock_db_response)
 
-        result = DBService.get_events(dto_filters_array=self.mock_dto_filter, query_parameters=FindFeatureQueryParameters)
+        result = DBService.get_events(dto_filters_array=self.mock_dto_filter, query_parameters=FindFeatureQueryParameters, session=MagicMock())
 
         self.assertEqual(len(result), 2)
         self.assertIsInstance(result[0], Event)
         self.assertIsInstance(result[1], Event)
 
     @patch.object(ConnectionManager, 'get_connection')
-    def test_excute_query(self, mock_connect):
+    def test_execute_query(self, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock()
         mock_cursor.fetchall = MagicMock(return_value=self.mock_db_response)
         mock_connect.return_value = mock_cursor
         query = 'This is query'
 
-        result = DBService.execute_query(query)
+        session = MagicMock()
+        session.session_key = MagicMock()
+
+        result = DBService.execute_query(query, session)
 
         self.assertEqual(len(result), 2)
         self.assertEqual(type(result), list)
 
     @patch.object(ConnectionManager, 'get_connection')
-    def test_execute_query_wrong_okta_credentials(self, mock_connect):
+    def test_execute_query_with_operational_error(self, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=OperationalError())
         mock_connect.return_value = mock_cursor
         query = 'SELECT 1'
 
         with self.assertRaises(OktaCredentialError):
-            DBService.execute_query(query)
+            DBService.execute_query(query, MagicMock())
 
     @patch.object(ConnectionManager, 'get_connection')
-    def test_excute_query_with_presto_error(self, mock_connect):
+    def test_execute_query_with_attribute_error(self, mock_connect):
+        mock_cursor = MagicMock()
+        mock_cursor.execute = MagicMock(side_effect=AttributeError())
+        mock_connect.return_value = mock_cursor
+        query = 'SELECT 1'
+
+        with self.assertRaises(OktaCredentialError):
+            DBService.execute_query(query, MagicMock())
+
+    @patch.object(ConnectionManager, 'get_connection')
+    def test_execute_query_with_exception(self, mock_connect):
         mock_cursor = MagicMock()
         mock_cursor.execute = MagicMock(side_effect=Exception())
         mock_connect.return_value = mock_cursor
         query = 'SELECT 1'
 
         with self.assertRaises(PrestoError):
-            DBService.execute_query(query)
+            DBService.execute_query(query, MagicMock())
 
     def test_format_query_without_filters(self):
         expected = FindFeatureQueryParameters.columns_select + FindFeatureQueryParameters.default_tables + FindFeatureQueryParameters.constraints
@@ -144,10 +157,32 @@ class TestDbService(TestCase):
     @patch.object(ConnectionManager, 'connect')
     @patch.object(DBService, 'execute_query')
     def test_create_connection(self, mock_execute_query, mock_connect):
-        DBService.create_connection('username', 'password')
+        DBService.create_connection('username', 'password', MagicMock())
 
         result_execute = mock_execute_query.call_count
         result_connect = mock_connect.call_count
 
         self.assertEqual(result_execute, 1)
         self.assertEqual(result_connect, 1)
+
+    @patch.object(ConnectionManager, 'get_connection')
+    def test_is_connected_true(self, mock_get_connection):
+        mock_get_connection.return_value = MagicMock()
+        result = DBService.is_connected(MagicMock())
+
+        self.assertTrue(result)
+
+    @patch.object(ConnectionManager, 'get_connection')
+    def test_is_connected_false(self, mock_get_connection):
+        mock_get_connection.return_value = None
+        result = DBService.is_connected(MagicMock())
+
+        self.assertFalse(result)
+
+    @patch.object(ConnectionManager, 'disconnect')
+    def test_disconnect(self, mock_disconnect):
+        DBService.disconnect(MagicMock())
+
+        count = mock_disconnect.call_count
+
+        self.assertEquals(count, 1)

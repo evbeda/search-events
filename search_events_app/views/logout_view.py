@@ -3,12 +3,12 @@ from django.shortcuts import (
 )
 from django.core.exceptions import SuspiciousOperation
 
-from search_events_app.services.db.db_connection_manager import ConnectionManager
+from search_events_app.services.db.db_service import DBService
 
 
 def logout(request):
     if request.method == 'POST':
-        ConnectionManager.disconnect()
+        DBService.disconnect(request.session)
         return redirect('login')
     else:
         raise SuspiciousOperation()
