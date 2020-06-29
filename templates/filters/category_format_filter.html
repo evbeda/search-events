@@ -5,7 +5,7 @@
         </span>
     </div>
     
-    <select id="category" name="category" class="custom-select h-100">
+    <select id="category" name="category" class="custom-select h-100 filter" onchange="ColorManager.changeColor('category');">
         <option selected value="">Any Category</option>
         {% for category in categories %}
             <option value={{ category.code }}>{{ category.name }}</option>
@@ -20,7 +20,7 @@
         </span>
     </div>
     
-    <select id="format" name="format" class="custom-select h-100">
+    <select id="format" name="format" class="custom-select h-100 filter" onchange="ColorManager.changeColor('format');"> 
         <option selected value="">Any Format</option>
         {% for format in formats %}
             <option value={{ format.code }}>{{ format.name }}</option>

@@ -88,11 +88,12 @@ const FormManager = (function() {
 
 	function validateNumbers(event, domId) {
 		document.getElementById(domId).setCustomValidity("");
+		console.log(document.getElementById(domId).value.length)
         if(event.metaKey && event.keyCode == KEY_CODES.R) return true; //reload page
         if(event.metaKey && event.keyCode == KEY_CODES.C) return true; //copy
         if(((event.keyCode < KEY_CODES.ZERO) || (event.keyCode > KEY_CODES.NINE))&& event.keyCode != KEY_CODES.DELETE && ((event.keyCode < KEY_CODES.LEFT) || (event.keyCode > KEY_CODES.DOWN))){
             event.preventDefault();
-        }
+		}
 	}
 
 	return {

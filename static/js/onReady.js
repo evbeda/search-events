@@ -12,6 +12,7 @@ $(document).ready(function() {
         document.getElementById("city").addEventListener("keyup", inputEvents.keyupCallback, false);
         FilterManager.reloadLastFilters();
         FilterManager.reloadLastState();
+        ColorManager.reloadFiltersColor();
     } catch(e) {}
     
     if(window.location.href.indexOf("FindFeature")!= -1) {

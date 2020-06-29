@@ -7,7 +7,7 @@
                     <i class="material-icons">search</i>
                 </span>
             </div>
-            <input type="search" class="form-control" placeholder="Event Name" id="event_name" name="event_name">
+            <input type="search" class="form-control selected-orange" placeholder="Event Name" id="event_name" name="event_name">
         </div>
         
         <div class="input-group col-sm-3">
@@ -16,7 +16,7 @@
                     <i class="material-icons">supervisor_account</i>
                 </span>
             </div>
-            <input name="organizer" id="organizer" type="search" class="form-control" placeholder="Organizer Name" aria-label="Organizer" aria-describedby="basic-addon1">
+            <input name="organizer" id="organizer" type="search" class="form-control selected-orange" placeholder="Organizer Name" aria-label="Organizer" aria-describedby="basic-addon1">
         </div>
         
         <div class="input-group col-sm-3">
@@ -25,7 +25,7 @@
                     <i class="material-icons">person</i>
                 </span>
             </div>
-            <input class="form-control" id="buyer" type="search" name="buyer" placeholder="Attendee Name">
+            <input class="form-control selected-orange" id="buyer" type="search" name="buyer" placeholder="Attendee Name">
         </div>
     </div>
 
@@ -36,7 +36,7 @@
                     <i class="material-icons">today</i>
                 </span>
             </div>
-            <input type="search" class="form-control" id="datefilter" name="datefilter" placeholder="Range Start Date">
+            <input type="search" class="form-control selected-orange" id="datefilter" name="datefilter" placeholder="Range Start Date">
         </div>
         
         <div class="input-group col-sm-3">
@@ -45,7 +45,7 @@
                     <i class="material-icons">directions</i>
                 </span>
             </div>
-            <input type="search" class="form-control" placeholder="Venue Location" id="venue" name="venue">
+            <input type="search" class="form-control selected-orange" placeholder="Venue Location" id="venue" name="venue">
         </div>
 
         <div class="input-group col-sm-3">
@@ -54,7 +54,7 @@
                     <i class="material-icons">credit_card</i>
                 </span>
             </div>
-            <input type="search" maxlength="4" class="form-control" placeholder="Last 4 Digits" id="card" name="card" onkeydown="FormManager.validateNumbers(event, 'card');" onpaste="return false;">
+            <input type="search" maxlength="4" class="form-control" placeholder="Last 4 Digits" id="card" name="card" onkeydown="FormManager.validateNumbers(event, 'card');" onchange="ColorManager.changeColor('card', this.value.length == 4);" onpaste="return false;">
         </div>
     </div>
     {% include "filters/shared_filters.html" %}
