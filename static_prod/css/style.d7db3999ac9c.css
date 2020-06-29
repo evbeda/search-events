@@ -1,0 +1,259 @@
+.width-90 {
+    width: 90%;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font: 16px Arial;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+
+.autocomplete-items {
+    width: 90%;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 5%;
+    right: 0%;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+.flag {
+  width: 50px;
+  height: auto;
+}
+
+.reduce {
+  width: 40px;
+  height: auto;
+}
+
+.feed-header__title-top {
+  color:#f05537;
+  border: none;
+}
+
+.blue-eb{
+  background-color: #1E0A3C
+}
+
+input::placeholder {
+  color: #495057 !important;
+}
+
+.page-link {
+  color: #f05537;
+}
+
+.page-link:hover {
+  color: #f05537;
+}
+
+.orange-eb {
+  background-color: #f05537 !important;
+  border-radius: 5px;
+}
+
+.orange-eb:hover {
+  background-color: #db2a07;
+}
+
+.text-orange {
+  color: #f05537;
+}
+
+.text-orange:hover {
+  color: #1E0A3C;
+}
+
+.thead-blue-eb {
+  background-color: #1E0A3C;
+}
+
+.clear-filter:hover{
+    background-color: #d32926;
+    color: white;
+    cursor:pointer;
+}
+
+.clear-filter{
+    border-radius: 5px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .375rem .375rem .375rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+}
+
+.clear-datepicker{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: .375rem .375rem .375rem .375rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option {
+  position: relative !important;
+  padding-top: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+}
+.bootstrap-select:not(.input-group-btn), .bootstrap-select[class*="col-"] {
+  padding: 1 !important;
+  width: auto !important;
+}
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+  color: #495057;
+}
+.show>.btn-light.dropdown-toggle{
+  background-color: white;
+  border: white;
+}
+.btn-light{
+  background-color: white;
+}
+
+#spin{
+  margin-top: 20%;
+  display: none;
+  text-align: center;
+}
+#spin-border{
+  width: 5rem;
+  height: 5rem;
+  color:  #f05537;
+}
+
+.dropdown-user {
+  color: #f05537;
+}
+
+.dropdown-user:hover {
+  cursor: pointer;
+  color: #f05537;
+  text-decoration:none;
+}
+
+.vl {
+  border-left: 3px solid #f05537;
+  height: 54px;
+  margin: 0 15px;
+}
+
+.container-between {
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.orange-arrow::after {
+  color: #f05537 !important;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 75%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    width: 10rem;
+}
+
+.dropdown-item {
+  align-self: auto;
+}
+
+.item.active {
+  color: white;
+  text-decoration: underline;
+}
+
+.in-range {
+  background-color: #f05537 !important;
+  opacity: 0.5 !important;
+}
+
+.start-date {
+  background-color: #f05537 !important;
+  opacity: 1 !important;
+}
+
+.end-date {
+  background-color: #f05537 !important;
+  opacity: 1 !important;
+}
+
+.card {
+  border: 0;
+}
+
+.card-header {
+  border: 0;
+}
+
+.card-header:hover {
+  text-decoration: none;
+}
+
+.selected-orange {
+  color:  #f05537 !important;
+}
