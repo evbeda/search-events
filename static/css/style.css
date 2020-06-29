@@ -253,3 +253,7 @@ input::placeholder {
 .card-header:hover {
   text-decoration: none;
 }
+
+.selected-orange {
+  color:  #f05537 !important;
+}

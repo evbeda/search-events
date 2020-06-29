@@ -55,6 +55,7 @@ const inputEvents = (function() {
                 item.innerHTML += "<input type='hidden' value='" + countries[i].name + "'>";
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 item.addEventListener("click", function(e) {
+                    ColorManager.changeColor('country', true)
                     /*insert the value for the autocomplete text field:*/
                     element = ListManager.getElement();
                     element.value = this.getElementsByTagName("input")[0].value;
@@ -68,6 +69,10 @@ const inputEvents = (function() {
         }
         if (document.getElementById('city').disabled) {
             document.getElementById('city').value = '';
+            ColorManager.changeColor('country', false)
+        }
+        else{
+            ColorManager.changeColor('country', true)
         }
     }
 
@@ -89,6 +94,8 @@ const inputEvents = (function() {
             StateManager.setCities(country[0].cities);
             cities = StateManager.getCities();
             FormManager.validateField("city", true);
+            const selected = cities.map(e => e.name).indexOf(document.getElementById("city").value) != -1
+            ColorManager.changeColor("city", selected)
             for (i = 0; i < cities.length; i++) {
                 /*check if the item starts with the same letters as the text field value:*/
                 if ((cities[i].code.toUpperCase() == val.toUpperCase() && val.length == 2) || (cities[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase() && val.length >= 1)) {
@@ -102,6 +109,7 @@ const inputEvents = (function() {
                     item.innerHTML += "<input type='hidden' value='" + cities[i].name + "'>";
                     /*execute a function when someone clicks on the item value (DIV element):*/
                     item.addEventListener("click", function(e) {
+                        ColorManager.changeColor("city", true)
                         /*insert the value for the autocomplete text field:*/
                         element = ListManager.getElement();
                         element.value = this.getElementsByTagName("input")[0].value;
