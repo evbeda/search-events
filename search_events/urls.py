@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.sessions.models import Session
 from django.urls import (
     path,
     include
@@ -21,6 +22,12 @@ from django.urls import (
 
 from search_events_app import urls as search_events_app_urls
 
+
+def clear_all_sessions():
+    Session.objects.all().delete()
+
+
+clear_all_sessions()
 
 urlpatterns = [
     path('admin/', admin.site.urls),

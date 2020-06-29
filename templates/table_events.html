@@ -11,7 +11,7 @@
         <thead class="thead-blue-eb text-white">
             <tr>
                 <th>Admin Dashboard</th>
-                {% if has_eb_studio %}
+                {% if has_eb_studio and not specific_event %}
                     <th class="text-center">EB Studio Page</th>
                 {% endif %}
                 <th class="text-center">Name</th>
@@ -37,9 +37,9 @@
                                 <i class="material-icons">link</i>
                             </a>
                         </td>
-                        {% if has_eb_studio %}
+                        {% if has_eb_studio and not specific_event %}
                             <td class="text-center">
-                                {% if event.eb_studio_url %}
+                                {% if event.eb_studio_url  %}
                                     <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
                                         <i class="material-icons">link</i>
                                     </a>

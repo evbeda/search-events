@@ -33,18 +33,6 @@ class FeatureFilterManager(Filter):
             latest_filter.apply_filter(features_codes)
         self.has_changed = len([latest_filter for latest_filter in self.value if latest_filter.has_changed]) > 0
 
-    def get_key(self):
-        return ''
-
-    def get_value(self):
-        return ''
-
-    def get_type(self):
-        return ''
-
-    def get_request_value(self):
-        return ''
-
     def get_join_query(self):
         join_query = []
         for feature in self.value:

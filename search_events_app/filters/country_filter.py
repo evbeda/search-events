@@ -18,22 +18,6 @@ class CountryFilter(Filter):
         if self.has_changed:
             self.value = new_filter
 
-    def get_key(self):
-        return 'country'
-
-    def get_value(self):
-        if self.value:
-            return self.value.name
-
-    def get_type(self):
-        return 'search'
-
-    def get_request_value(self):
-        if self.value:
-            return {
-                'places_within': [self.value.eventbrite_id]
-            }
-
     def get_join_query(self):
         return ['']
 

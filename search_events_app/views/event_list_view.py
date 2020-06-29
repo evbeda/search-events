@@ -9,7 +9,6 @@ from search_events_app.factories import (
     TemplateFactory
 )
 from search_events_app.services.db.db_service import DBService
-from search_events_app.services.db.db_connection_manager import ConnectionManager
 from search_events_app.services import (
     FilterManager,
     StateManager,
@@ -31,7 +30,7 @@ class EventListView(ListView):
 
     def get(self, request):
         self.template_name = TemplateFactory.get_template(request)
-        if not ConnectionManager.get_connection():
+        if not DBService.is_connected(request.session):
             return redirect('login')
         try:
             return super().get(request)
@@ -45,12 +44,13 @@ class EventListView(ListView):
         if self.is_from_login():
             return []
         FilterManager.apply_filters(self.request)
-        if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events():
+        if FilterManager.filter_has_changed() or not StateManager.get_last_searched_events() or self.request.path != StateManager.url:
             db_service_filters = FilterManager.get_list_dto_db_service_filter()
             query_parameters = QueryParameterFactory.get_query_parameters(self.request)
-            events = DBService.get_events(db_service_filters, query_parameters)
+            events = DBService.get_events(db_service_filters, query_parameters, self.request.session)
             StateManager.set_events(events)
             self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
+            StateManager.change_url(self.request)
             return events
         events = StateManager.get_last_searched_events()
         self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
@@ -64,7 +64,7 @@ class EventListView(ListView):
         for class_ in classes:
             context.update(class_.get_context())
 
-        context['username'] = ConnectionManager.username
+        context['username'] = self.request.session['username']
         context['has_eb_studio'] = self.has_eb_studio
         context['specific_event'] = 'SpecificEvent' in self.request.path
 

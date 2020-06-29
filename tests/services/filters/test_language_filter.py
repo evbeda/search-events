@@ -48,12 +48,6 @@ class TestLanguageFilter(TestCase):
 
         self.language_filter.value = Language(name='German', code='de')
 
-        self.assertEqual(self.language_filter.get_key(), 'language')
-        self.assertEqual(self.language_filter.get_value(), 'German')
-        self.assertEqual(self.language_filter.get_type(), 'search')
-        self.assertEqual(self.language_filter.get_request_value(), {
-            'languages': ['de']
-        })
         self.assertEqual(self.language_filter.get_join_query(), [''])
         self.assertEqual(self.language_filter.get_where_query(),  "AND dw_event.event_language LIKE '%de_%'")
 
@@ -61,9 +55,5 @@ class TestLanguageFilter(TestCase):
 
         self.language_filter.value = None
 
-        self.assertEqual(self.language_filter.get_key(), 'language')
-        self.assertIsNone(self.language_filter.get_value())
-        self.assertEqual(self.language_filter.get_type(), 'search')
-        self.assertIsNone(self.language_filter.get_request_value())
         self.assertEqual(self.language_filter.get_join_query(), [''])
         self.assertEqual(self.language_filter.get_where_query(), '')

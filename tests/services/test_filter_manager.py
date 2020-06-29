@@ -43,51 +43,18 @@ class TestFilterManager(TestCase):
 
         self.assertFalse(FilterManager.filter_has_changed())
 
-    def test_get_dto_filter_by_filters(self):
-        country_filter = CountryFilter()
-        country_filter.value = Country(label='Spain', code='ES')
-        language_filter = LanguageFilter()
-        language_filter.value = Language.objects.create(name='Spanish', code='es')
-        FilterManager.latest_filters = [country_filter, OnlineFilter(), language_filter]
-
-        result = FilterManager.get_dto_filter_by_filters()
-        
-        self.assertEqual(result.country, 'Spain')
-
-    def test_get_list_dto_api_service_filter_by_filters(self):
-        list_dto = [
-            {'type': 'search', 'value': {'places_within': ['85632505']}},
-            {'type': 'search', 'value': None},
-            {'type': 'search', 'value': {'languages': ['es']}}
-        ]
-        
+    def test_get_list_dto_db_service_filter(self):
         country_filter = CountryFilter()
         country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='85632505')
-        language_filter = LanguageFilter()
-        language_filter.value = Language.objects.create(name='Spanish', code='es')
-        FilterManager.latest_filters = [country_filter, OnlineFilter(), language_filter]
+        FilterManager.latest_filters = [country_filter]
 
-        result = [
-            {
-                'type': dto.type,
-                'value': dto.value
-            }
-            for dto in FilterManager.get_list_dto_api_service_filter_by_filters()
-        ]
-        self.assertEqual(result, list_dto)
+        expected_where = "AND country_desc='AR'"
+        expected_join = ['']
+        result = FilterManager.get_list_dto_db_service_filter()
 
-        def test_get_list_dto_db_service_filter(self):
-            country_filter = CountryFilter()
-            country_filter.value = Country(label='Argentina', code='AR', eventbrite_id='85632505')
-            FilterManager.latest_filters = [country_filter]
-
-            expected_where = " AND country_desc='AR' "
-            expected_join = ''
-            result = FilterManager.get_list_dto_db_service_filter()
-
-            self.assertEqual(result[0].where_query, expected_where)
-            self.assertEqual(result[0].join_query, expected_join)
-            self.assertIsInstance(result[0], DTODBServiceFilter)
+        self.assertEqual(result[0].where_query, expected_where)
+        self.assertEqual(result[0].join_query, expected_join)
+        self.assertIsInstance(result[0], DTODBServiceFilter)
 
     def test_get_list_dto_db_service_filter_by_filters(self):
         list_dto = [

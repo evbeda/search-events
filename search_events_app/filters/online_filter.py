@@ -16,23 +16,6 @@ class OnlineFilter(Filter):
         if self.has_changed:
             self.value = new_filter
 
-    def get_request_value(self):
-        if self.value:
-            dict_key = self.value.get('key')
-            return {
-                dict_key: True
-            }
-
-    def get_value(self):
-        if self.value:
-            return self.value
-
-    def get_type(self):
-        return 'search'
-
-    def get_key(self):
-        return 'online'
-
     def get_join_query(self):
         return ['']
 
