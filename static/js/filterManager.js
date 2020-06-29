@@ -117,7 +117,8 @@ const FilterManager = (function() {
         try {
             FILTER_IDS.forEach(function (id) {
                 filter = document.getElementById(id);
-                filter.value = FILTERS_BY_DEFAULT[id];
+                $('#'+id).val(FILTERS_BY_DEFAULT[id]).trigger('change');
+                ColorManager.changeColor('country', true)
                 filter.disabled = false;
             });
         } catch (e) {}
@@ -133,7 +134,7 @@ const FilterManager = (function() {
     function clearSelectedFeatures() {
         try {
             const domElement = document.getElementById("feature");
-            domElement.value = "";
+            $('#feature').val('').trigger('change')
             const options = domElement.options;
         
             for(let i = 0; i < options.length; i++) {

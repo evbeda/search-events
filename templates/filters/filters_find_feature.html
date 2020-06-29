@@ -12,7 +12,7 @@
                 </span>
             </div>
             
-            <select id="feature" class="selectpicker custom-select h-100" multiple data-selected-text-format="count > 1" data-live-search="true" title="Any Feature">
+            <select id="feature" class="selectpicker custom-select h-100" multiple data-selected-text-format="count > 1" data-live-search="true" title="Any Feature" onchange="ColorManager.changeColorFeature();">
                 {% for feature in features %}
                 <option value="{{ feature.code }}">{{ feature.name }}</option>
                 {% endfor %}
