@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.sessions.models import Session
+from django.db import OperationalError
 from django.urls import (
     path,
     include
@@ -24,7 +25,10 @@ from search_events_app import urls as search_events_app_urls
 
 
 def clear_all_sessions():
-    Session.objects.all().delete()
+    try:
+        Session.objects.all().delete()
+    except OperationalError:
+        pass
 
 
 clear_all_sessions()
