@@ -51,6 +51,7 @@ class TestDBResponseProcessor(TestCase):
 			'admin_url': 'https://www.eventbrite.com/myevent?eid=99894936444',
 			'eb_studio_url': None,
 			'status': None,
+			'facebook': None,
 		}
 
 		self.assertIsInstance(result[0], dict)

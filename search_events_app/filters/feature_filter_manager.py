@@ -35,6 +35,12 @@ class FeatureFilterManager(Filter):
             latest_filter.apply_filter(features_codes)
         self.has_changed = len([latest_filter for latest_filter in self.value if latest_filter.has_changed]) > 0
 
+    def get_select_query(self):
+        select_query = ''
+        for feature in self.value:
+            select_query += feature.get_select_query()
+        return select_query
+
     def get_join_query(self):
         join_query = []
         for feature in self.value:
@@ -48,3 +54,9 @@ class FeatureFilterManager(Filter):
         for feature in self.value:
             where_query += feature.get_where_query()
         return where_query
+
+    def get_group_query(self):
+        group_query = ''
+        for feature in self.value:
+            group_query += feature.get_group_query()
+        return group_query

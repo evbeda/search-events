@@ -54,8 +54,11 @@ class FilterManager:
         list_dto = []
         dict_dto = {}
         for filter_ in cls.latest_filters:
+            dict_dto['select_query'] = filter_.get_select_query()
             dict_dto['join_query'] = filter_.get_join_query()
             dict_dto['where_query'] = filter_.get_where_query()
+            dict_dto['group_query'] = filter_.get_group_query()
+
             list_dto.append(DTODBServiceFilter(**dict_dto))
 
         return list_dto
