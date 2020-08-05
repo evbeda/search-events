@@ -14,6 +14,7 @@ class Event:
             admin_url=None,
             eb_studio_url=None,
             status=None,
+            facebook=None,
             **kwargs
     ):
         self.name = name
@@ -27,6 +28,7 @@ class Event:
         self.admin_url = admin_url
         self.eb_studio_url = eb_studio_url
         self.status = status
+        self.facebook = facebook
         if not feature:
             self.feature = []
         else:

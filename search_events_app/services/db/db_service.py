@@ -31,9 +31,11 @@ class DBService:
         order_by_base_query = query_parameters.order_by
         limit = query_parameters.limit
         for dto in dto_filters_array:
+            select_base_query += " "+dto.select_query
             for dto_join in dto.join_query:
                 join_base_query += " "+dto_join
             where_base_query += " "+dto.where_query
+            group_by_base_query += " "+dto.group_query
         query = select_base_query+join_base_query+where_base_query+group_by_base_query+order_by_base_query+limit
         return query
 

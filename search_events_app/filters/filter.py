@@ -10,7 +10,10 @@ class Filter:
     @abstractmethod
     def apply_filter(self, request):
         pass
-    
+
+    def get_select_query(self):
+        return ''
+
     @abstractmethod
     def get_join_query(self):
         pass
@@ -18,3 +21,6 @@ class Filter:
     @abstractmethod
     def get_where_query(self):
         pass
+
+    def get_group_query(self):
+        return ''

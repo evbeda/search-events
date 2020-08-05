@@ -138,21 +138,23 @@ class TestDbService(TestCase):
 
     def test_format_query_with_filters(self):
         where_query = FindFeatureQueryParameters.constraints + " " + "AND dw_event.event_language LIKE '%en%'"
-        expected = FindFeatureQueryParameters.columns_select + FindFeatureQueryParameters.default_tables + where_query + FindFeatureQueryParameters.group_by
+        expected = FindFeatureQueryParameters.columns_select + FindFeatureQueryParameters.default_tables + where_query + " " + FindFeatureQueryParameters.group_by
         expected += FindFeatureQueryParameters.order_by + FindFeatureQueryParameters.limit
 
         result = DBService.format_query(self.mock_dto_filter, FindFeatureQueryParameters)
-        self.assertEqual(result, expected)
+
+        self.assertEqual(result.split(), expected.split())
 
     def test_format_join_query_with_filters(self):
         mock_dto_filter = [DTODBServiceFilter(join_query=['INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id'], where_query='')]
         join_query = FindFeatureQueryParameters.default_tables + " " +  "INNER JOIN dw.f_ticket_merchandise_purchase f ON f.event_id = dw_event.event_id"
         where_query = FindFeatureQueryParameters.constraints + " "
-        expected = FindFeatureQueryParameters.columns_select + join_query + where_query + FindFeatureQueryParameters.group_by
+        expected = " " + FindFeatureQueryParameters.columns_select + join_query + where_query + " " + FindFeatureQueryParameters.group_by
         expected += FindFeatureQueryParameters.order_by + FindFeatureQueryParameters.limit
 
         result = DBService.format_query(mock_dto_filter, FindFeatureQueryParameters)
-        self.assertEqual(result, expected)
+
+        self.assertEqual(result.split(), expected.split())
 
     @patch.object(ConnectionManager, 'connect')
     @patch.object(DBService, 'execute_query')
