@@ -27,6 +27,7 @@ from search_events_app.models import (
 class EventListView(ListView):
 
     has_eb_studio = False
+    has_facebook = False
 
     def get(self, request):
         self.template_name = TemplateFactory.get_template(request)
@@ -50,10 +51,12 @@ class EventListView(ListView):
             events = DBService.get_events(db_service_filters, query_parameters, self.request.session)
             StateManager.set_events(events)
             self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
+            self.has_facebook = len([event for event in events if event.facebook]) > 0
             StateManager.change_url(self.request)
             return events
         events = StateManager.get_last_searched_events()
         self.has_eb_studio = len([event for event in events if event.eb_studio_url]) > 0
+        self.has_facebook = len([event for event in events if event.facebook]) > 0
         return events
 
     def get_context_data(self, **kwargs):
@@ -65,7 +68,7 @@ class EventListView(ListView):
             context.update(class_.get_context())
 
         context['username'] = self.request.session['username']
-        context['has_eb_studio'] = self.has_eb_studio
+        context['has_links'] = self.has_eb_studio or self.has_facebook
         context['specific_event'] = 'SpecificEvent' in self.request.path
 
         return context

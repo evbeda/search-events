@@ -9,6 +9,11 @@ class FacebookFilter(Filter):
         if self.has_changed:
             self.value = new_filter
 
+    def get_select_query(self):
+        if self.value:
+            return ', fb.facebook_event_id'
+        return ''
+
     def get_join_query(self):
         if self.value:
             return [
@@ -19,6 +24,10 @@ class FacebookFilter(Filter):
             ]
         return ['']
 
-
     def get_where_query(self):
+        return ''
+
+    def get_group_query(self):
+        if self.value:
+            return ', fb.facebook_event_id'
         return ''

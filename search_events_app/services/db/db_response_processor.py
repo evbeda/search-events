@@ -20,6 +20,7 @@ def process_events(data):
                 'admin_url': get_admin_url(item),
                 'eb_studio_url': get_eb_studio_url(item),
                 'status': get_status(item),
+                'facebook': get_facebook(item)
             }
             events.append(event_dict)
     return events
@@ -65,6 +66,13 @@ def get_status(item):
         if item[9]:
             return item[9]
         return None
+    except Exception:
+        return None
+
+
+def get_facebook(item):
+    try:
+        return f'https://wwww.facebook.com/events/{item[10]}'
     except Exception:
         return None
 
