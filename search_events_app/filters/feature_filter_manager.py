@@ -4,6 +4,7 @@ from search_events_app.filters.features import (
     CustomQuestionFilter,
     DonationFilter,
     EBStudioFilter,
+    FacebookFilter,
     GroupRegistrationFilter,
     RepeatingEventsFilter,
     ReservedSeatingFilter,
@@ -24,7 +25,8 @@ class FeatureFilterManager(Filter):
             DonationFilter(),
             GroupRegistrationFilter(),
             EBStudioFilter(),
-            WaitlistFilter()
+            WaitlistFilter(),
+            FacebookFilter()
         ]
 
     def apply_filter(self, request):
