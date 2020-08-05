@@ -13,9 +13,9 @@ class TestEBStudioFilter(TestCase):
         self.eb_studio_filter.apply_filter(
             [FeatureCodes.eventbrite_studio, FeatureCodes.repeating_events, FeatureCodes.reserved_seating])
 
-        self.assertTrue(self.eb_studio_filter .value)
+        self.assertTrue(self.eb_studio_filter.value)
 
-    def test_apply_without_group_registration_filter(self):
+    def test_apply_without_eb_studio_filter(self):
         self.eb_studio_filter.apply_filter([FeatureCodes.repeating_events, FeatureCodes.reserved_seating])
 
         self.assertFalse(self.eb_studio_filter.value)
