@@ -6,7 +6,7 @@ from search_events_app.models.currency import Currency
 
 class CurrencyFilter(Filter):
     def apply_filter(self, request):
-        currency_code = request.GET.get('currency', '')
+        currency_code = request.GET.get('currency')
         new_filter = None
         if currency_code:
             try:
@@ -16,9 +16,6 @@ class CurrencyFilter(Filter):
         self.has_changed = new_filter != self.value
         if self.has_changed:
             self.value = new_filter
-
-    def get_join_query(self):
-        return ['']
 
     def get_where_query(self):
         if self.value:

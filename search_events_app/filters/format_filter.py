@@ -22,9 +22,6 @@ class FormatFilter(Filter):
         if self.value:
             return self.value.name
 
-    def get_join_query(self):
-        return ['']
-
     def get_where_query(self):
         if self.value:
             return f"AND dw_cat.event_format_desc='{self.value.name}'"

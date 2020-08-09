@@ -4,7 +4,7 @@ from search_events_app.filters.filter import Filter
 class LastFourFilter(Filter):
 
     def apply_filter(self, request):
-        last_four = request.GET.get('card', '')
+        last_four = request.GET.get('card')
         new_filter = None
         if last_four:
             new_filter = last_four
@@ -27,6 +27,3 @@ class LastFourFilter(Filter):
                 ') AS o on o.event = dw_event.event_id'
             ]
         return ['']
-
-    def get_where_query(self):
-        return ''

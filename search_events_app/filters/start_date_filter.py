@@ -16,9 +16,6 @@ class StartDateFilter(Filter):
         if self.has_changed:
             self.value = new_filter
 
-    def get_join_query(self):
-        return ['']
-
     def get_where_query(self):
         if self.value:
             return 'AND CAST(CAST(event_start_date AS TIMESTAMP) AS DATE) ' \

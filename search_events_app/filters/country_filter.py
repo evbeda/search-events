@@ -18,9 +18,6 @@ class CountryFilter(Filter):
         if self.has_changed:
             self.value = new_filter
 
-    def get_join_query(self):
-        return ['']
-
     def get_where_query(self):
         if self.value:
             return f"AND country_desc='{self.value.alpha_2_code}'"
