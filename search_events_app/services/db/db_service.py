@@ -36,8 +36,7 @@ class DBService:
                 join_base_query += " "+dto_join
             where_base_query += " "+dto.where_query
             group_by_base_query += " "+dto.group_query
-        query = select_base_query+join_base_query+where_base_query+group_by_base_query+order_by_base_query+limit
-        return query
+        return select_base_query+join_base_query+where_base_query+group_by_base_query+order_by_base_query+limit
 
     @classmethod
     def get_events(cls, dto_filters_array, query_parameters, session):
@@ -55,8 +54,7 @@ class DBService:
     def is_connected(cls, session):
         if ConnectionManager.get_connection(session.session_key):
             return True
-        else:
-            return False
+        return False
 
     @classmethod
     def disconnect(cls, session):

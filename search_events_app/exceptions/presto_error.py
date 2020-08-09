@@ -5,6 +5,7 @@ from requests.exceptions import (
 
 
 class PrestoError(Exception):
+    
     def __init__(self, exception):
         if isinstance(exception, SSLError):
             # Raised when certificate not in env var
