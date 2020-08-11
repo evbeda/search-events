@@ -292,4 +292,7 @@ env/
 # Ignore all local history of files
 .history
 
+# deploy scripts
+deploy/
+
 # End of https://www.gitignore.io/api/macos,django,python,pycharm,visualstudiocode
