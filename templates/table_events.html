@@ -19,12 +19,11 @@
                 <th>Start Date</th>
                 <th>Language</th>
                 {% if specific_event %}
-                <th class="text-center">Status</th>
+                    <th class="text-center">Status</th>
                 {% endif %}
                 {% if has_links and not specific_event %}
-                <th class="text-center">External Links</th>
-            {% endif %}
-
+                    <th class="text-center">External Links</th>
+                {% endif %}
             </tr>
         </thead>
         
@@ -53,19 +52,15 @@
                         {% endif %}
                         {% if has_links and not specific_event %}
                             <td class="text-center">
-                                {% if event.eb_studio_url or event.facebook %}
-                                    {% if event.eb_studio_url  %}
-                                        <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
-                                            <i class="material-icons">link</i>
-                                        </a>
-                                    {% endif %}
-                                    {% if event.facebook  %}
-                                        <a class="text-blue" href="{{event.facebook}}" target="_blank">
-                                            <i class="material-icons">facebook</i>
-                                        </a>
-                                    {% endif %}
-                                {% else %}
-                                    <i>None</i>
+                                {% if event.eb_studio_url  %}
+                                    <a class="text-orange" href="{{event.eb_studio_url}}" target="_blank">
+                                        <i class="material-icons">link</i>
+                                    </a>
+                                {% endif %}
+                                {% if event.facebook %}
+                                    <a class="text-blue" href="{{event.facebook}}" target="_blank">
+                                        <i class="material-icons">facebook</i>
+                                    </a>
                                 {% endif %}
                             </td>
                         {% endif %}

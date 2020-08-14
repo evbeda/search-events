@@ -10,5 +10,3 @@ class QueryParameterFactory:
             return SpecificEventsQueryParameters
         elif 'FindFeature' in request.path:
             return FindFeatureQueryParameters
-        return None
-
