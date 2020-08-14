@@ -30,9 +30,9 @@ class FeatureFilterManager(Filter):
         ]
 
     def apply_filter(self, request):
-        features_codes = request.GET.get('feature', '').split('-')
+        feature_codes = request.GET.get('feature', '').split('-')
         for latest_filter in self.value:
-            latest_filter.apply_filter(features_codes)
+            latest_filter.apply_filter(feature_codes)
         self.has_changed = len([latest_filter for latest_filter in self.value if latest_filter.has_changed]) > 0
 
     def get_select_query(self):

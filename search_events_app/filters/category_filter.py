@@ -6,7 +6,7 @@ from search_events_app.models.category import Category
 
 class CategoryFilter(Filter):
     def apply_filter(self, request):
-        category_code = request.GET.get('category', '')
+        category_code = request.GET.get('category')
         new_filter = None
         if category_code:
             try:
@@ -16,9 +16,6 @@ class CategoryFilter(Filter):
         self.has_changed = new_filter != self.value
         if self.has_changed:
             self.value = new_filter
-
-    def get_join_query(self):
-        return ['']
 
     def get_where_query(self):
         if self.value:

@@ -3,11 +3,8 @@ from search_events_app.utils import FeatureCodes
 
 
 class GroupRegistrationFilter(Filter):
-    def apply_filter(self, features_codes):
-        new_filter = FeatureCodes.group_registration in features_codes
-        self.has_changed = new_filter != self.value
-        if self.has_changed:
-            self.value = new_filter     
+    def apply_filter(self, feature_codes):
+        super().apply_filter(FeatureCodes.group_registration, feature_codes) 
 
     def get_join_query(self):
         if self.value:
@@ -18,6 +15,3 @@ class GroupRegistrationFilter(Filter):
                 ') AS team ON dw_event.event_id = team.event_id'
             ]
         return ['']
-
-    def get_where_query(self):
-        return ''

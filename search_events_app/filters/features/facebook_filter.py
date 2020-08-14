@@ -3,11 +3,8 @@ from search_events_app.utils import FeatureCodes
 
 
 class FacebookFilter(Filter):
-    def apply_filter(self, features_codes):
-        new_filter = FeatureCodes.facebook in features_codes
-        self.has_changed = new_filter != self.value
-        if self.has_changed:
-            self.value = new_filter
+    def apply_filter(self, feature_codes):
+        super().apply_filter(FeatureCodes.facebook, feature_codes)
 
     def get_select_query(self):
         if self.value:
@@ -23,9 +20,6 @@ class FacebookFilter(Filter):
                 ') AS fb ON dw_event.event_id = fb.event_id'
             ]
         return ['']
-
-    def get_where_query(self):
-        return ''
 
     def get_group_query(self):
         if self.value:

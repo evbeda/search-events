@@ -1,7 +1,5 @@
-from search_events_app.dto import (
-    DTOFilter,
-    DTODBServiceFilter,
-)
+from search_events_app.dto import DTODBServiceFilter
+
 from search_events_app.filters import (
     BuyerFilter,
     CategoryFilter,

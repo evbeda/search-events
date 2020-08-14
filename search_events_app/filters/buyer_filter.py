@@ -24,6 +24,3 @@ class BuyerFilter(Filter):
                 ') AS at ON at.event = dw_event.event_id'
             ]
         return ['']
-
-    def get_where_query(self):
-        return ''
